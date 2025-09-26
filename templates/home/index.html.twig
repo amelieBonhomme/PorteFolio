@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur mon Portfolio{% endblock %}
+
+{% block body %}
+    <nav class="navbar">
+    <ul>
+        <li><a href="{{ path('home') }}">Accueil</a></li>
+        <li><a href="#presentation">Présentation</a></li>
+        <li><a href="#experience">Expérience</a></li>
+        <li><a href="#competence">Compétences</a></li>
+        <li><a href="#projet">Projet 1 et 2</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    </nav>
+    <video autoplay muted loop id="background-video">
+        <source src="https://media.istockphoto.com/id/2185730918/fr/vid%C3%A9o/digital-waves-of-particles-emit-light-and-stream-of-data-points-big-data-visualization.mp4?s=mp4-640x640-is&k=20&c=lmxwUKEqTvSDCsk_vKLsKmE8pIx4PNoucBN7_6kkW-w=" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo HTML5.
+    </video>
+
+    <div class = "accueil">
+        <h1>Bonhomme Amélie</h1>
+        <h2>Développeuse polyvalente</h2>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Bonjour, je suis Amélie </h1>
+            <p>Bienvenue sur mon portfolio Symfony. Découvrez mes projets, mes compétences et comment me contacter.</p>
+        </header>
+
+        <section class="projects">
+            <h2>Mes projets</h2>
+            <ul>
+                <li><strong>Site vitrine</strong> – HTML/CSS/JS</li>
+                <li><strong>Application Symfony</strong> – Gestion de tâches</li>
+                <li><strong>Portfolio dynamique</strong> – Symfony + Twig</li>
+            </ul>
+        </section>
+
+        <section class="contact">
+            <h2>Me contacter</h2>
+            <p>Email : <a href="mailto:amelie@example.com">amelie@example.com</a></p>
+        </section>
+    </div>
+{% endblock %}
