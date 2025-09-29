@@ -12,7 +12,18 @@ body {
     background: rgba(255, 255, 255, 0.87);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
+#background-video {
+    position:absolute;
+    top: 0;
+    left: 0;
+    /*min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;*/
+    z-index: -1;
+}
+/*
+---------------------------------------- Zone 1 --------------------------------------------------------------
+*/
 /*section {
     margin-top: 30px;
 }*/
@@ -44,7 +55,7 @@ body {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
 }
 /*Trait sous les mots de la nav bare*/
 .navbar li a:hover {
@@ -54,26 +65,37 @@ body {
 .accueil {
     text-align: center;
     margin-bottom: 10%;
-    margin-top: 10%;
+    margin-top: 18%;
 }
-#background-video {
-    position:absolute;
-    top: 0;
-    left: 0;
-    /*min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;*/
-    z-index: -1;
-}
-
-/* Pour que le contenu ne soit pas caché derrière la vidéo */
-/*body {
+.bas-btn {
     position: relative;
-    z-index: 1;
-    padding-top: 60px;
-}*/
-
-
+    width: 4.5%;
+    height: 100px; /*-------------------------------------------------------------> Trouver pourquoi je ne peux pas le mettre en %*/
+    background-color: transparent;
+    border: 3px solid #c8ad7f;
+    border-radius: 30px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-top: 3%;
+}
+.bas-btn::before {
+    content: "V";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #c8ad7f;
+    animation: descend 2s infinite;
+}
+@keyframes descend {
+    0% { top: 0; opacity: 0.2; }
+    50% { top: 50%; opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+/*
+---------------------------------------- Zone 2 --------------------------------------------------------------
+*/
 
 /*
 ------------------------------------------------------------------
