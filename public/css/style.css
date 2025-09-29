@@ -4,26 +4,31 @@ body {
     margin: 0;
     padding: 0;
 }
-
+/*centre du site*/
 .container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: white;
+    max-width: 80%;
+    margin: 10% auto;
+    padding: 1%;
+    background: rgba(255, 255, 255, 0.87);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-section {
+/*section {
     margin-top: 30px;
-}
+}*/
 .navbar {
     position: fixed;
+    max-width: 60%;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #2c3e50;
-    padding: 10px 0;
-    z-index: 1000;
+    background-color: #c8ad7fbe;
+    padding: 1% 0;
+    text-align: center;
+    border-radius: 30px;
+    margin-left: 20%;
+    margin-top: 1%;
+    /*z-index: 1000;*/
 }
 
 .navbar ul {
@@ -32,7 +37,7 @@ section {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 40px;
+    gap: 4%; /*espace entre les ul (mot)*/
 }
 
 .navbar li a {
@@ -41,35 +46,63 @@ section {
     font-weight: bold;
     font-size: 16px;
 }
-
+/*Trait sous les mots de la nav bare*/
 .navbar li a:hover {
     text-decoration: underline;
 }
 
-/* Pour éviter que le contenu soit caché derrière la navbar */
-body {
-    padding-top: 60px;
-}
-
 .accueil {
     text-align: center;
+    margin-bottom: 10%;
+    margin-top: 10%;
 }
 #background-video {
-    position: fixed;
+    position:absolute;
     top: 0;
     left: 0;
-    min-width: 100%;
+    /*min-width: 100%;
     min-height: 100%;
-    object-fit: cover;
+    object-fit: cover;*/
     z-index: -1;
-    opacity: 1; /* Ajuste la transparence si besoin */
 }
 
 /* Pour que le contenu ne soit pas caché derrière la vidéo */
-body {
+/*body {
     position: relative;
     z-index: 1;
     padding-top: 60px;
-}
+}*/
 
+
+
+/*
+------------------------------------------------------------------
+CSS pour téléphone ( à travailler)
+-----------------------------------------------------------------
+*/
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        max-width: 90%;
+        margin-left: 5%;
+        padding: 2% 0;
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .navbar li {
+        flex: 1 1 40%; /* chaque lien prend 40% de la largeur, donc 2 par ligne */
+        text-align: center;
+    }
+
+    .navbar li a {
+        font-size: 18px; /* agrandit le texte si besoin */
+        display: block;
+        padding: 10px 0;
+    }
+}
 
