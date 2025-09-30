@@ -4,41 +4,50 @@
 
 {% block body %}
     <nav class="navbar">
-    <ul>
-        <li><a href="{{ path('home') }}">Accueil</a></li>
-        <li><a href="#presentation">Présentation</a></li>
-        <li><a href="#experience">Expérience</a></li>
-        <li><a href="#competence">Compétences</a></li>
-        <li><a href="#projet">Projet 1 et 2</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+        <ul>
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+            <li><a href="#presentation">Présentation</a></li>
+            <li><a href="#experience">Expérience</a></li>
+            <li><a href="#competence">Compétences</a></li>
+            <li><a href="#projet">Projet 1 et 2</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
+
     <video autoplay muted loop id="background-video">
         <source src="https://cdn.pixabay.com/video/2023/11/07/188288-882243044_large.mp4" type="video/mp4">
         Votre navigateur ne supporte pas la vidéo HTML5.
     </video>
 
     <div class = "accueil">
-        <h1>Bonhomme Amélie</h1>
+        <h1 id="nom">Bonhomme Amélie</h1>
         <h2>Développeuse polyvalente</h2>
-        <button class="bas-btn"></button>
+        <a href="#partie1" class="bas-btn"></a>
+
 
     </div>
 
+    
     <div class="container">
-        <header>
-            <h1>Bonjour, je suis Amélie </h1>
-            <p>Bienvenue sur mon portfolio Symfony. Découvrez mes projets, mes compétences et comment me contacter.</p>
-        </header>
+        <section id="partie1">
 
-        <section class="projects">
-            <h2>Mes projets</h2>
-            <ul>
-                <li><strong>Site vitrine</strong> – HTML/CSS/JS</li>
-                <li><strong>Application Symfony</strong> – Gestion de tâches</li>
-                <li><strong>Portfolio dynamique</strong> – Symfony + Twig</li>
-            </ul>
+            <header>
+                <h1>Motivation et présentation </h1>
+                <p id ="motivation">Jeune développeuse junior de 19 ans, je désire avant tout me nourrir de l’expérience des autres et acquérir de nouvelles compétences dans le cadre d’un contrat d’apprentissage. J’ai choisi l’alternance pour allier la prédominance théorique des cours à la concrétisation pratique du travail en entreprise. Mon objectif à terme est de découvrir un maximum de technologie dans le but de trouver celle qui me parle le mieux.</p>
+            </header>
+
+            <section class="projects">
+                <h2>Mes projets</h2>
+                <ul>
+                    <li><strong>Site vitrine</strong> – HTML/CSS/JS</li>
+                    <li><strong>Application Symfony</strong> – Gestion de tâches</li>
+                    <li><strong>Portfolio dynamique</strong> – Symfony + Twig</li>
+                </ul>
+            </section>
         </section>
+
+
+
 
         <section class="contact">
             <h2>Me contacter</h2>

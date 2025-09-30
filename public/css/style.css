@@ -21,6 +21,10 @@ body {
     object-fit: cover;*/
     z-index: -1;
 }
+html {
+    scroll-behavior: smooth;
+}
+
 /*
 ---------------------------------------- Zone 1 --------------------------------------------------------------
 */
@@ -67,19 +71,24 @@ body {
     margin-bottom: 10%;
     margin-top: 18%;
 }
+#nom{
+    font-size: 400%;
+}
 .bas-btn {
     position: relative;
     width: 4.5%;
-    height: 100px; /*-------------------------------------------------------------> Trouver pourquoi je ne peux pas le mettre en %*/
+    height: 18vh; /*en vh pour se référer à la taille de l'écran*/
     background-color: transparent;
     border: 3px solid #c8ad7f;
     border-radius: 30px;
     cursor: pointer;
     overflow: hidden;
     margin-top: 3%;
+    display: inline-block; /* pour pouvoir appliquer width et height */
+    text-decoration: none; 
 }
 .bas-btn::before {
-    content: "V";
+    content: "ᐯ";
     position: absolute;
     top: 0;
     left: 50%;
@@ -96,7 +105,10 @@ body {
 /*
 ---------------------------------------- Zone 2 --------------------------------------------------------------
 */
-
+#motivation{
+    margin-left: 5%;
+    margin-right: 5%;
+}
 /*
 ------------------------------------------------------------------
 CSS pour téléphone ( à travailler)
