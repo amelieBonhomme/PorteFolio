@@ -9,7 +9,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
     object-fit: cover;
     z-index: -1;
@@ -17,7 +17,13 @@ body {
 html {
     scroll-behavior: smooth;
 }
-
+.separateur{
+    border: 3px solid #c8ad7f;
+    width: 150vh;
+    height: 0.01vh;
+    margin-left: 10%;
+    margin-top: 5%;
+}
 /*
 ---------------------------------------- Zone 1 --------------------------------------------------------------
 */
@@ -66,7 +72,16 @@ html {
 }
 #nom{
     font-size: 400%;
+    animation: scroll-left 10s ;
 }
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}/*---------------------------------------------------------------------------------------revoir pour faire apparaitre lettre par lettre*/
 .bas-btn {
     position: relative;
     width: 4.5%;
@@ -120,12 +135,21 @@ html {
 .logo1 {
     width: 30%;
     height: 20%;
-    margin-right: 10%;
+    margin-right: 7%;
+    transition: transform 0.3s ease; 
+    margin-top: 5%;
+}
+.logo1:hover {
+  transform: scale(1.2); /* agrandit de 10% */
 }
 .logo2 {
     width: 30%;
     height: 20%;
-    margin-left: 5%;
+    transition: transform 0.3s ease; 
+    margin-top: 5%;
+}
+.logo2:hover {
+  transform: scale(1.2); /* agrandit de 10% */
 }
 
 .entreprise1 {
@@ -135,6 +159,37 @@ html {
 .entreprise2 {
     display:flex;
     margin-top: 5%;
+}
+/*
+---------------------------------------- Zone 4 --------------------------------------------------------------
+*/
+#competence {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.competence1 {
+    display: flex;
+    align-items: center; /* centre verticalement */
+    justify-content: center; /* centre horizontalement si besoin */
+    height: 7%; /* ou une hauteur fixe ou relative */
+}
+
+.competence2 {
+    display: flex;
+    align-items: center; /* centre verticalement */
+    justify-content: center; /* centre horizontalement si besoin */
+    height: 7%; /* ou une hauteur fixe ou relative */
+    margin-top: 5%;
+}
+.logo3 {
+    width: 13%;
+    height: auto;
+    margin-right: 2%;
+    transition: transform 0.3s ease; 
+}
+.logo3:hover {
+  transform: scale(1.1); /* agrandit de 10% */
 }
 
 /*
