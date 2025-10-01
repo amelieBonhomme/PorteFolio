@@ -73,15 +73,9 @@ html {
 #nom{
     font-size: 400%;
     animation: opaciterNom 5s ;
+    min-height: 100%;
 }
-@keyframes opaciterNom {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}/*---------------------------------------------------------------------------------------revoir pour faire apparaitre lettre par lettre*/
+
 .bas-btn {
     position: relative;
     width: 4.5%;
