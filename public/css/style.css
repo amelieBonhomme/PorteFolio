@@ -73,7 +73,7 @@ html {
 #nom{
     font-size: 400%;
     animation: opaciterNom 5s ;
-    min-height: 100%;
+    min-width: 12ch;
 }
 
 .bas-btn {
@@ -88,6 +88,7 @@ html {
     margin-top: 3%;
     display: inline-block; /* pour pouvoir appliquer width et height */
     text-decoration: none; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 .bas-btn::before {
     content: "ᐯ";
