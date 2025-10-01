@@ -6,8 +6,8 @@
     <nav class="navbar">
         <ul>
             <li><a href="{{ path('home') }}">Accueil</a></li>
-            <li><a href="#presentation">Présentation</a></li>
-            <li><a href="#experience">Expérience</a></li>
+            <li><a href="#partie1">Présentation</a></li>
+            <li><a href="#partie2">Expérience</a></li>
             <li><a href="#competence">Compétences</a></li>
             <li><a href="#projet">Projet 1 et 2</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -34,25 +34,43 @@
             <p id ="motivation">Acutellement sur ma deuxième année de BTS SIO (Service Informatique au Organision) option SLAM et en alternance avec l'entreprise Daher depuis maintenant 1 ans.</p>
         </header>
         <section class="contact">
-            <h2>Me contacter</h2>
+            <h2>Centre d'intérêt personnel :</h2>
             <h2>Me contacter</h2>
             <p>Email : <a href="mailto:amelie@example.com">amelie@example.com</a></p>
         </section>
     </div>
     <section id="entreprise">
+            <div id="partie2"></div>
             <h1>Expérience :</h1>
-            
             <div class = "entreprise1">
                 <img class = "logo1"src = "https://specialmissionaircraft.daher.com/wp-content/uploads/2021/07/Daher-white-bg-1024x270.png">
-                <ul class = "texte1">
+                <ul>
                     <li>Réalisation de diverse API et automatisation sur l'environement microsoft (PowerApps, PowerAutomate, Script Office, Excel, Power Point avec VBA)</li>
                     <li>Réalisation de diverse API sur l'environement google (google sheet, AppScript, AppSheet, glide)</li>
                     <li>...</li>
+                    
                 </ul>
             </div>
+            
+            <div class = "entreprise2">
+                <ul>
+                    <li>Réalisation de diverse API et automatisation sur l'environement microsoft (PowerApps, PowerAutomate, Script Office, Excel, Power Point avec VBA)</li>
+                    <li>Réalisation de diverse API sur l'environement google (google sheet, AppScript, AppSheet, glide)</li>
+                    <li>...</li>
+                    
+                </ul>
+                <img class = "logo2"src = "https://beproject.fr/wp-content/uploads/thegem/logos/logo_d8de66a5adf7eae8cc0118763ae1075e_1x.png">
+            </div>
 
-            <h3>Beproject</h3>
-            <h3>Syselec</h3>
+            <div class = "entreprise1">
+                <img class = "logo1"src = "https://www.sireagroup.com/wp-content/uploads/2021/12/logo-groupe-syselec.png">
+                <ul>
+                    <li>Réalisation de diverse API et automatisation sur l'environement microsoft (PowerApps, PowerAutomate, Script Office, Excel, Power Point avec VBA)</li>
+                    <li>Réalisation de diverse API sur l'environement google (google sheet, AppScript, AppSheet, glide)</li>
+                    <li>...</li>
+                    
+                </ul>
+            </div>
             
         </section>
 {% endblock %}

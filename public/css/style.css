@@ -6,12 +6,12 @@ body {
 }
 
 #background-video {
-    position:absolute;
+    position: absolute;
     top: 0;
     left: 0;
-    /*min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;*/
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
     z-index: -1;
 }
 html {
@@ -61,8 +61,8 @@ html {
 
 .accueil {
     text-align: center;
-    margin-bottom: 10%;
-    margin-top: 18%;
+    margin-bottom: 0%;
+    margin-top: 11%;
 }
 #nom{
     font-size: 400%;
@@ -86,7 +86,7 @@ html {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 24px;
+    font-size: 200%;
     color: #c8ad7f;
     animation: descend 2s infinite;
 }
@@ -102,8 +102,9 @@ html {
     max-width: 80%;
     margin: 10% auto;
     padding: 1%;
-    background: rgba(255, 255, 255, 0.87);
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.651);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 30px;
 }
 #motivation{
     margin-left: 5%;
@@ -113,14 +114,25 @@ html {
 ---------------------------------------- Zone 3 --------------------------------------------------------------
 */
 #entreprise {
-    margin-left: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .logo1 {
     width: 30%;
     height: 20%;
     margin-right: 10%;
 }
+.logo2 {
+    width: 30%;
+    height: 20%;
+    margin-left: 5%;
+}
+
 .entreprise1 {
+    display:flex;
+    margin-top: 5%;
+}
+.entreprise2 {
     display:flex;
     margin-top: 5%;
 }
