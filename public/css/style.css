@@ -124,6 +124,7 @@ html {
   width: 20%;
   border-radius: 70%;
   height: 20%;
+  border: 2px solid #c8ad7f;
 }
 header {
     display: flex;
@@ -131,17 +132,29 @@ header {
 }
 .contact {
     display: flex;
-    align-items: center; /* centre verticalement */
-    justify-content: center; /* centre horizontalement si besoin */
-    height: 7%; /* ou une hauteur fixe ou relative */
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 3rem;
 }
-.interet{
-    width: 13%;
-    height: auto;
-    margin-left: 2%;
-    margin-right: 1%;
+.cercle {
+    width: 20vh;          /* taille fixe du cercle */
+    height: 20vh;
+    border-radius: 50%;    /* rend le conteneur circulaire */
+    overflow: hidden;      /* cache ce qui dépasse du cercle */
+    border: 2px solid #c8ad7f; /* optionnel : contour */
 }
-
+.cercle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* ajuste l’image au cercle sans déformation */
+}
+.imageTaille{
+    display: flex;
+    flex-direction: column; /* empile image + texte */
+    align-items: center;     /* centre horizontalement */
+    text-align: center;
+    min-width: 25%;
+}
 /*
 ---------------------------------------- Zone 3 --------------------------------------------------------------
 */
