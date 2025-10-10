@@ -244,18 +244,44 @@ header {
     display: flex;
 }
 .pdf1 {
-    width: 800px; 
+    width: 650px; 
     height: 600px; 
     border: 1px solid #ccc; 
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    
+}
+.pdf2 {
+    width: 650px; 
+    height: 600px; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  
+}
+.espace {
     margin-right: 5%;
     margin-top: 5%;
 }
-.pdf2 {
-    width: 800px; 
-    height: 600px; 
-    border: 1px solid #ccc; 
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+/*
+---------------------------------------- Zone 5 --------------------------------------------------------------
+*/
+.contactener {
+    max-width: 80%;
+    margin: 10% auto;
+    padding: 1%;
+    background: rgba(255, 255, 255, 0.651);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 30px;
+}
+.mapgg {
+  width: 150%;
+  height: 50vh;
+  border: none;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border:0;
+}
+.info {
+    margin-left: 40%;
     margin-top: 5%;
 }
 /*
