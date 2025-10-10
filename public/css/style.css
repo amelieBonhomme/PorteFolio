@@ -89,6 +89,7 @@ html {
     display: inline-block; /* pour pouvoir appliquer width et height */
     text-decoration: none; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    margin-bottom: 4%;
 }
 .bas-btn::before {
     content: "ᐯ";
@@ -119,6 +120,7 @@ html {
 #motivation{
     margin-left: 5%;
     margin-right: 5%;
+
 }
 .photoProfil {
   width: 20%;
@@ -231,7 +233,31 @@ header {
 .logo3:hover {
   transform: scale(1.1); /* agrandit de 10% */
 }
-
+/*
+---------------------------------------- Zone 5 --------------------------------------------------------------
+*/
+#projet {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.pdf {
+    display: flex;
+}
+.pdf1 {
+    width: 800px; 
+    height: 600px; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-right: 5%;
+    margin-top: 5%;
+}
+.pdf2 {
+    width: 800px; 
+    height: 600px; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 5%;
+}
 /*
 ------------------------------------------------------------------
 CSS pour téléphone ( à travailler)

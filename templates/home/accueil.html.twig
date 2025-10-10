@@ -23,11 +23,10 @@
         <h1 id="nom"><span>Bonhomme Amélie</span></h1>
         <h2>Développeuse Full-Stack</h2>
         <a href="#partie1" class="bas-btn"></a>
-
-    <div id="partie1"></div>
     </div>
     
     <div class="container">
+    <div id="partie1"></div>
         <header>
             <img src="{{ asset('img/pp.jpg') }}" alt="Photo de profil" class="photoProfil">
             <div>
@@ -131,6 +130,20 @@
                 <img alt ="logo typescript" class = "logo3"src = "https://user-images.githubusercontent.com/12243763/33518868-6e2595c4-d76a-11e7-8260-31b4e8110c93.png">
             </div>
         </section>
+        <section id="projet">
+            <h1>Mes projets :</h1>
+            <div class="pdf">
+                <div class ="pdf1">
+                    <iframe src="PDF/Cahier_des_charges_portefolio.pdf" width="100%" height="100%" style="border: none;"></iframe>
+                </div>
+                <div class ="pdf2">
+                    <iframe src="PDF/BTS SIO – Projet Spécial - Django.pdf" width="100%" height="100%" style="border: none;"></iframe>
+                </div>
+            </div>
+        </section>
+
+
+
         <p>Email : <a href="mailto:amelie@example.com">amelie@example.com</a></p>
         <script src="{{ asset('js/ecriturePrenom.js') }}"></script>
 {% endblock %}
