@@ -265,24 +265,28 @@ header {
 ---------------------------------------- Zone 5 --------------------------------------------------------------
 */
 .contactener {
-    max-width: 80%;
-    margin: 10% auto;
+    margin-top: 10%;
     padding: 1%;
     background: rgba(255, 255, 255, 0.651);
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 30px;
 }
 .mapgg {
   width: 150%;
-  height: 30vh;
+  height: 25vh;
   border: none;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border:0;
+  margin-left: 10%;
 }
 .info {
     margin-left: 30%;
-    margin-top: 5%;
+    margin-top: 2%;
+}
+.titrefooter {
+    margin-left: 2%;
+    margin-top: 0%;
+    margin-bottom: 2%;
 }
 /*
 ------------------------------------------------------------------
