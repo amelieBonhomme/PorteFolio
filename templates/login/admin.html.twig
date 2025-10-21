@@ -4,17 +4,28 @@
 {% block javascripts %}
     <script src="{{ asset('js/zoom.js') }}"></script>
 {% endblock %}
+
 {% block body %}
-<h1>Connexion</h1>
+    
+    <section>
+        <div id="loginAdmin">
+            <h1>Connexion</h1>
 
-{% if error %}
-    <div style="color: red;">{{ error }}</div>
-{% endif %}
+            {% if error %}
+                <div class="form-error">{{ error }}</div>
+            {% endif %}
 
-{{ form_start(form) }}
-    {{ form_row(form.login) }}
-    {{ form_row(form.mdp) }}
-    <button type="submit">Se connecter</button>
-{{ form_end(form) }}
+            {{ form_start(form, {'attr': {'class': 'login-form'}}) }}
+                <div class="form-group">
+                    {{ form_row(form.login, {'attr': {'class': 'form-input'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.mdp, {'attr': {'class': 'form-input'}}) }}
+                </div>
+                <button type="submit" class="form-button">Se connecter</button>
+            {{ form_end(form) }}
+        </div>
+    </section>
 
 {% endblock %}
+{% block footer %}{% endblock %}

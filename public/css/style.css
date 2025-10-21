@@ -312,6 +312,71 @@ body.zoomEffect {
   margin-top: 0%;
 }
 /*
+---------------------------------------- Page login Admin --------------------------------------------------------------
+*/
+#loginAdmin {
+    padding: 10%; /*sinon la nav barre bouge donc on touche uniquement au contenu interne*/
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    max-width: 400px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-left: 30%;
+}
+
+
+/* Titre */
+#loginAdmin h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+}
+
+/* Erreur */
+.form-error {
+    color: #e74c3c;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Groupe de champs */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Champs de saisie */
+.form-input input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Bouton */
+.form-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.form-button:active {
+    background-color: #3e8e41;
+    transform: scale(0.98);
+}
+
+/*
 ------------------------------------------------------------------
 CSS pour téléphone ( à travailler)
 -----------------------------------------------------------------
