@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Entity;
 
-use App\Repository\presenteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: presenteRepository::class)]
+#[ORM\Entity]
 class Presente
 {
     #[ORM\Id]
@@ -17,32 +15,4 @@ class Presente
     #[ORM\ManyToOne(targetEntity: Projet::class)]
     #[ORM\JoinColumn(name: 'IDprojet', referencedColumnName: 'IDprojet')]
     private Projet $projet;
-
-    public function getAdmin(): ?PAdmin
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(?PAdmin $admin): static
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
-
-    public function getProjet(): ?Projet
-    {
-        return $this->projet;
-    }
-
-    public function setProjet(?Projet $projet): static
-    {
-        $this->projet = $projet;
-
-        return $this;
-    }
 }
-
-
-
-

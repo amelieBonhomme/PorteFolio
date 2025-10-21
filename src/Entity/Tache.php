@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Entity;
 
-use App\Repository\tacheRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: tacheRepository::class)]
+#[ORM\Entity]
 class Tache
 {
     #[ORM\Id]
@@ -17,32 +15,4 @@ class Tache
     #[ORM\ManyToOne(targetEntity: Activite::class)]
     #[ORM\JoinColumn(name: 'IDactivite', referencedColumnName: 'IDactivite')]
     private Activite $activite;
-
-    public function getInformationPro(): ?InformationPro
-    {
-        return $this->informationPro;
-    }
-
-    public function setInformationPro(?InformationPro $informationPro): static
-    {
-        $this->informationPro = $informationPro;
-
-        return $this;
-    }
-
-    public function getActivite(): ?Activite
-    {
-        return $this->activite;
-    }
-
-    public function setActivite(?Activite $activite): static
-    {
-        $this->activite = $activite;
-
-        return $this;
-    }
 }
-
-
-
-
