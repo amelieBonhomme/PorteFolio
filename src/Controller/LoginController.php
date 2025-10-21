@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Form\LoginType;
@@ -8,9 +7,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends AbstractController
 {
+    #[Route('/login', name: 'login')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(LoginType::class);
@@ -22,17 +23,17 @@ class LoginController extends AbstractController
             $data = $form->getData();
             $admin = $em->getRepository(PAdmin::class)->findOneBy([
                 'login' => $data['login'],
-                'mdp' => $data['mdp'], // ⚠️ en clair ici, à sécuriser plus tard
+                'mdp' => $data['mdp'],
             ]);
 
             if ($admin) {
-                return $this->redirectToRoute('dashboard'); // ou autre page
+                return $this->redirectToRoute('admin');
             } else {
                 $error = 'Identifiants incorrects';
             }
         }
 
-        return $this->render('login/index.html.twig', [
+        return $this->render('login/admin.html.twig', [
             'form' => $form->createView(),
             'error' => $error,
         ]);

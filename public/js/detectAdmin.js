@@ -7,6 +7,6 @@ document.addEventListener('keydown', function(event) {
     }
 
     if (typed === 'admin') {
-        window.location.href = '/admin'; // Redirection vers la page admin
+        window.location.href = '/login'; // Redirection vers la page admin
     }
 });
