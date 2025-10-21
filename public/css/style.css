@@ -280,13 +280,36 @@ header {
   margin-left: 10%;
 }
 .info {
-    margin-left: 30%;
+    margin-left: 20%;
+
+}
+.info2 {
+    margin-left: 10%;
     margin-top: 2%;
+
 }
 .titrefooter {
     margin-left: 2%;
     margin-top: 0%;
     margin-bottom: 2%;
+}
+/*
+---------------------------------------- Page Admin --------------------------------------------------------------
+*/
+@keyframes zoom {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+body.zoomEffect {
+  animation: zoom 0.6s ease-out forwards;
+  margin-top: 0%;
 }
 /*
 ------------------------------------------------------------------
