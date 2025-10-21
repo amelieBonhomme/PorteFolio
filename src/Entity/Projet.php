@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Projet
 {
     #[ORM\Id]
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'IDprojet', type: 'string', length: 50)]
     private string $IDprojet;
 
     #[ORM\Column(length: 50)]
@@ -18,4 +18,45 @@ class Projet
 
     #[ORM\Column]
     private bool $projetActif;
+
+    public function getIDprojet(): ?string
+    {
+        return $this->IDprojet;
+    }
+
+    public function getTitreP(): ?string
+    {
+        return $this->titreP;
+    }
+
+    public function setTitreP(string $titreP): static
+    {
+        $this->titreP = $titreP;
+
+        return $this;
+    }
+
+    public function getPdf(): ?string
+    {
+        return $this->pdf;
+    }
+
+    public function setPdf(string $pdf): static
+    {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
+    public function isProjetActif(): ?bool
+    {
+        return $this->projetActif;
+    }
+
+    public function setProjetActif(bool $projetActif): static
+    {
+        $this->projetActif = $projetActif;
+
+        return $this;
+    }
 }

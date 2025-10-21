@@ -15,4 +15,28 @@ class Connaissance
     #[ORM\ManyToOne(targetEntity: Competence::class)]
     #[ORM\JoinColumn(name: 'IDcompetence', referencedColumnName: 'IDcompetence')]
     private Competence $competence;
+
+    public function getAdmin(): ?PAdmin
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?PAdmin $admin): static
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
+
+    public function getCompetence(): ?Competence
+    {
+        return $this->competence;
+    }
+
+    public function setCompetence(?Competence $competence): static
+    {
+        $this->competence = $competence;
+
+        return $this;
+    }
 }

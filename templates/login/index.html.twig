@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion Admin{% endblock %}
+
+{% block body %}
+<h1>Connexion</h1>
+
+{% if error %}
+    <div style="color: red;">{{ error }}</div>
+{% endif %}
+
+{{ form_start(form) }}
+    {{ form_row(form.login) }}
+    {{ form_row(form.mdp) }}
+    <button type="submit">Se connecter</button>
+{{ form_end(form) }}
+
+{% endblock %}
