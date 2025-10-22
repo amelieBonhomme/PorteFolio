@@ -320,20 +320,21 @@ body.zoomEffect {
 }
 
 #loginAdmin {
-    padding: 2%;
+    padding-top: 1%;
+    padding-bottom: 2%;
     text-align: center;
     background-color: #f9f9f9;
     border-radius: 12px;
-    max-width: 400px;
+    max-width: 40%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     margin-left: 30%;
 }
 
 /* Titre */
 #loginAdmin h1 {
-    margin-bottom: 20px;
+    margin-bottom: 10%;
     font-size: 28px;
-    color: #333;
+    color: #000000;
 }
 
 /* Erreur */
@@ -344,39 +345,36 @@ body.zoomEffect {
 }
 
 /* Groupe de champs */
-.form-group {
-    margin-bottom: 20px;
-}
-
-/* Champs de saisie */
-.form-input input {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #ccc;
+.form-group input {
+    width: 50%;
+    padding: 10px;
+    margin-left : 5%;
+    margin-bottom : 5%;
     border-radius: 6px;
-    font-size: 16px;
+    border: 1px solid #ccc;
 }
 
 /* Bouton */
 .form-button {
-    background-color: #4CAF50;
+    background-color: #c8ad7f;
     color: white;
     padding: 12px 24px;
     border: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
+/*quand on le survole*/
 .form-button:hover {
-    background-color: #45a049;
+    background-color: #685a42;
     transform: scale(1.05);
 }
-
+/*au clic sur le bouton*/
 .form-button:active {
-    background-color: #3e8e41;
+    background-color: #685a42;
     transform: scale(0.98);
 }
 
