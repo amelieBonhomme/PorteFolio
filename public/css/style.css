@@ -1,8 +1,8 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #EBBFA9;
-    margin: 0;
-    padding: 0;
+    margin: 0%;
+    padding: 0%;
 }
 
 #background-video {
@@ -314,8 +314,13 @@ body.zoomEffect {
 /*
 ---------------------------------------- Page login Admin --------------------------------------------------------------
 */
+/*Pour décollé la nav barre de la box*/
+#login { 
+    padding: 10%;
+}
+
 #loginAdmin {
-    padding: 10%; /*sinon la nav barre bouge donc on touche uniquement au contenu interne*/
+    padding: 2%;
     text-align: center;
     background-color: #f9f9f9;
     border-radius: 12px;
@@ -323,7 +328,6 @@ body.zoomEffect {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     margin-left: 30%;
 }
-
 
 /* Titre */
 #loginAdmin h1 {
