@@ -3,6 +3,7 @@ body {
     background-color: #EBBFA9;
     margin: 0%;
     padding: 0%;
+    color :#000000;
 }
 
 #background-video {
@@ -55,7 +56,7 @@ html {
 }
 
 .navbar li a {
-    color: white;
+    color: #ffffff;
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
@@ -116,6 +117,7 @@ html {
     background: rgba(255, 255, 255, 0.651);
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     border-radius: 30px;
+    color :#000000;
 }
 #motivation{
     margin-left: 5%;
@@ -376,6 +378,20 @@ body.zoomEffect {
 .form-button:active {
     background-color: #685a42;
     transform: scale(0.98);
+}
+/*
+---------------------------------------- Page Gestion Admin --------------------------------------------------------------
+*/
+/*Pour décollé la nav barre de la box*/
+#Gestion { 
+    padding: 10%;
+}
+.adminteneur {
+    background-color: #f9f9f996;
+    padding-left: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-radius: 15px;
 }
 
 /*
