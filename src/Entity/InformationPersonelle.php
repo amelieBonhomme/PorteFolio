@@ -4,40 +4,41 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\Table(name: 'InformationPersonelle')]
 class InformationPersonelle
 {
     #[ORM\Id]
     #[ORM\Column(name: 'IDInfoP', type: 'string', length: 50)]
     private string $IDInfoP;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'nom', type: 'string', length: 50)]
     private string $nom;
 
-    #[ORM\Column(length: 50)]
-    private string $prenom;
+    #[ORM\Column(name: 'prenom', type: 'string', length: 50)]
+    private string $prenom; 
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'description', type: 'string', length: 50)]
     private string $description;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'mail', type: 'string', length: 50)]
     private string $mail;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'telephone', type: 'string', length: 50)]
     private string $telephone;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'localisationMap', type: 'string', length: 50)]
     private string $localisationMap;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'linkedin', type: 'string', length: 50)]
     private string $linkedin;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(name: 'infoPersoActif', type: 'boolean')]
     private bool $infoPersoActif;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'centreInteretImg', type: 'string', length: 50)]
     private string $centreInteretImg;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'centreInteretTexte', type: 'string', length: 50)]
     private string $centreInteretTexte;
 
     public function getIDInfoP(): ?string

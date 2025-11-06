@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Designe;
+use App\Entity\InformationPersonelle;
 use App\Form\AdminForm;
+use App\Form\AdminFormDesigne;
+use App\Form\AdminFormIP;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,23 +16,40 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminModificationC extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function editDesigne(Request $request, EntityManagerInterface $em): Response
+    public function editAdmin(Request $request, EntityManagerInterface $em): Response
     {
-        $designe = $em->getRepository(Designe::class)->find('Designe002');
-        if (!$designe) {
-            throw $this->createNotFoundException('Design introuvable.');
+        // Récupération des entités
+        $design = $em->getRepository(Designe::class)->find('designe002');
+        $IP = $em->getRepository(InformationPersonelle::class)->find('info001');
+
+        if (!$design || !$IP) {
+            throw $this->createNotFoundException('Design ou Information Personnelle introuvable.');
         }
 
-        $form = $this->createForm(AdminForm::class, $designe);
-        $form->handleRequest($request);
+        // Création des formulaires
+        $designForm = $this->createForm(AdminFormDesigne::class, $design);
+        $IPForm = $this->createForm(AdminFormIP::class, $IP);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        // Gestion des requêtes
+        $designForm->handleRequest($request);
+        $IPForm->handleRequest($request);
+
+        // Traitement du formulaire de design
+        if ($designForm->isSubmitted() && $designForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Design mis à jour avec succès !');
         }
 
+        // Traitement du formulaire d’informations personnelles
+        if ($IPForm->isSubmitted() && $IPForm->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
+        }
+
+        // Affichage de la vue
         return $this->render('home/admin.html.twig', [
-            'designForm' => $form->createView(),
+            'designForm' => $designForm->createView(),
+            'IPForm' => $IPForm->createView(),
         ]);
     }
 }

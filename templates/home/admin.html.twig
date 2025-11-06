@@ -36,6 +36,37 @@
         {{ form_end(designForm) }}
 
         <h2>Information personelle :</h2>
+
+        {{ form_start(IPForm) }}
+        <div class ="Form">
+            <div class="FormText">
+                <p>{{ form_label(IPForm.nom, 'nom :') }}</p>
+                <p>{{ form_label(IPForm.prenom, 'prenom :') }}</p>
+                <p>{{ form_label(IPForm.description, 'description :') }}</p>
+                <p>{{ form_label(IPForm.mail, 'mail :') }}</p>
+                <p>{{ form_label(IPForm.telephone, 'telephone :') }}</p>
+                <p>{{ form_label(IPForm.localisationMap, 'localisationMap :') }}</p>
+                <p>{{ form_label(IPForm.linkedin, 'linkedin :') }}</p>
+                <p>{{ form_label(IPForm.centreInteretImg, 'centreInteretImg :') }}</p>
+                <p>{{ form_label(IPForm.centreInteretTexte, 'centreInteretTexte :') }}</p>
+                <p>{{ form_label(IPForm.infoPersoActif, 'infoPersoActif :') }}</p>
+            </div>
+            <div class="FormInput">
+                <p>{{ form_widget(IPForm.nom, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.prenom, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.description, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.mail, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.telephone, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.localisationMap, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'form-input'}}) }}</p>
+            </div>
+        </div>
+        <button type="submit" class="form-button boutonform">Enregistrer</button>
+        {{ form_end(IPForm) }}
+
         <h2>Competance :</h2>
         <h2>Information professionelle :</h2>
         <h2>Projet :</h2>
