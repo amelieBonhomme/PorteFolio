@@ -7,28 +7,30 @@
 {% endblock %}
 
 {% block body %}
-    <section id="Gestion">
-        <section id="designe" class="adminteneur">
-            <h2>Modifier le Design :</h2>
-            {{ form_start(form, {'attr': {'class': 'login-form'}}) }}
-                <div class="form-group">
-                    {{ form_row(form.imagePrincipale) }}
-                    {{ form_row(form.couleurFond) }}
-                    {{ form_row(form.couleurTexteGeneral) }}
-                    {{ form_row(form.couleurMotivationFooter) }}
-                    {{ form_row(form.couleurTexteMotivationFooter) }}
-                    {{ form_row(form.couleurNavigation) }}
-                    {{ form_row(form.couleurTexteNavigation) }}
-                </div>
-                <button type="submit" class="form-button">Enregistrer</button>
-            {{ form_end(form) }}
-            <h2>Information personelle :</h2>
-            <h2>Competance :</h2>
-            <h2>Information professionelle :</h2>
-            <h2>Projet :</h2>
-            <h2>Information Admin :</h2>
-        </section>
-            
+<section id="Gestion">
+    <section id="designe" class="adminteneur">
+        <h2>Modifier le Design :</h2>
+
+        {{ form_start(designForm, {'attr': {'class': 'design-form'}}) }}
+            <div class="form-group">
+                {{ form_row(designForm.imagePrincipale) }}
+                {{ form_row(designForm.couleurFond) }}
+                {{ form_row(designForm.couleurTexteGeneral) }}
+                {{ form_row(designForm.couleurMotivationFooter) }}
+                {{ form_row(designForm.couleurTexteMotivationFooter) }}
+                {{ form_row(designForm.couleurNavigation) }}
+                {{ form_row(designForm.couleurTexteNavigation) }}
+            </div>
+            <button type="submit" class="form-button">Enregistrer</button>
+        {{ form_end(designForm) }}
+
+        <h2>Information personelle :</h2>
+        <h2>Competance :</h2>
+        <h2>Information professionelle :</h2>
+        <h2>Projet :</h2>
+        <h2>Information Admin :</h2>
     </section>
+</section>
 {% endblock %}
+
 {% block footer %}{% endblock %}

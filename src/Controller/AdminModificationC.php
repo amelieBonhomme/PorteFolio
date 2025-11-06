@@ -1,5 +1,5 @@
 <?php
-
+// transmet  le formulaire à la vue , indique la ligne à ajouter gère la soumission
 namespace App\Controller;
 
 use App\Entity\Designe;
@@ -12,13 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminModificationC extends AbstractController
 {
-    #[Route('/admin', name: 'Modification')]
+    #[Route('/admin', name: 'admin')]
     public function editDesigne(Request $request, EntityManagerInterface $em): Response
     {
-        $designe = $em->getRepository(Designe::class)->find('designe002');
+        $designe = $em->getRepository(Designe::class)->find('Designe002');
         if (!$designe) {
-        throw $this->createNotFoundException('Design introuvable.');
-}
+            throw $this->createNotFoundException('Design introuvable.');
+        }
 
         $form = $this->createForm(AdminForm::class, $designe);
         $form->handleRequest($request);
@@ -29,7 +29,7 @@ class AdminModificationC extends AbstractController
         }
 
         return $this->render('home/admin.html.twig', [
-            'form' => $form->createView(),
+            'designForm' => $form->createView(),
         ]);
     }
 }
