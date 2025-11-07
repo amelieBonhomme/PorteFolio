@@ -10,10 +10,10 @@ class Designe
     #[ORM\Column(name: 'IDdesigne', type: 'string', length: 50)] // on précise car dans ma base de donnée j'utilise camelCase au lieu de snake_case
     private string $IDdesigne;
 
-    #[ORM\Column(name: 'imagePrincipale', type: 'string', length: 100)]
+    #[ORM\Column(name: 'imagePrincipale', type: 'string', length: 100)] //ok
     private string $imagePrincipale;
 
-    #[ORM\Column(name: 'couleurFond', type: 'string',length: 50)]
+    #[ORM\Column(name: 'couleurFond', type: 'string',length: 50)]// ok
     private string $couleurFond;
 
     #[ORM\Column(name: 'couleurMotivationFooter', type: 'string',length: 50)]
@@ -22,7 +22,7 @@ class Designe
     #[ORM\Column(name: 'couleurNavigation', type: 'string',length: 50, nullable: true)]
     private ?string $couleurNavigation = null;
 
-    #[ORM\Column(name: 'couleurTexteGeneral', type: 'string',length: 50)]
+    #[ORM\Column(name: 'couleurTexteGeneral', type: 'string',length: 50)] //ok
     private string $couleurTexteGeneral;
 
     #[ORM\Column(name: 'couleurTexteMotivationFooter', type: 'string',length: 50)]

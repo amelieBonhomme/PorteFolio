@@ -50,6 +50,7 @@
                 <p>{{ form_label(IPForm.centreInteretImg, 'centreInteretImg :') }}</p>
                 <p>{{ form_label(IPForm.centreInteretTexte, 'centreInteretTexte :') }}</p>
                 <p>{{ form_label(IPForm.infoPersoActif, 'infoPersoActif :') }}</p>
+                <p>{{ form_label(IPForm.metier, 'metier :') }}</p>
             </div>
             <div class="FormInput">
                 <p>{{ form_widget(IPForm.nom, {'attr': {'class': 'form-input'}}) }}</p>
@@ -62,6 +63,7 @@
                 <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'casecoche'}}) }}</p>
+                <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
             </div>
         </div>
         <button type="submit" class="form-button boutonform">Enregistrer</button>

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Designe;
 use App\Entity\InformationPersonelle;
-use App\Form\AdminForm;
 use App\Form\AdminFormDesigne;
 use App\Form\AdminFormIP;
 use Doctrine\ORM\EntityManagerInterface;

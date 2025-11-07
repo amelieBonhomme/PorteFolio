@@ -336,7 +336,7 @@ body.zoomEffect {
 #loginAdmin h1 {
     margin-bottom: 10%;
     font-size: 28px;
-    color: #000000;
+    /*color: #000000;*/
 }
 
 /* Erreur */
@@ -407,7 +407,7 @@ body.zoomEffect {
 .FormText1 p {
     margin-bottom: 15%;
     font-size: 20px;
-    color: #000000;
+    /*color: #000000;*/
     text-align: right;
 }
 .boutonform {
@@ -416,7 +416,7 @@ body.zoomEffect {
 .FormText2 p {
     margin-bottom: 19.5%;
     font-size: 20px;
-    color: #000000;
+    /*color: #000000;*/
     text-align: right;
 }
 .casecoche {

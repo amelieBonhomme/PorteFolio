@@ -25,7 +25,8 @@ class AdminFormIP extends AbstractType
             ->add('linkedin', TextType::class)
             ->add('infoPersoActif', CheckboxType::class)
             ->add('centreInteretImg', TextType::class)
-            ->add('centreInteretTexte', TextType::class);
+            ->add('centreInteretTexte', TextType::class)
+            ->add('metier', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
