@@ -13,7 +13,7 @@
 
         {{ form_start(designForm) }}
         <div class ="Form">
-            <div class="FormText">
+            <div class="FormText1">
                 <p>{{ form_label(designForm.imagePrincipale, 'Image principale :') }}</p>
                 <p>{{ form_label(designForm.couleurFond, 'Couleur de fond :') }}</p>
                 <p>{{ form_label(designForm.couleurTexteGeneral, 'Texte général :') }}</p>
@@ -39,7 +39,7 @@
 
         {{ form_start(IPForm) }}
         <div class ="Form">
-            <div class="FormText">
+            <div class="FormText2">
                 <p>{{ form_label(IPForm.nom, 'nom :') }}</p>
                 <p>{{ form_label(IPForm.prenom, 'prenom :') }}</p>
                 <p>{{ form_label(IPForm.description, 'description :') }}</p>
@@ -61,16 +61,17 @@
                 <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'casecoche'}}) }}</p>
             </div>
         </div>
         <button type="submit" class="form-button boutonform">Enregistrer</button>
         {{ form_end(IPForm) }}
 
         <h2>Competance :</h2>
-        <h2>Information professionelle :</h2>
+        <h2>Login :</h2>
         <h2>Projet :</h2>
-        <h2>Information Admin :</h2>
+        <h2>Information professionnelle /activité :</h2>
+        <h2>Login :</h2>
     </section>
 </section>
 {% endblock %}

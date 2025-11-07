@@ -20,6 +20,7 @@ class AdminModificationC extends AbstractController
     {
         // Récupération des entités
         $design = $em->getRepository(Designe::class)->find('designe002');
+        
         $IP = $em->getRepository(InformationPersonelle::class)->find('info001');
 
         if (!$design || !$IP) {
@@ -45,11 +46,14 @@ class AdminModificationC extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
-
         // Affichage de la vue
         return $this->render('home/admin.html.twig', [
             'designForm' => $designForm->createView(),
             'IPForm' => $IPForm->createView(),
+            'couleurFond' => $design->getCouleurFond(),
+            'couleurTexte' => $design->getCouleurTexteGeneral(),
+            'imagePrincipale'=> $design->getImagePrincipale(),
         ]);
+
     }
 }
