@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const span = document.getElementById("nom");
-  const fullText = "Amélie Bonhomme";
+
+  // Récupère la valeur injectée par Twig
+  const fullText = span.dataset.fulltext;
+
   let index = 0;
 
   function typeEffect() {

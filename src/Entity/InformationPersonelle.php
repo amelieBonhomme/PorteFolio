@@ -10,14 +10,14 @@ class InformationPersonelle
     #[ORM\Id]
     #[ORM\Column(name: 'IDInfoP', type: 'string', length: 50)]
     private string $IDInfoP;
-
+ 
     #[ORM\Column(name: 'nom', type: 'string', length: 50)]
     private string $nom;
 
     #[ORM\Column(name: 'prenom', type: 'string', length: 50)]
     private string $prenom; 
 
-    #[ORM\Column(name: 'description', type: 'string', length: 50)]
+    #[ORM\Column(name: 'description', type: 'string', length: 1441)]
     private string $description;
 
     #[ORM\Column(name: 'mail', type: 'string', length: 50)]
@@ -26,7 +26,7 @@ class InformationPersonelle
     #[ORM\Column(name: 'telephone', type: 'string', length: 50)]
     private string $telephone;
 
-    #[ORM\Column(name: 'localisationMap', type: 'string', length: 50)]
+    #[ORM\Column(name: 'localisationMap', type: 'string')]
     private string $localisationMap;
 
     #[ORM\Column(name: 'linkedin', type: 'string', length: 50)]

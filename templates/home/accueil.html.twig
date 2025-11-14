@@ -8,8 +8,8 @@
     </video>
 
     <div class = "accueil">
-        <h1 id="nom"><span>Bonhomme Amélie</span></h1>
-        <h2>Développeuse Full-Stack</h2>  
+        <h3><span id="nom" data-fulltext="{{ prenom }} {{ nom }}"></span></h3>
+        <h2>{{ metier }}</h2>  
         <a href="#partie1" class="bas-btn"></a>
     </div>
     
@@ -19,8 +19,7 @@
             <img src="{{ asset('img/pp.jpg') }}" alt="Photo de profil" class="photoProfil">
             <div>
                 <h1>Motivation et présentation </h1>
-                <p id ="motivation">Jeune développeuse junior de 19 ans, je désire avant tout me nourrir de l’expérience des autres et acquérir de nouvelles compétences. J’ai choisi l’alternance pour allier la prédominance théorique des cours à la concrétisation pratique du travail en entreprise. Mon objectif à terme est de découvrir un maximum de technologie dans le but de trouver celle qui me parle le mieux.</p>
-                <p id ="motivation">Acutellement sur ma deuxième année de BTS SIO (Service Informatique au Organision) option SLAM et en alternance avec l'entreprise Daher depuis maintenant 1 ans.</p>
+                <p id="motivation">{{ description|nl2br }}</p>
             </div>
         </header>
         <h2>Centre d'intérêt personnel :</h2>

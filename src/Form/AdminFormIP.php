@@ -4,10 +4,10 @@
 namespace App\Form;
 
 use App\Entity\InformationPersonelle;
-use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,10 +18,10 @@ class AdminFormIP extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
-            ->add('description', TextType::class)
+            ->add('description', TextareaType::class, ['attr' => [ 'rows' => 9],])
             ->add('mail', TextType::class)
             ->add('telephone', TextType::class)
-            ->add('localisationMap', TextType::class)
+            ->add('localisationMap', TextareaType::class)
             ->add('linkedin', TextType::class)
             ->add('infoPersoActif', CheckboxType::class)
             ->add('centreInteretImg', TextType::class)

@@ -52,6 +52,14 @@ class AdminModificationC extends AbstractController
             'couleurFond' => $design->getCouleurFond(),
             'couleurTexte' => $design->getCouleurTexteGeneral(),
             'imagePrincipale'=> $design->getImagePrincipale(),
+            'nom'=> $IP->getNom(),
+            'prenom'=> $IP->getPrenom(),
+            'metier'=> $IP->getMetier(),
+            'description'=> $IP->getDescription(),
+            'mail'=> $IP->getMail(),
+            'linkedin'=> $IP->getLinkedin(),
+            'tel'=> $IP->getTelephone(),
+            'localisationMap'=> $IP->getlocalisationMap(),
         ]);
 
     }
