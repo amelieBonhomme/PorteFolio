@@ -3,4 +3,24 @@
 {% block title %}Ma veille{% endblock %}
 
 {% block body %}
+  <h1>Ma veille technologique</h1>
+
+  <div class="videos-grid">
+    {% for video in videos %}
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/{{ video.id.videoId }}"
+          title="{{ video.snippet.title }}"
+          width="560" height="315"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+        <h3>{{ video.snippet.title }}</h3>
+        <small>Publiée le {{ video.snippet.publishedAt|date('d/m/Y') }}</small>
+      </div>
+    {% else %}
+      <p>Aucune vidéo à afficher.</p>
+    {% endfor %}
+  </div>
 {% endblock %}

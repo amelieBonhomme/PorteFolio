@@ -1,9 +1,7 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
+# config/services.yaml
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    youtube.api_key: '%env(YOUTUBE_API_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -15,9 +13,10 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+
     App\Twig\DesignExtension:
         tags: ['twig.extension']
-
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    
+    App\Service\YoutubeService:
+        arguments:
+            $apiKey: '%youtube.api_key%'
