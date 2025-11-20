@@ -3,24 +3,40 @@
 {% block title %}Ma veille{% endblock %}
 
 {% block body %}
-  <h1>Ma veille technologique</h1>
-
-  <div class="videos-grid">
-    {% for video in videos %}
-      <div class="video-card">
-        <iframe
-          src="https://www.youtube.com/embed/{{ video.id.videoId }}"
-          title="{{ video.snippet.title }}"
-          width="560" height="315"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-        <h3>{{ video.snippet.title }}</h3>
-        <small>Publiée le {{ video.snippet.publishedAt|date('d/m/Y') }}</small>
+    <section id ="video_veille">
+    <h1>Veille vidéo (_underscore)</h1>
+    <br>
+    <div class="videos-grid">
+        {% for video in videos %}
+        <div class="video-card">
+            <iframe
+            src="https://www.youtube.com/embed/{{ video.id.videoId }}"
+            title="{{ video.snippet.title|e('html_attr') }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+            </iframe>
+            <h3>{{ video.snippet.title|raw }}</h3>
+            <small>Publiée le {{ video.snippet.publishedAt|date('d/m/Y') }}</small>
+        </div>
+        {% else %}
+        <p>Aucune vidéo à afficher.</p>
+        {% endfor %}
+    </div>
+    <br>
+    <h1>Veille article (Hacker News)</h1>
+    <br>
+    <div class="articles-grid">
+    {% for article in articles %}
+      <div class="article-card">
+        <h3>{{ article.title }}</h3>
+        <small>Publiée le {{ article.pubDate|date('d/m/Y H:i') }}</small>
+        <p>{{ article.description|raw }}</p>
+        <a href="{{ article.link }}" target="_blank">Lire la suite</a>
       </div>
     {% else %}
-      <p>Aucune vidéo à afficher.</p>
+      <p>Aucun article trouvé.</p>
     {% endfor %}
   </div>
+    </section>
 {% endblock %}

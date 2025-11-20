@@ -423,6 +423,26 @@ body.zoomEffect {
     transform: scale(2); /* Agrandit la case à cocher */
     cursor: pointer;
 }
+/*
+---------------------------------------- Page veille --------------------------------------------------------------
+*/
+#video_veille {
+    padding: 7%; /* un padding plus raisonnable */
+    
+}
+
+.videos-grid {
+    display: flex;
+    flex-wrap: wrap; /* permet de passer à la ligne */
+    gap: 1rem;       /* espace entre les vidéos */
+    justify-content: center; /* centrer les vidéos */
+}
+
+.video-card {
+    flex: 1 1 300px; /* chaque vidéo prend au moins 300px */
+    max-width: 400px; /* limite la largeur */
+}
+
 
 /*
 ------------------------------------------------------------------
