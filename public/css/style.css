@@ -358,7 +358,7 @@ body.zoomEffect {
 
 /* Bouton */
 .form-button {
-    background-color: #c8ad7f;
+    /*background-color: #c8ad7f;*/
     color: white;
     padding: 12px 24px;
     border: none;
@@ -379,6 +379,9 @@ body.zoomEffect {
     background-color: #685a42;
     transform: scale(0.98);
 }
+.boutonform {
+    margin-left: 43%;
+}
 /*
 ---------------------------------------- Page Gestion Admin --------------------------------------------------------------
 */
@@ -396,8 +399,9 @@ body.zoomEffect {
 .Form {
     display: flex;
 }
+.FormInput textarea,
 .FormInput input {
-    width: 300%;
+    width: 400%;
     padding: 10px;
     margin-left : 15%;
     margin-bottom : 3%;
@@ -410,9 +414,6 @@ body.zoomEffect {
     /*color: #000000;*/
     text-align: right;
 }
-.boutonform {
-    margin-left: 35%;
-}
 .FormText2 p {
     margin-bottom: 19.5%;
     font-size: 20px;
@@ -422,6 +423,13 @@ body.zoomEffect {
 .casecoche {
     transform: scale(2); /* Agrandit la case à cocher */
     cursor: pointer;
+    margin-top: 13%;
+}
+.description {
+    padding-bottom: 75%;
+}
+.localisationMap {
+    padding-bottom: 9%;
 }
 /*
 ---------------------------------------- Page veille --------------------------------------------------------------

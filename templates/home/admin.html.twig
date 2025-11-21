@@ -32,7 +32,7 @@
                 <p>{{ form_widget(designForm.couleurTexteNavigation, {'attr': {'class': 'form-input'}}) }}</p>
             </div>
         </div>
-        <button type="submit" class="form-button boutonform">Enregistrer</button>
+        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
         {{ form_end(designForm) }}
 
         <h2>Information personelle :</h2>
@@ -42,15 +42,16 @@
             <div class="FormText2">
                 <p>{{ form_label(IPForm.nom, 'nom :') }}</p>
                 <p>{{ form_label(IPForm.prenom, 'prenom :') }}</p>
-                <p>{{ form_label(IPForm.description, 'description :') }}</p>
+                <p class = "description">{{ form_label(IPForm.description, 'description :') }}</p>
                 <p>{{ form_label(IPForm.mail, 'mail :') }}</p>
                 <p>{{ form_label(IPForm.telephone, 'telephone :') }}</p>
-                <p>{{ form_label(IPForm.localisationMap, 'localisationMap :') }}</p>
+                <p class = "localisationMap">{{ form_label(IPForm.localisationMap, 'localisationMap :') }}</p>
                 <p>{{ form_label(IPForm.linkedin, 'linkedin :') }}</p>
                 <p>{{ form_label(IPForm.centreInteretImg, 'centreInteretImg :') }}</p>
                 <p>{{ form_label(IPForm.centreInteretTexte, 'centreInteretTexte :') }}</p>
-                <p>{{ form_label(IPForm.infoPersoActif, 'infoPersoActif :') }}</p>
                 <p>{{ form_label(IPForm.metier, 'metier :') }}</p>
+                <p>{{ form_label(IPForm.infoPersoActif, 'infoPersoActif :') }}</p>
+                
             </div>
             <div class="FormInput">
                 <p>{{ form_widget(IPForm.nom, {'attr': {'class': 'form-input'}}) }}</p>
@@ -62,11 +63,12 @@
                 <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'casecoche'}}) }}</p>
                 <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
+                <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'casecoche'}}) }}</p>
+                
             </div>
         </div>
-        <button type="submit" class="form-button boutonform">Enregistrer</button>
+        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
         {{ form_end(IPForm) }}
 
         <h2>Competance :</h2>
