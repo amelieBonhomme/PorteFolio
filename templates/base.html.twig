@@ -18,22 +18,22 @@
 
     <body style="background-color: {{ couleurFond }}; color: {{ couleurTexte }};">
         {% block navbar %}
-        <nav class="navbar">
+        <nav class="navbar" style="background-color: {{ couleurNavigation }};">
             <ul>
-                <li><a href="{{ path('home') }}">Accueil</a></li>
-                <li><a href="#partie1">Présentation</a></li>
-                <li><a href="#entreprise">Expérience</a></li>
-                <li><a href="#competence">Compétences</a></li>
-                <li><a href="#projet">Projet</a></li>
-                <li><a href="{{ path('veille') }}">Veille technologique</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+                <li><a style=" color: {{ couleurTexteNavigation }};" href="{{ path('home') }}">Accueil</a></li>
+                <li><a style=" color: {{ couleurTexteNavigation }};" href="#partie1">Présentation</a></li>
+                <li><a style=" color: {{ couleurTexteNavigation }};" href="#entreprise">Expérience</a></li>
+                <li><a style=" color: {{ couleurTexteNavigation }};" href="#competence">Compétences</a></li>
+                <li><a style=" color: {{ couleurTexteNavigation }};" href="#projet">Projet</a></li>
+                <li><a style=" color: {{ couleurTexteNavigation }};" href="{{ path('veille') }}">Veille technologique</a></li>
+                <li><a style=" color: {{ couleurTexteNavigation }};" href="#contact">Contact</a></li>
+            </ul>   
         </nav>
         {% endblock %}
         {% block body %}{% endblock %}
 
         {% block footer %}
-        <footer id="contact">
+        <footer id="contact" style="background-color: {{ couleurMotivationFooter }}; color: {{ couleurTexteMotivationFooter }};">
             <div class="contactener">
                 <h1 class = "titrefooter">Contacts :</h1>
                 <div class="pdf">

@@ -33,6 +33,10 @@ class DesignExtension extends AbstractExtension implements GlobalsInterface
             'linkedin'=> $IP ? $IP->getLinkedin() :'',
             'tel'=> $IP ? $IP->getTelephone() :'',
             'localisationMap'=> $IP ? $IP->getlocalisationMap() :'',
+            'couleurMotivationFooter'=> $design ? $design->getcouleurMotivationFooter() :'',
+            'couleurTexteMotivationFooter'=> $design ? $design->getcouleurTexteMotivationFooter() :'',
+            'couleurNavigation'=> $design ? $design->getcouleurNavigation() :'',
+            'couleurTexteNavigation'=> $design ? $design->getcouleurTexteNavigation() :'',
         ];
     }
 }

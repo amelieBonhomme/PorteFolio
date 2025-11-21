@@ -37,7 +37,7 @@ html {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #c8ad7fbe;
+    /*background-color: #c8ad7fbe;*/
     padding: 1% 0;
     text-align: center;
     border-radius: 30px;
@@ -56,7 +56,7 @@ html {
 }
 
 .navbar li a {
-    color: #ffffff;
+    /*color: #ffffff;*/
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;

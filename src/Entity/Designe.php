@@ -16,7 +16,7 @@ class Designe
     #[ORM\Column(name: 'couleurFond', type: 'string',length: 50)]// ok
     private string $couleurFond;
 
-    #[ORM\Column(name: 'couleurMotivationFooter', type: 'string',length: 50)]
+    #[ORM\Column(name: 'couleurMotivationFooter', type: 'string',length: 50)] //ok
     private string $couleurMotivationFooter;
 
     #[ORM\Column(name: 'couleurNavigation', type: 'string',length: 50, nullable: true)]
@@ -25,7 +25,7 @@ class Designe
     #[ORM\Column(name: 'couleurTexteGeneral', type: 'string',length: 50)] //ok
     private string $couleurTexteGeneral;
 
-    #[ORM\Column(name: 'couleurTexteMotivationFooter', type: 'string',length: 50)]
+    #[ORM\Column(name: 'couleurTexteMotivationFooter', type: 'string',length: 50)] //ok
     private string $couleurTexteMotivationFooter;
 
     #[ORM\Column(name: 'couleurTexteNavigation', type: 'string',length: 50)]
