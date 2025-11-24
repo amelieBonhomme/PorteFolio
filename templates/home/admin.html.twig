@@ -47,7 +47,7 @@
                 <p>{{ form_label(IPForm.telephone, 'telephone :') }}</p>
                 <p class = "localisationMap">{{ form_label(IPForm.localisationMap, 'localisationMap :') }}</p>
                 <p>{{ form_label(IPForm.linkedin, 'linkedin :') }}</p>
-                <p>{{ form_label(IPForm.centreInteretImg, 'centreInteretImg :') }}</p>
+                <p>{{ form_start(IPForm, {'attr': {'enctype': 'multipart/form-data'}}) }}</p>
                 <p>{{ form_label(IPForm.centreInteretTexte, 'centreInteretTexte :') }}</p>
                 <p>{{ form_label(IPForm.metier, 'metier :') }}</p>
                 <p>{{ form_label(IPForm.infoPersoActif, 'infoPersoActif :') }}</p>
@@ -61,7 +61,7 @@
                 <p>{{ form_widget(IPForm.telephone, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.localisationMap, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input'}}) }}</p>
+                <p><p>{{ form_widget(IPForm.centreInteretImg) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
                 <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'casecoche'}}) }}</p>
@@ -76,6 +76,8 @@
         <h2>Projet :</h2>
         <h2>Information professionnelle /activité :</h2>
         <h2>Login :</h2>
+
+
     </section>
 </section>
 {% endblock %}

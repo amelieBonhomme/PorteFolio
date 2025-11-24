@@ -35,8 +35,8 @@ class InformationPersonelle
     #[ORM\Column(name: 'infoPersoActif', type: 'boolean')]
     private bool $infoPersoActif;
 
-    #[ORM\Column(name: 'centreInteretImg', type: 'string', length: 50)]
-    private string $centreInteretImg;
+    #[ORM\Column(name: 'centreInteretImg', type: 'blob', nullable: true)]
+    private $centreInteretImg;
 
     #[ORM\Column(name: 'centreInteretTexte', type: 'string', length: 50)]
     private string $centreInteretTexte;
@@ -147,13 +147,12 @@ class InformationPersonelle
 
     public function getCentreInteretImg(): ?string
     {
-        return $this->centreInteretImg;
+        return $this->centreInteretImg !== null ? stream_get_contents($this->centreInteretImg) : null;
     }
 
-    public function setCentreInteretImg(string $centreInteretImg): static
+    public function setCentreInteretImg($centreInteretImg): static
     {
         $this->centreInteretImg = $centreInteretImg;
-
         return $this;
     }
 

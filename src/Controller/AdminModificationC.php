@@ -42,9 +42,22 @@ class AdminModificationC extends AbstractController
 
         // Traitement du formulaire d’informations personnelles
         if ($IPForm->isSubmitted() && $IPForm->isValid()) {
+            $imageFile = $IPForm->get('centreInteretImg')->getData();
+
+            if ($imageFile) {
+                // Option A : stocker le contenu en BLOB
+                $IP->setCentreInteretImg(file_get_contents($imageFile->getPathname()));
+
+                // Option B (recommandée) : stocker le chemin
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                $imageFile->move($this->getParameter('images_directory'), $newFilename);
+                $IP->setCentreInteretImg($newFilename);
+            }
+
             $em->flush();
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
+
         // Affichage de la vue
         return $this->render('home/admin.html.twig', [
             'designForm' => $designForm->createView(),

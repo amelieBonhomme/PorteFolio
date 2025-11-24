@@ -2,6 +2,7 @@
 
 parameters:
     youtube.api_key: '%env(YOUTUBE_API_KEY)%'
+    images_directory: '%kernel.project_dir%/public/uploads'
 
 services:
     # default configuration for services in *this* file
