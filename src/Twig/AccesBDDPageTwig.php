@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
-class DesignExtension extends AbstractExtension implements GlobalsInterface
+class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 {
     private EntityManagerInterface $em;
 

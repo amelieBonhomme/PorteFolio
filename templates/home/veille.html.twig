@@ -7,7 +7,7 @@
     <h1>Veille vidéo (_underscore)</h1>
     <br>
     <div class="videos-grid">
-        {% for video in videos %}
+        {% for video in videos|slice(0,4) %}
         <div class="video-card">
             <iframe
             src="https://www.youtube.com/embed/{{ video.id.videoId }}"

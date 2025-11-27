@@ -401,7 +401,7 @@ body.zoomEffect {
 }
 .FormInput textarea,
 .FormInput input {
-    width: 400%;
+    width: 250%;
     padding: 10px;
     margin-left : 15%;
     margin-bottom : 3%;
@@ -426,10 +426,10 @@ body.zoomEffect {
     margin-top: 13%;
 }
 .description {
-    padding-bottom: 75%;
+    padding-bottom: 80%;
 }
 .localisationMap {
-    padding-bottom: 9%;
+    padding-bottom: 20%;
 }
 /*
 ---------------------------------------- Page veille --------------------------------------------------------------

@@ -15,7 +15,7 @@ services:
     App\:
         resource: '../src/'
 
-    App\Twig\DesignExtension:
+    App\Twig\AccesBDDPageTwig:
         tags: ['twig.extension']
     
     App\Service\YoutubeService:
