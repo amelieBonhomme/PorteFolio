@@ -37,6 +37,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'couleurTexteMotivationFooter'=> $design ? $design->getcouleurTexteMotivationFooter() :'',
             'couleurNavigation'=> $design ? $design->getcouleurNavigation() :'',
             'couleurTexteNavigation'=> $design ? $design->getcouleurTexteNavigation() :'',
+            'centreInteretImg'=> $IP ? $IP->getcentreInteretImg() :'',
         ];
     }
 }

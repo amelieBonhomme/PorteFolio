@@ -62,7 +62,14 @@
                 <p>{{ form_widget(IPForm.telephone, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.localisationMap, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                <div class="images-centre-interet">
+                    {% if centreInteretImg %}
+                        {% for image in centreInteretImg %}
+                            <img src="{{ asset('uploads/' ~ image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                        {% endfor %}
+                    {% endif %}
+                </div>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
                 <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'casecoche'}}) }}</p>

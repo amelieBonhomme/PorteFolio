@@ -431,6 +431,22 @@ body.zoomEffect {
 .localisationMap {
     padding-bottom: 20%;
 }
+.img-centre-interet {
+    width: 15%;       /* largeur fixe */
+    height: 10%;      /* hauteur fixe */
+    object-fit:cover;  /* recadre l’image sans déformation */
+    margin: 5px;        /* petit espace entre les images */
+}
+
+/* conteneur pour forcer l’alignement sur une ligne */
+.images-centre-interet {
+    display: flex;
+    flex-wrap: nowrap;   /* pas de retour à la ligne */
+    justify-content: flex-start; /* aligne à gauche */
+    gap: 10px;           /* espace entre les images */
+    
+}
+
 /*
 ---------------------------------------- Page veille --------------------------------------------------------------
 */

@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
+
 
 class AdminFormIP extends AbstractType
 {
@@ -26,9 +28,17 @@ class AdminFormIP extends AbstractType
             ->add('linkedin', TextType::class)
             ->add('infoPersoActif', CheckboxType::class)
             ->add('centreInteretImg', FileType::class, [
-                'label' => 'Image centre d’intérêt',
-                'mapped' => false, // important : ce champ n’est pas directement lié à l’entité
-                'required' => false,])
+                'label' => 'Images centre d’intérêt',
+                'mapped' => false,
+                'required' => false,
+                'multiple' => true,
+                'constraints' => [
+                    new Count([
+                        'max' => 4,
+                        'maxMessage' => 'Vous ne pouvez pas télécharger plus de 4 images.'
+                    ])
+                ],
+            ])
             ->add('centreInteretTexte', TextType::class)
             ->add('metier', TextType::class);
     }

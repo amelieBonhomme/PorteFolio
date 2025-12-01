@@ -42,17 +42,20 @@ class AdminModificationC extends AbstractController
 
         // Traitement du formulaire d’informations personnelles
         if ($IPForm->isSubmitted() && $IPForm->isValid()) {
-            $imageFile = $IPForm->get('centreInteretImg')->getData();
+            $imageFiles = $IPForm->get('centreInteretImg')->getData(); // tableau d'UploadedFile
+            $filenames = [];
 
-            if ($imageFile) {
-                // Option A : stocker le contenu en BLOB
-                $IP->setCentreInteretImg(file_get_contents($imageFile->getPathname()));
+            if ($imageFiles) {
+                foreach ($imageFiles as $imageFile) {
+                    $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                    $imageFile->move($this->getParameter('images_directory'), $newFilename);
+                    $filenames[] = $newFilename;
+                }
 
-                // Option B (recommandée) : stocker le chemin
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
-                $imageFile->move($this->getParameter('images_directory'), $newFilename);
-                $IP->setCentreInteretImg($newFilename);
+                // Comme ton champ est JSON, tu stockes un tableau de chemins
+                $IP->setCentreInteretImg($filenames);
             }
+
 
             $em->flush();
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
