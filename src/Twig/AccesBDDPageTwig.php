@@ -53,6 +53,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'nom' => $IP ? $IP->getNom() : '',
             'prenom'=> $IP ? $IP->getPrenom() :'',
             'metier'=> $IP ? $IP->getMetier() :'',
+            'ordrePerso'=> $IP ? $IP->getordrePerso() :'',
             'description'=> $IP ? $IP->getDescription() :'',
             'mail'=> $IP ? $IP->getMail() :'',
             'linkedin'=> $IP ? $IP->getLinkedin() :'',

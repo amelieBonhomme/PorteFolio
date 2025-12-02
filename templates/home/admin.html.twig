@@ -49,6 +49,7 @@
                 <p>{{ form_label(IPForm.linkedin, 'Lien Linkedin :') }}</p>
                 <p>{{ form_start(IPForm, {'attr': {'enctype': 'multipart/form-data'}}) }}</p>
                 <p class = "centreInteretImg">{{ form_label(IPForm.centreInteretImg, 'Image centre intéret (4 max) :') }}</p>
+                <p>{{ form_label(IPForm.ordrePerso, 'Ordre image :') }}</p>
                 <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre intéret (Séparer par une virgule dans l ordre des images :') }}</p>
                 <p>{{ form_label(IPForm.metier, 'Metier :') }}</p>
                 
@@ -69,8 +70,10 @@
                         {% endfor %}
                     {% endif %}
                 </div>
+                <p>{{ form_widget(IPForm.ordrePerso, {'attr': {'class': 'ordrePerso'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
+                
                 
             </div>
         </div>
@@ -86,8 +89,8 @@
                 <p class = "Petitlongtexte">{{ form_label(IProForm.titrePoste, 'Titre du poste :') }}</p>
                 <p class="Longtexte">{{ form_label(IProForm.descriptionEntreprise1, 'Description entreprise :') }}</p>
                 <p class = "Petitlongtexte">{{ form_label(IProForm.lienSite, 'Lien du site :') }}</p>
-                <p>{{ form_label(IProForm.logo, 'Logos entreprise (plusieurs possibles) :') }}</p>
-                <p>{{ form_label(IProForm.ordrepro, 'Odre image :') }}</p>
+                <p class = "centreInteretImg">{{ form_label(IProForm.logo, 'Logos entreprise (plusieurs possibles) :') }}</p>
+                <p>{{ form_label(IProForm.ordrepro, 'Ordre image :') }}</p>
             </div>
 
             <div class="FormInput">

@@ -42,6 +42,9 @@ class InformationPersonelle
     #[ORM\Column(name: 'metier', type: 'string', length: 50, nullable: true)]
     private ?string $metier = null;
 
+    #[ORM\Column(name: 'ordrePerso', type: 'string', length: 50, nullable: true)]
+    private ?string $ordrePerso = null;
+
     public function getIDInfoP(): ?string
     {
         return $this->IDInfoP;
@@ -163,6 +166,17 @@ class InformationPersonelle
     public function setMetier(?string $metier): static
     {
         $this->metier = $metier;
+        return $this;
+    }
+
+    public function getordrePerso(): ?string
+    {
+        return $this->ordrePerso;
+    }
+
+    public function setordrePerso(?string $ordrePerso): static
+    {
+        $this->ordrePerso = $ordrePerso;
         return $this;
     }
 }

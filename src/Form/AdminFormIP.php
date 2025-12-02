@@ -38,7 +38,8 @@ class AdminFormIP extends AbstractType
                 ],
             ])
             ->add('centreInteretTexte', TextType::class)
-            ->add('metier', TextType::class);
+            ->add('metier', TextType::class)
+            ->add('ordrePerso', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

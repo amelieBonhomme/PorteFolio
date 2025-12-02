@@ -24,14 +24,20 @@
         </header>
         <h2>Centre d'intérêt personnel :</h2>
         <section class="contact">
-            {% for interet in centreInterets %}
+            {% set ordre = ordrePerso|split(';') %}
+            {% set interets = centreInterets %}
+
+            {% for pos in ordre %}
+                {% set i = pos|trim - 1 %} {# -1 car tableau commence à 0 #}
+
                 <div class="imageTaille">
                     <div class="cercle">
-                        <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt">
+                        <img src="{{ asset('uploads/' ~ interets[i].image) }}" alt="Centre d’intérêt">
                     </div>
-                    <h3>{{ interet.texte }}</h3>
+                    <h3>{{ interets[i].texte }}</h3>
                 </div>
             {% endfor %}
+
         </section>
     </div>
 
