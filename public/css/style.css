@@ -386,66 +386,99 @@ body.zoomEffect {
 ---------------------------------------- Page Gestion Admin --------------------------------------------------------------
 */
 /*Pour décollé la nav barre de la box*/
-#Gestion { 
-    padding: 10%;
+#Gestion {
+    padding: 5%;
+    max-width: 1200px;
+    margin: auto;
 }
+
 .adminteneur {
     background-color: #f9f9f996;
-    padding-left: 5%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding: 2% 5%;
     border-radius: 15px;
 }
+
 .Form {
     display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
 }
+
+.FormText1,
+.FormText2 {
+    flex: 1;
+    min-width: 200px;
+}
+
+.FormText1 p,
+.FormText2 p {
+    margin-bottom: 2.8rem;
+    font-size: 18px;
+    text-align: right;
+}
+
+.FormInput {
+    flex: 2;
+    min-width: 300px;
+}
+
 .FormInput textarea,
-.FormInput input {
-    width: 250%;
+.FormInput input,
+.FormInput select {
+    width: 100%;
+    max-width: 500px;
     padding: 10px;
-    margin-left : 15%;
-    margin-bottom : 3%;
+    margin-bottom: 15px;
     border-radius: 6px;
     border: 1px solid #ccc;
 }
-.FormText1 p {
-    margin-bottom: 15%;
-    font-size: 20px;
-    /*color: #000000;*/
-    text-align: right;
-}
-.FormText2 p {
-    margin-bottom: 19.5%;
-    font-size: 20px;
-    /*color: #000000;*/
-    text-align: right;
-}
+
 .casecoche {
-    transform: scale(2); /* Agrandit la case à cocher */
+    transform: scale(1.5);
     cursor: pointer;
-    margin-top: 13%;
-}
-.description {
-    padding-bottom: 80%;
-}
-.localisationMap {
-    padding-bottom: 20%;
-}
-.img-centre-interet {
-    width: 15%;       /* largeur fixe */
-    height: 10%;      /* hauteur fixe */
-    object-fit:cover;  /* recadre l’image sans déformation */
-    margin: 5px;        /* petit espace entre les images */
+    margin-top: 10px;
 }
 
-/* conteneur pour forcer l’alignement sur une ligne */
+.description {
+    padding-bottom: 8rem;
+}
+.localisationMap {
+    padding-bottom: 1.3rem;
+}
+.centreInteretImg {
+    padding-bottom: 6.7rem;
+}
+
+.img-centre-interet {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    margin: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    flex-shrink: 1; /* autorise la réduction si manque de place */
+}
+
 .images-centre-interet {
     display: flex;
-    flex-wrap: nowrap;   /* pas de retour à la ligne */
-    justify-content: flex-start; /* aligne à gauche */
-    gap: 10px;           /* espace entre les images */
-    
+    flex-wrap: nowrap; /* reste sur une seule ligne */
+    justify-content: flex-start;
+    gap: 10px;
+    overflow-x: auto; /* ajoute un scroll horizontal si vraiment trop serré */
 }
+
+
+.boutonform {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
 
 /*
 ---------------------------------------- Page veille --------------------------------------------------------------
