@@ -24,22 +24,14 @@
         </header>
         <h2>Centre d'intérêt personnel :</h2>
         <section class="contact">
-            <div class="imageTaille">
-                <div class="cercle"><img src="{{ asset('img/cheval_saut.jpeg') }}" alt="Photo de profil"></div>
-                <h3>Equitation</h3>
-            </div>
-            <div class="imageTaille">
-                <div class="cercle"><img src="{{ asset('img/nourriture.jpg') }}" alt="Photo de profil"></div>
-                <h3>Découverte culinaire</h3>
-            </div>
-            <div class="imageTaille">
-                <div class="cercle"><img src="{{ asset('img/ski_cauteret.jpg') }}" alt="Photo de profil"></div>
-                <h3>Activité sportive</h3>
-            </div>
-            <div class="imageTaille">
-                <div class="cercle"><img src="{{ asset('img/voyage_londre.jpg') }}" alt="Photo de profil"></div>
-                <h3>Découverte du monde</h3>
-            </div>
+            {% for interet in centreInterets %}
+                <div class="imageTaille">
+                    <div class="cercle">
+                        <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt">
+                    </div>
+                    <h3>{{ interet.texte }}</h3>
+                </div>
+            {% endfor %}
         </section>
     </div>
 

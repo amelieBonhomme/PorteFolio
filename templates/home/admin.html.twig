@@ -64,9 +64,9 @@
                 <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
                 <div class="images-centre-interet">
-                    {% if centreInteretImg %}
-                        {% for image in centreInteretImg %}
-                            <img src="{{ asset('uploads/' ~ image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                    {% if centreInterets %}
+                        {% for interet in centreInterets %}
+                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
                         {% endfor %}
                     {% endif %}
                 </div>

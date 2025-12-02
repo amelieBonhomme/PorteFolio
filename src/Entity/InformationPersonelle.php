@@ -39,7 +39,7 @@ class InformationPersonelle
     private ?array $centreInteretImg = [];
 
 
-    #[ORM\Column(name: 'centreInteretTexte', type: 'string', length: 50)]
+    #[ORM\Column(name: 'centreInteretTexte', type: 'string', length: 255)]
     private string $centreInteretTexte;
 
     #[ORM\Column(name: 'metier', type: 'string', length: 50, nullable: true)]

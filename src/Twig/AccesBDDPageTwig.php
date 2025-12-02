@@ -20,6 +20,19 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
     {
         $design = $this->em->getRepository(Designe::class)->find('designe002');
         $IP = $this->em->getRepository(InformationPersonelle::class)->find('info001');
+        $centreInterets = [];
+        if ($IP) {
+            $images = $IP->getCentreInteretImg(); // tableau JSON
+            $textesString = $IP->getCentreInteretTexte(); // chaîne "Texte1,Texte2,..."
+            $textes = explode(',', $textesString); // transforme en tableau
+
+            foreach ($images as $index => $img) {
+                $centreInterets[] = [
+                    'image' => $img,
+                    'texte' => $textes[$index] ?? '' // associe texte par index
+                ];
+            }
+        }
 
         return [
             'couleurFond' => $design ? $design->getCouleurFond() : '#EBBFA9',
@@ -37,7 +50,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'couleurTexteMotivationFooter'=> $design ? $design->getcouleurTexteMotivationFooter() :'',
             'couleurNavigation'=> $design ? $design->getcouleurNavigation() :'',
             'couleurTexteNavigation'=> $design ? $design->getcouleurTexteNavigation() :'',
-            'centreInteretImg'=> $IP ? $IP->getcentreInteretImg() :'',
+            'centreInterets' => $centreInterets,
         ];
     }
 }
