@@ -5,6 +5,7 @@ use App\Entity\Designe;
 use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
 use App\Entity\Competence;
+use App\Entity\Projet;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -64,6 +65,21 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
                 ];
             }
         }
+        $P = $this->em->getRepository(Projet::class)->find('P001');
+        $Grouppdf = [];
+        if ($P) {
+            $pdfs = $P->getPdf(); // tableau JSON stocké en BDD
+            $titresString = $P->gettitreP(); // ⚡ ta colonne avec les titres séparés par ";"
+            $titres = explode(';', $titresString);
+
+            foreach ($pdfs as $index => $pdf) {
+                $Grouppdf[] = [
+                    'file' => $pdf,
+                    'titre' => $titres[$index] ?? '' // associe le titre par index
+                ];
+            }
+        }
+
 
         return [
             'couleurFond' => $design ? $design->getCouleurFond() : '#EBBFA9',
@@ -91,6 +107,8 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'ordrepro'=> $IPro ? $IPro->getordrepro() :'',
             'GrouplogoC1' => $GrouplogoC1,
             'GrouplogoC2' => $GrouplogoC2,
+            'titreP'=> $P ? $P->gettitreP() :'',
+            'Grouppdf' => $Grouppdf,
         ];
     }
 }

@@ -156,6 +156,35 @@
         {{ form_end(CompForm) }}
 
         <h2>Projet :</h2>
+
+        {{ form_start(ProjetForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+        <div class="Form">
+            <div class="FormText2">
+                <p>{{ form_label(ProjetForm.titreP, 'Nom du projet :') }}</p>
+            </div>
+
+            <div class="FormInput">
+                <p>{{ form_widget(ProjetForm.titreP, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(ProjetForm.pdf, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                <div class="pdf-list">
+                    {% if Grouppdf %}
+                        {% for doc in Grouppdf %}
+                            <div class="pdf-preview">
+                                <a href="{{ asset('uploads/' ~ doc.file) }}" target="_blank" class="pdf-link">
+                                    📄 {{ doc.file|split('\\\\')|last }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+            Enregistrer
+        </button>
+        {{ form_end(ProjetForm) }}
+        
         <h2>Contact :</h2>
 
 

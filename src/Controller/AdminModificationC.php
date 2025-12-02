@@ -6,10 +6,12 @@ use App\Entity\Designe;
 use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
 use App\Entity\Competence;
+use App\Entity\Projet;
 use App\Form\AdminFormDesigne;
 use App\Form\AdminFormIP;
 use App\Form\AdminFormPro;
 use App\Form\AdminFormComp;
+use App\Form\AdminFormProjet;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +28,9 @@ class AdminModificationC extends AbstractController
         $IP = $em->getRepository(InformationPersonelle::class)->find('info001');
         $IPro = $em->getRepository(InformationPro::class)->find('pro001');
         $Comp = $em->getRepository(Competence::class)->find('C001');
+        $P= $em->getRepository(Projet::class)->find('P001');
 
-        if (!$design || !$IP || !$IPro || !$Comp) {
+        if (!$design || !$IP || !$IPro || !$Comp || !$P) {
             throw $this->createNotFoundException('Design ou Information Personnelle introuvable.');
         }
 
@@ -36,12 +39,14 @@ class AdminModificationC extends AbstractController
         $IPForm = $this->createForm(AdminFormIP::class, $IP);
         $IProForm = $this->createForm(AdminFormPro::class, $IPro);
         $CompForm = $this->createForm(AdminFormComp::class, $Comp);
+        $ProjetForm = $this->createForm(AdminFormProjet::class, $P);
 
         // Gestion des requêtes
         $designForm->handleRequest($request);
         $IPForm->handleRequest($request);
         $IProForm->handleRequest($request);
         $CompForm->handleRequest($request);
+        $ProjetForm->handleRequest($request);
 
         // Traitement du formulaire de design
         if ($designForm->isSubmitted() && $designForm->isValid()) {
@@ -161,6 +166,36 @@ class AdminModificationC extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Informations pro mises à jour avec succès !');
         }
+        if ($ProjetForm->isSubmitted() && $ProjetForm->isValid()) {
+            $imageFiles = $ProjetForm->get('pdf')->getData(); // tableau d'UploadedFile
+            $filenames = [];
+
+            if ($imageFiles) {
+                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
+                $oldFiles = $P->getpdf(); // tableau JSON stocké en BDD
+                if ($oldFiles) {
+                    foreach ($oldFiles as $oldFileName) {
+                        $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+                }
+
+                // Ajouter les nouveaux fichiers
+                foreach ($imageFiles as $imageFile) {
+                    $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                    $imageFile->move($this->getParameter('images_directory'), $newFilename);
+                    $filenames[] = $newFilename;
+                }
+
+                $P->setpdf($filenames);
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'Informations pro mises à jour avec succès !');
+        }
+        
 
         // Affichage de la vue
         return $this->render('home/admin.html.twig', [
@@ -168,6 +203,7 @@ class AdminModificationC extends AbstractController
             'IPForm' => $IPForm->createView(),
             'IProForm' => $IProForm->createView(),
             'CompForm' => $CompForm->createView(),
+            'ProjetForm' => $ProjetForm->createView(),
         ]);
 
     }

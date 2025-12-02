@@ -254,27 +254,23 @@ header {
     margin-left: 5%;
     margin-right: 5%;
 }
+
 .pdf {
     display: flex;
 }
-.pdf1 {
+
+.pdf-frame {
     width: 650px; 
     height: 600px; 
     border: 1px solid #ccc; 
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    
 }
-.pdf2 {
-    width: 650px; 
-    height: 600px; 
-    border: 1px solid #ccc; 
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  
-}
+
 .espace {
     margin-right: 5%;
     margin-top: 5%;
 }
+
 /*
 ---------------------------------------- foooter --------------------------------------------------------------
 */
