@@ -5,35 +5,30 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\Table(name: "informationpro")]
 class InformationPro
 {
     #[ORM\Id]
     #[ORM\Column(name: 'ID_pro', type: 'string', length: 50)]
     private string $ID_pro;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'nomEntreprise',length: 255)]
     private string $nomEntreprise;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'titrePoste', type: 'string')]
     private string $titrePoste;
 
-    #[ORM\Column(length: 50)]
-    private string $logo;
+    #[ORM\Column(name: 'logo', type: 'json', nullable: true)]
+    private ?array $logo = [];
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'descriptionEntreprise1', type: 'string')]
     private string $descriptionEntreprise1;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'lienSite', type: 'string')]
     private string $lienSite;
 
-    #[ORM\Column(type: 'date')]
-    private \DateTimeInterface $dateDebut;
-
-    #[ORM\Column(type: 'date', nullable: true)]
-    private ?\DateTimeInterface $dateFin = null;
-
-    #[ORM\Column]
-    private bool $infoProActif;
+    #[ORM\Column(name: 'ordrepro',length: 255)]
+    private ?string $ordrepro = null;
 
     public function getIDPro(): ?string
     {
@@ -64,15 +59,14 @@ class InformationPro
         return $this;
     }
 
-    public function getLogo(): ?string
+    public function getlogo(): ?array
     {
         return $this->logo;
     }
 
-    public function setLogo(string $logo): static
+    public function setlogo(?array $logo): static
     {
         $this->logo = $logo;
-
         return $this;
     }
 
@@ -99,40 +93,14 @@ class InformationPro
 
         return $this;
     }
-
-    public function getDateDebut(): ?\DateTime
+    public function getOrdrepro(): ?string
     {
-        return $this->dateDebut;
+        return $this->ordrepro;
     }
 
-    public function setDateDebut(\DateTime $dateDebut): static
+    public function setOrdrepro(?string $ordrepro): static
     {
-        $this->dateDebut = $dateDebut;
-
-        return $this;
-    }
-
-    public function getDateFin(): ?\DateTime
-    {
-        return $this->dateFin;
-    }
-
-    public function setDateFin(?\DateTime $dateFin): static
-    {
-        $this->dateFin = $dateFin;
-
-        return $this;
-    }
-
-    public function isInfoProActif(): ?bool
-    {
-        return $this->infoProActif;
-    }
-
-    public function setInfoProActif(bool $infoProActif): static
-    {
-        $this->infoProActif = $infoProActif;
-
+        $this->ordrepro = $ordrepro;
         return $this;
     }
 }

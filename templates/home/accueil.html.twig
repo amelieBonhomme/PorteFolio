@@ -37,55 +37,41 @@
 
     <section id="entreprise">
             <h1>Expérience :</h1>
-            <div class = "entreprise1">
-                <img class = "logo1"src = "https://specialmissionaircraft.daher.com/wp-content/uploads/2021/07/Daher-white-bg-1024x270.png">
-                <div>
-                    <ul>
-                    <h3>Alternance au siens du groupe Daher dans la branche innovation interne (2 ans) → Assistante Data Analyste</h3>
-                        <li>Du 01/09/2024 au 20/08/2026</li>
-                        <li>Réalisation de diverse API et automatisation sur l'environement microsoft (PowerApps, PowerAutomate, Script Office, Excel, Power Point avec VBA)</li>
-                        <li>Réalisation de diverse API sur l'environement google (google sheet, AppScript, AppSheet, glide)</li>
-                        <li>Travail réaliser en autonomie avec le demandeur, gestion du temps et de la capacités de développemetn de la demande.</li>
-                        
-                    </ul>
-                    <a class="lienEntreprise" href="https://www.daher.com/">Site de l'entreprise</a>
-                </div>
-            </div>
-            <div class="separateur"></div>
+            {% set ordre = ordrepro|split(';') %}
+            {% set noms = nomEntreprise|split(';') %}
+            {% set postes = titrePoste|split(';') %}
+            {% set descriptions = descriptionEntreprise1|split(';') %}
+            {% set liens = lienSite|split(';') %}
+            {% set logos = Grouplogo %}
 
-            <div class = "entreprise2">
-                <div>    
-                    <ul>
-                    <h3>Stage réaliser dans le cadre de mon bac pro SN (1 mois) → Stagière développeuse web</h3>
-                        <li>Du 15/01/2024 au 09/02/2024</li>
-                        <li>Création d'une signature mail en HTML</li>
-                        <li>Création de visuel sur Figma</li>
-                        <li>Création de communication sur Canva</li>
-                        <li>Initiation à WordPress</li>
-                        
-                    </ul>
-                    <a class="lienEntreprise2" href="https://beproject.fr/">Site de l'entreprise</a>
+            {% for pos in ordre %}
+                {% set i = pos|trim - 1 %} {# -1 car ton ordre est 1-based #}
+
+                <div class="entrepriseGénéral">
+                    {% if i is even %}
+                        <img class="logo logo-left" src="{{ asset('uploads/' ~ logos[i].image) }}">
+                    {% endif %}
+
+                    <div>
+                        <ul>
+                            <h3>{{ postes[i] }}</h3>
+                            {% for line in descriptions[i]|split('\n') %}
+                                <li>{{ line }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a class="lienEntreprise{{ i+1 }}" href="{{ liens[i] }}">Site de l'entreprise</a>
+                    </div>
+
+                    {% if i is odd %}
+                        <img class="logo logo-right" src="{{ asset('uploads/' ~ logos[i].image) }}">
+                    {% endif %}
                 </div>
-                <img class = "logo2"src = "https://beproject.fr/wp-content/uploads/thegem/logos/logo_d8de66a5adf7eae8cc0118763ae1075e_1x.png">
-            </div>
-            <div class="separateur"></div>
-            <div class = "entreprise1">
-                <img class = "logo1"src = "https://www.sireagroup.com/wp-content/uploads/2021/12/logo-groupe-syselec.png">
-                <div>
-                    <ul>
-                    <h3>CDD de 1 mois pendant les vacances et 2 stages de 1 mois lors de mon bac pro SN → Opératrice de production</h3>
-                        <li>Stage du 27/03/2023 au 28/04/2023 et 25/09/2023 au 27/10/2023 / CDD du 31/07/2023 au 01/09/2023</li>
-                        <li>Implantation de composants électronique à la main</li>
-                        <li>Programmation et tests de fonctionnement</li>
-                        <li>Maintenance des appareils électroniques</li>
-                        <li>Détection d'erreurs en service après-vente (SAV)</li>
-                        <li>Vérification des différentes brasures</li>
-                        <li>Observation de la gestion des achats</li>
-                        
-                    </ul>
-                    <a class="lienEntreprise" href="https://groupesyselec.com/">Site de l'entreprise</a>
-                </div>
-            </div>
+
+                {% if not loop.last %}
+                    <div class="separateur" style="background-color: {{ couleurNavigation }};"></div>
+                {% endif %}
+            {% endfor %}
+
         </section>
 
         <section id="competence">

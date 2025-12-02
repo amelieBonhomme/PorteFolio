@@ -162,48 +162,60 @@ header {
 /*
 ---------------------------------------- Zone 3 --------------------------------------------------------------
 */
+/* Section entreprise */
 #entreprise {
     margin-left: 10%;
     margin-right: 15%;
     margin-top: 0%;
 }
-.logo1 {
+
+/* Liens */
+.lienEntreprise {
+    margin-top: 5%;
+    display: block;
+    text-align: center;
+}
+
+.lienEntreprise2 {
+    margin-top: 5%;
+    display: block;
+    text-align: center;
+}
+
+/* Logos */
+.logo-left {
     width: 30%;
-    height: 20%;
+    height: auto;
     margin-right: 7%;
-    transition: transform 0.3s ease; 
     margin-top: 5%;
-}
-.logo1:hover {
-  transform: scale(1.1); /* agrandit de 10% */
-}
-.lienEntreprise{
-    margin-top: 5%;
-    margin-left: 40%;
+    transition: transform 0.3s ease;
+    order: 0; /* placé avant le texte */
 }
 
-.logo2 {
+.logo-left:hover {
+    transform: scale(1.1);
+}
+
+.logo-right {
     width: 30%;
-    height: 20%;
-    transition: transform 0.3s ease; 
+    height: auto;
+    margin-left: 7%;
     margin-top: 5%;
-}
-.logo2:hover {
-  transform: scale(1.1); /* agrandit de 10% */
-}
-.lienEntreprise2{
-    margin-top: 5%;
-    margin-left: 10%;
+    transition: transform 0.3s ease;
+    order: 1; /* placé après le texte */
 }
 
-.entreprise1 {
-    display:flex;
+.logo-right:hover {
+    transform: scale(1.1);
+}
+
+/* Conteneurs entreprise */
+.entrepriseGénéral{
+    display: flex;
+    align-items: flex-start;
     margin-top: 5%;
 }
-.entreprise2 {
-    display:flex;
-    margin-top: 5%;
-}
+
 /*
 ---------------------------------------- Zone 4 --------------------------------------------------------------
 */
@@ -440,10 +452,10 @@ body.zoomEffect {
     margin-top: 10px;
 }
 
-.description {
+.Longtexte {
     padding-bottom: 8rem;
 }
-.localisationMap {
+.Petitlongtexte {
     padding-bottom: 1.3rem;
 }
 .centreInteretImg {
@@ -453,11 +465,8 @@ body.zoomEffect {
 .img-centre-interet {
     width: 120px;
     height: 80px;
-    object-fit: cover;
+    object-fit: contain;
     margin: 5px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    flex-shrink: 1; /* autorise la réduction si manque de place */
 }
 
 .images-centre-interet {

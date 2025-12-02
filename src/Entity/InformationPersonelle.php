@@ -32,9 +32,6 @@ class InformationPersonelle
     #[ORM\Column(name: 'linkedin', type: 'string', length: 50)]
     private string $linkedin;
 
-    #[ORM\Column(name: 'infoPersoActif', type: 'boolean')]
-    private bool $infoPersoActif;
-
     #[ORM\Column(name: 'centreInteretImg', type: 'json', nullable: true)]
     private ?array $centreInteretImg = [];
 
@@ -130,18 +127,6 @@ class InformationPersonelle
     public function setLinkedin(string $linkedin): static
     {
         $this->linkedin = $linkedin;
-
-        return $this;
-    }
-
-    public function isInfoPersoActif(): ?bool
-    {
-        return $this->infoPersoActif;
-    }
-
-    public function setInfoPersoActif(bool $infoPersoActif): static
-    {
-        $this->infoPersoActif = $infoPersoActif;
 
         return $this;
     }

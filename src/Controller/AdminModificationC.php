@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Designe;
 use App\Entity\InformationPersonelle;
+use App\Entity\InformationPro;
 use App\Form\AdminFormDesigne;
 use App\Form\AdminFormIP;
+use App\Form\AdminFormPro;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,20 +21,22 @@ class AdminModificationC extends AbstractController
     {
         // Récupération des entités
         $design = $em->getRepository(Designe::class)->find('designe002');
-        
         $IP = $em->getRepository(InformationPersonelle::class)->find('info001');
+        $IPro = $em->getRepository(InformationPro::class)->find('pro001');
 
-        if (!$design || !$IP) {
+        if (!$design || !$IP || !$IPro) {
             throw $this->createNotFoundException('Design ou Information Personnelle introuvable.');
         }
 
         // Création des formulaires
         $designForm = $this->createForm(AdminFormDesigne::class, $design);
         $IPForm = $this->createForm(AdminFormIP::class, $IP);
+        $IProForm = $this->createForm(AdminFormPro::class, $IPro);
 
         // Gestion des requêtes
         $designForm->handleRequest($request);
         $IPForm->handleRequest($request);
+        $IProForm->handleRequest($request);
 
         // Traitement du formulaire de design
         if ($designForm->isSubmitted() && $designForm->isValid()) {
@@ -42,40 +46,71 @@ class AdminModificationC extends AbstractController
 
         // Traitement du formulaire d’informations personnelles
         if ($IPForm->isSubmitted() && $IPForm->isValid()) {
-            $imageFiles = $IPForm->get('centreInteretImg')->getData(); // tableau d'UploadedFile
+            $imageFiles = $IPForm->get('centreInteretImg')->getData();
             $filenames = [];
 
             if ($imageFiles) {
+                // Supprimer les anciens fichiers
+                $oldFiles = $IP->getCentreInteretImg();
+                if ($oldFiles) {
+                    foreach ($oldFiles as $oldFileName) {
+                        $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+                }
+
+                // Ajouter les nouveaux fichiers
                 foreach ($imageFiles as $imageFile) {
                     $newFilename = uniqid().'.'.$imageFile->guessExtension();
                     $imageFile->move($this->getParameter('images_directory'), $newFilename);
                     $filenames[] = $newFilename;
                 }
 
-                // Comme ton champ est JSON, tu stockes un tableau de chemins
                 $IP->setCentreInteretImg($filenames);
             }
-
 
             $em->flush();
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
 
+        if ($IProForm->isSubmitted() && $IProForm->isValid()) {
+            $imageFiles = $IProForm->get('logo')->getData(); // tableau d'UploadedFile
+            $filenames = [];
+
+            if ($imageFiles) {
+                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
+                $oldFiles = $IPro->getLogo(); // tableau JSON stocké en BDD
+                if ($oldFiles) {
+                    foreach ($oldFiles as $oldFileName) {
+                        $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+                }
+
+                // Ajouter les nouveaux fichiers
+                foreach ($imageFiles as $imageFile) {
+                    $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                    $imageFile->move($this->getParameter('images_directory'), $newFilename);
+                    $filenames[] = $newFilename;
+                }
+
+                $IPro->setLogo($filenames);
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'Informations pro mises à jour avec succès !');
+        }
+
+
         // Affichage de la vue
         return $this->render('home/admin.html.twig', [
             'designForm' => $designForm->createView(),
             'IPForm' => $IPForm->createView(),
-            'couleurFond' => $design->getCouleurFond(),
-            'couleurTexte' => $design->getCouleurTexteGeneral(),
-            'imagePrincipale'=> $design->getImagePrincipale(),
-            'nom'=> $IP->getNom(),
-            'prenom'=> $IP->getPrenom(),
-            'metier'=> $IP->getMetier(),
-            'description'=> $IP->getDescription(),
-            'mail'=> $IP->getMail(),
-            'linkedin'=> $IP->getLinkedin(),
-            'tel'=> $IP->getTelephone(),
-            'localisationMap'=> $IP->getlocalisationMap(),
+            'IProForm' => $IProForm->createView(),
         ]);
 
     }

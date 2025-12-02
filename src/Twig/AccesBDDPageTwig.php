@@ -3,6 +3,7 @@ namespace App\Twig;
 
 use App\Entity\Designe;
 use App\Entity\InformationPersonelle;
+use App\Entity\InformationPro;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -33,6 +34,17 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
                 ];
             }
         }
+        $IPro = $this->em->getRepository(InformationPro::class)->find('Pro001');
+        $Grouplogo = [];
+        if ($IPro) {
+            $images = $IPro->getlogo(); // tableau JSON
+
+            foreach ($images as $index => $img) {
+                $Grouplogo[] = [
+                    'image' => $img,
+                ];
+            }
+        }
 
         return [
             'couleurFond' => $design ? $design->getCouleurFond() : '#EBBFA9',
@@ -51,6 +63,12 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'couleurNavigation'=> $design ? $design->getcouleurNavigation() :'',
             'couleurTexteNavigation'=> $design ? $design->getcouleurTexteNavigation() :'',
             'centreInterets' => $centreInterets,
+            'Grouplogo' => $Grouplogo,
+            'nomEntreprise'=> $IPro ? $IPro->getnomEntreprise() :'',
+            'titrePoste'=> $IPro ? $IPro->gettitrePoste() :'',
+            'descriptionEntreprise1'=> $IPro ? $IPro->getdescriptionEntreprise1() :'',
+            'lienSite'=> $IPro ? $IPro->getlienSite() :'',
+            'ordrepro'=> $IPro ? $IPro->getordrepro() :'',
         ];
     }
 }

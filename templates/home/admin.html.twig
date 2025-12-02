@@ -42,16 +42,15 @@
             <div class="FormText2">
                 <p>{{ form_label(IPForm.nom, 'Nom :') }}</p>
                 <p>{{ form_label(IPForm.prenom, 'Prenom :') }}</p>
-                <p class = "description">{{ form_label(IPForm.description, 'Description :') }}</p>
+                <p class = "Longtexte">{{ form_label(IPForm.description, 'Description :') }}</p>
                 <p>{{ form_label(IPForm.mail, 'Mail :') }}</p>
                 <p>{{ form_label(IPForm.telephone, 'Telephone :') }}</p>
-                <p class = "localisationMap">{{ form_label(IPForm.localisationMap, 'Adresse localisation google map:') }}</p>
+                <p class = "Petitlongtexte">{{ form_label(IPForm.localisationMap, 'Adresse localisation google map:') }}</p>
                 <p>{{ form_label(IPForm.linkedin, 'Lien Linkedin :') }}</p>
                 <p>{{ form_start(IPForm, {'attr': {'enctype': 'multipart/form-data'}}) }}</p>
                 <p class = "centreInteretImg">{{ form_label(IPForm.centreInteretImg, 'Image centre intéret (4 max) :') }}</p>
                 <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre intéret (Séparer par une virgule dans l ordre des images :') }}</p>
                 <p>{{ form_label(IPForm.metier, 'Metier :') }}</p>
-                <p>{{ form_label(IPForm.infoPersoActif, 'Actif :') }}</p>
                 
             </div>
             <div class="FormInput">
@@ -72,18 +71,51 @@
                 </div>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
-                <p>{{ form_widget(IPForm.infoPersoActif, {'attr': {'class': 'casecoche'}}) }}</p>
                 
             </div>
         </div>
         <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
         {{ form_end(IPForm) }}
 
+        <h2>Expérience :</h2>
+
+        {{ form_start(IProForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+        <div class="Form">
+            <div class="FormText2">
+                <p>{{ form_label(IProForm.nomEntreprise, 'Nom entreprise :') }}</p>
+                <p class = "Petitlongtexte">{{ form_label(IProForm.titrePoste, 'Titre du poste :') }}</p>
+                <p class="Longtexte">{{ form_label(IProForm.descriptionEntreprise1, 'Description entreprise :') }}</p>
+                <p class = "Petitlongtexte">{{ form_label(IProForm.lienSite, 'Lien du site :') }}</p>
+                <p>{{ form_label(IProForm.logo, 'Logos entreprise (plusieurs possibles) :') }}</p>
+                <p>{{ form_label(IProForm.ordrepro, 'Odre image :') }}</p>
+            </div>
+
+            <div class="FormInput">
+                <p>{{ form_widget(IProForm.nomEntreprise, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IProForm.titrePoste, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IProForm.descriptionEntreprise1, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IProForm.lienSite, {'attr': {'class': 'form-input'}}) }}</p>
+                <p>{{ form_widget(IProForm.logo, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                <div class="images-centre-interet">
+                    {% if Grouplogo %}
+                        {% for interet in Grouplogo %}
+                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <p>{{ form_widget(IProForm.ordrepro, {'attr': {'class': 'form-input'}}) }}</p>
+            </div>
+        </div>
+
+        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+            Enregistrer
+        </button>
+        {{ form_end(IProForm) }}
+
+
         <h2>Competence :</h2>
-        <h2>Login :</h2>
         <h2>Projet :</h2>
-        <h2>Information professionnelle /activité :</h2>
-        <h2>Login :</h2>
+        <h2>Contact :</h2>
 
 
     </section>

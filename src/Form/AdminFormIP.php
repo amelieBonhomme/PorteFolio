@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Count;
 
@@ -26,7 +25,6 @@ class AdminFormIP extends AbstractType
             ->add('telephone', TextType::class)
             ->add('localisationMap', TextareaType::class)
             ->add('linkedin', TextType::class)
-            ->add('infoPersoActif', CheckboxType::class)
             ->add('centreInteretImg', FileType::class, [
                 'label' => 'Images centre d’intérêt',
                 'mapped' => false,
