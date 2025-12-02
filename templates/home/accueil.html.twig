@@ -82,25 +82,22 @@
 
         <section id="competence">
             <h1>Compétences :</h1>
-            <div class = "competence1">
-                <img alt ="logo PowerApps" class = "logo3"src = "https://cdn.prod.website-files.com/604a3ad5df4bbcc3722cc5e8/671265f5059c059c67984e1a_64f1f1c97ae800d0dc7f173f_Power%2520app%2520logo.png">
-                <img alt ="logo PowerAutomate" class = "logo3"src = "https://www.eskape.fr/wp-content/uploads/2025/04/microsoft_power_automate_logo.png">
-                <img alt ="logo AppSheet" class = "logo3"src = "https://wp.logos-download.com/wp-content/uploads/2021/01/AppSheet_Logo.png?dl">
-                <img alt ="logo AppScript" class = "logo3"src = "https://thierryvanoffe.com/wp-content/uploads/2024/01/google-apps-script_logo.png">
-                <img alt ="logo glide" class = "logo3"src = "https://cdn.hostadvice.com/2025/09/Glide-logo.png">
-                <img alt ="logo symfony" class = "logo3"src = "https://symfony.com/logos/symfony_black_02.png">
-                <img alt ="logo codeIgniter" class = "logo3"src = "https://cdn.worldvectorlogo.com/logos/codeigniter.svg">
-                
+            <div class="competence1">
+                {% if GrouplogoC1 %}
+                    {% for logo in GrouplogoC1 %}
+                        <img alt="logo compétence ligne 1" class="logo3" src="{{ asset('uploads/' ~ logo.image) }}">
+                    {% endfor %}
+                {% endif %}
             </div>
-            <div class = "competence2"> 
-                <img alt ="logo php" class = "logo3"src = "https://pngimg.com/d/php_PNG35.png">
-                <img alt ="logo python" class = "logo3"src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/1200px-Python_logo_and_wordmark.svg.png">
-                <img alt ="logo sql" class = "logo3"src = "https://www.fast2.tech/images/connectors/sql-logo.webp">
-                <img alt ="logo html css javascript" class = "logo3"src = "https://www.freepnglogos.com/uploads/javascript-png/logo-html5-js-css3-png-transparent-logo-4.png">
-                <img alt ="logo django" class = "logo3"src = "https://www.djangoproject.com/m/img/logos/django-logo-negative.png">
-                <img alt ="logo VBA" class = "logo3"src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Microsoft_Visual_Basic_for_Applications_logo.svg/1200px-Microsoft_Visual_Basic_for_Applications_logo.svg.png">
-                <img alt ="logo typescript" class = "logo3"src = "https://user-images.githubusercontent.com/12243763/33518868-6e2595c4-d76a-11e7-8260-31b4e8110c93.png">
+
+            <div class="competence2">
+                {% if GrouplogoC2 %}
+                    {% for logo in GrouplogoC2 %}
+                        <img alt="logo compétence ligne 2" class="logo3" src="{{ asset('uploads/' ~ logo.image) }}">
+                    {% endfor %}
+                {% endif %}
             </div>
+
         </section>
         <section id="projet">
             <h1>Mes projets :</h1>

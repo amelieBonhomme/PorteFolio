@@ -116,7 +116,45 @@
         {{ form_end(IProForm) }}
 
 
-        <h2>Competence :</h2>
+        <h2>Compétence :</h2>
+
+        {{ form_start(CompForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+        <div class="Form">
+            <div class="FormText2">
+                <p class="centreInteretImg">
+                    {{ form_label(CompForm.logoLigne1, 'Logos compétences ligne 1 (plusieurs possibles) :') }}
+                </p>
+                <p class="centreInteretImg">
+                    {{ form_label(CompForm.logoLigne2, 'Logos compétences ligne 2 (plusieurs possibles) :') }}
+                </p>
+            </div>
+
+            <div class="FormInput">
+                <p>{{ form_widget(CompForm.logoLigne1, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                <div class="images-centre-interet">
+                    {% if GrouplogoC1 %}
+                        {% for interet in GrouplogoC1 %}
+                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <p>{{ form_widget(CompForm.logoLigne2, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                <div class="images-centre-interet">
+                    {% if GrouplogoC2 %}
+                        {% for interet in GrouplogoC2 %}
+                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+            Enregistrer
+        </button>
+        {{ form_end(CompForm) }}
+
         <h2>Projet :</h2>
         <h2>Contact :</h2>
 

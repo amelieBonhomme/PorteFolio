@@ -4,6 +4,7 @@ namespace App\Twig;
 use App\Entity\Designe;
 use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
+use App\Entity\Competence;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -45,6 +46,24 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
                 ];
             }
         }
+        $Comp = $this->em->getRepository(Competence::class)->find('C001');
+        $GrouplogoC1 = [];
+        $GrouplogoC2 = [];
+        if ($Comp) {
+            $images1 = $Comp->getlogoLigne1(); // tableau JSON
+            $images2 = $Comp->getlogoLigne2(); // tableau JSON
+
+            foreach ($images1 as $index => $img) {
+                $GrouplogoC1[] = [
+                    'image' => $img,
+                ];
+            }
+            foreach ($images2 as $index => $img) {
+                $GrouplogoC2[] = [
+                    'image' => $img,
+                ];
+            }
+        }
 
         return [
             'couleurFond' => $design ? $design->getCouleurFond() : '#EBBFA9',
@@ -70,6 +89,8 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'descriptionEntreprise1'=> $IPro ? $IPro->getdescriptionEntreprise1() :'',
             'lienSite'=> $IPro ? $IPro->getlienSite() :'',
             'ordrepro'=> $IPro ? $IPro->getordrepro() :'',
+            'GrouplogoC1' => $GrouplogoC1,
+            'GrouplogoC2' => $GrouplogoC2,
         ];
     }
 }

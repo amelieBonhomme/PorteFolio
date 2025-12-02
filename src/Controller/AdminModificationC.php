@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Designe;
 use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
+use App\Entity\Competence;
 use App\Form\AdminFormDesigne;
 use App\Form\AdminFormIP;
 use App\Form\AdminFormPro;
+use App\Form\AdminFormComp;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +25,9 @@ class AdminModificationC extends AbstractController
         $design = $em->getRepository(Designe::class)->find('designe002');
         $IP = $em->getRepository(InformationPersonelle::class)->find('info001');
         $IPro = $em->getRepository(InformationPro::class)->find('pro001');
+        $Comp = $em->getRepository(Competence::class)->find('C001');
 
-        if (!$design || !$IP || !$IPro) {
+        if (!$design || !$IP || !$IPro || !$Comp) {
             throw $this->createNotFoundException('Design ou Information Personnelle introuvable.');
         }
 
@@ -32,11 +35,13 @@ class AdminModificationC extends AbstractController
         $designForm = $this->createForm(AdminFormDesigne::class, $design);
         $IPForm = $this->createForm(AdminFormIP::class, $IP);
         $IProForm = $this->createForm(AdminFormPro::class, $IPro);
+        $CompForm = $this->createForm(AdminFormComp::class, $Comp);
 
         // Gestion des requêtes
         $designForm->handleRequest($request);
         $IPForm->handleRequest($request);
         $IProForm->handleRequest($request);
+        $CompForm->handleRequest($request);
 
         // Traitement du formulaire de design
         if ($designForm->isSubmitted() && $designForm->isValid()) {
@@ -104,13 +109,65 @@ class AdminModificationC extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Informations pro mises à jour avec succès !');
         }
+        if ($CompForm->isSubmitted() && $CompForm->isValid()) {
+            $imageFiles1 = $CompForm->get('logoLigne1')->getData(); // tableau d'UploadedFile
+            $imageFiles2 = $CompForm->get('logoLigne2')->getData(); // tableau d'UploadedFile
+            $filenames1 = [];
+            $filenames2 = [];
 
+            if ($imageFiles1) {
+                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
+                $oldFiles = $Comp->getlogoLigne1(); // tableau JSON stocké en BDD
+                if ($oldFiles) {
+                    foreach ($oldFiles as $oldFileName) {
+                        $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+                }
+
+                // Ajouter les nouveaux fichiers
+                foreach ($imageFiles1 as $imageFile) {
+                    $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                    $imageFile->move($this->getParameter('images_directory'), $newFilename);
+                    $filenames1[] = $newFilename;
+                }
+
+                $Comp->setLogoLigne1($filenames1);
+            }
+            if ($imageFiles2) {
+                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
+                $oldFiles = $Comp->getlogoLigne2(); // tableau JSON stocké en BDD
+                if ($oldFiles) {
+                    foreach ($oldFiles as $oldFileName) {
+                        $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+                }
+
+                // Ajouter les nouveaux fichiers
+                foreach ($imageFiles2 as $imageFile) {
+                    $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                    $imageFile->move($this->getParameter('images_directory'), $newFilename);
+                    $filenames2[] = $newFilename;
+                }
+
+                $Comp->setLogoLigne2($filenames2);
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'Informations pro mises à jour avec succès !');
+        }
 
         // Affichage de la vue
         return $this->render('home/admin.html.twig', [
             'designForm' => $designForm->createView(),
             'IPForm' => $IPForm->createView(),
             'IProForm' => $IProForm->createView(),
+            'CompForm' => $CompForm->createView(),
         ]);
 
     }
