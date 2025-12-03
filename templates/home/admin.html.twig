@@ -47,11 +47,11 @@
                 <p>{{ form_label(IPForm.telephone, 'Telephone :') }}</p>
                 <p class = "Petitlongtexte">{{ form_label(IPForm.localisationMap, 'Adresse localisation google map:') }}</p>
                 <p>{{ form_label(IPForm.linkedin, 'Lien Linkedin :') }}</p>
-                <p>{{ form_start(IPForm, {'attr': {'enctype': 'multipart/form-data'}}) }}</p>
                 <p class = "centreInteretImg">{{ form_label(IPForm.centreInteretImg, 'Image centre intéret (4 max) :') }}</p>
                 <p>{{ form_label(IPForm.ordrePerso, 'Ordre image :') }}</p>
                 <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre intéret (Séparer par une virgule dans l ordre des images :') }}</p>
                 <p>{{ form_label(IPForm.metier, 'Metier :') }}</p>
+                <p class = "Petitlongtexte">{{ form_label(IPForm.photo, 'Photo de profil :') }}</p>
                 
             </div>
             <div class="FormInput">
@@ -73,6 +73,11 @@
                 <p>{{ form_widget(IPForm.ordrePerso, {'attr': {'class': 'ordrePerso'}}) }}</p>
                 <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                 <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
+                <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
+                {% if photo %}
+                    <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo" class="img-centre-interet">
+                {% endif %}
+
                 
                 
             </div>

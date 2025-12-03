@@ -109,6 +109,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'GrouplogoC2' => $GrouplogoC2,
             'titreP'=> $P ? $P->gettitreP() :'',
             'Grouppdf' => $Grouppdf,
+            'photo' => $IP ? $IP->getphoto() : '',
         ];
     }
 }

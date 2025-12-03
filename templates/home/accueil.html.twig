@@ -16,7 +16,7 @@
     <div class="container" style="background-color: {{ couleurMotivationFooter }}; color: {{ couleurTexteMotivationFooter }};">
     <div id="partie1"></div>
         <header>
-            <img src="{{ asset('img/pp.jpg') }}" alt="Photo de profil" class="photoProfil">
+            <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo de profil" class="photoProfil">
             <div>
                 <h1>Motivation et présentation </h1>
                 <p id="motivation">{{ description|nl2br }}</p>

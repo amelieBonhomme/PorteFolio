@@ -39,6 +39,12 @@ class AdminFormIP extends AbstractType
             ])
             ->add('centreInteretTexte', TextType::class)
             ->add('metier', TextType::class)
+            ->add('photo', FileType::class, [
+                'label' => 'Images centre d’intérêt',
+                'mapped' => false,
+                'required' => false,
+                'multiple' => false,
+            ])
             ->add('ordrePerso', TextType::class);
     }
 

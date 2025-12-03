@@ -45,6 +45,10 @@ class InformationPersonelle
     #[ORM\Column(name: 'ordrePerso', type: 'string', length: 50, nullable: true)]
     private ?string $ordrePerso = null;
 
+    #[ORM\Column(name: 'photo', type: 'json', nullable: true)]
+    private ?array $photo = [];
+
+
     public function getIDInfoP(): ?string
     {
         return $this->IDInfoP;
@@ -177,6 +181,17 @@ class InformationPersonelle
     public function setordrePerso(?string $ordrePerso): static
     {
         $this->ordrePerso = $ordrePerso;
+        return $this;
+    }
+
+    public function getphoto(): ?array
+    {
+        return $this->photo;
+    }
+
+    public function setphoto(?array $photo): static
+    {
+        $this->photo = $photo;
         return $this;
     }
 }

@@ -56,9 +56,11 @@ class AdminModificationC extends AbstractController
 
         // Traitement du formulaire d’informations personnelles
         if ($IPForm->isSubmitted() && $IPForm->isValid()) {
-            $imageFiles = $IPForm->get('centreInteretImg')->getData();
+            $imageFiles = $IPForm->get('centreInteretImg')->getData(); // tableau d'UploadedFile
+            $photoFile = $IPForm->get('photo')->getData(); // un seul UploadedFile
             $filenames = [];
 
+            // 🔹 Gestion des images multiples (centreInteretImg)
             if ($imageFiles) {
                 // Supprimer les anciens fichiers
                 $oldFiles = $IP->getCentreInteretImg();
@@ -81,9 +83,30 @@ class AdminModificationC extends AbstractController
                 $IP->setCentreInteretImg($filenames);
             }
 
+            // 🔹 Gestion de la photo unique
+            if ($photoFile) {
+                // Supprimer l’ancienne photo
+                $oldPhoto = $IP->getPhoto();
+                if ($oldPhoto) {
+                    $oldPath = $this->getParameter('images_directory').'/'.$oldPhoto;
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
+                    }
+                }
+
+                // Ajouter la nouvelle photo
+                $newPhotoFilename = uniqid().'.'.$photoFile->guessExtension();
+                $photoFile->move($this->getParameter('images_directory'), $newPhotoFilename);
+
+                // ⚡ Ici tu stockes juste le nom du fichier (string) ou un tableau JSON avec un seul élément
+                $IP->setPhoto([$newPhotoFilename]);
+
+            }
+
             $em->flush();
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
+
 
         if ($IProForm->isSubmitted() && $IProForm->isValid()) {
             $imageFiles = $IProForm->get('logo')->getData(); // tableau d'UploadedFile
