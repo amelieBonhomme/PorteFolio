@@ -514,6 +514,13 @@ CSS pour téléphone ( à travailler)
 
 /* === Responsive === */
 @media screen and (max-width: 600px) {
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* évite le décalage horizontal */
+    }
     .navbar {
         position: static;
         left: 0;
@@ -617,29 +624,38 @@ CSS pour téléphone ( à travailler)
         margin-left: 0%;
 
     }
-    .Form {
+    
+    .FormMobile {
+        display: flex;
         flex-direction: column;
-    }
-
-    .FormText2, .FormInput {
-        flex: 1 1 100%;
-    }
-
-    .img-centre-interet {
-        width: 80px;
-        height: 80px;
-    }
-
-    .img-profil {
-        width: 150px;
-        height: 150px;
-    }
-    html, body {
+        gap: 15px;
         width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden; /* évite le décalage horizontal */
+        padding: 10px;
     }
+
+    /* Chaque ligne label + champ */
+    .FormMobile .form-row {
+        display: flex;
+        flex-direction: column; /* label au-dessus du champ */
+        gap: 6px;
+    }
+
+    /* Style des labels */
+    .FormMobile .form-row p:first-child {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    /* Style des inputs */
+    .FormMobile .form-row .form-input {
+        width: 100%;
+        min-height: 38px;
+        padding: 8px 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
 }
 

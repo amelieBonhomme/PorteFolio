@@ -12,185 +12,365 @@
         <h2>Modifier le Design :</h2>
 
         {{ form_start(designForm) }}
-        <div class ="Form">
-            <div class="FormText1">
-                <p>{{ form_label(designForm.imagePrincipale, 'Image principale :') }}</p>
-                <p>{{ form_label(designForm.couleurFond, 'Couleur de fond du site :') }}</p>
-                <p>{{ form_label(designForm.couleurTexteGeneral, 'Texte général du site :') }}</p>
-                <p>{{ form_label(designForm.couleurMotivationFooter, 'Couleur fond Motivation/footer :') }}</p>
-                <p>{{ form_label(designForm.couleurTexteMotivationFooter, 'Couleur texte motivation/footer :') }}</p>
-                <p>{{ form_label(designForm.couleurNavigation, 'Couleur barre navigation :') }}</p>
-                <p>{{ form_label(designForm.couleurTexteNavigation, 'Couleur texte barre navigation :') }}</p>
-            </div>
-            <div class="FormInput">
-                <p>{{ form_widget(designForm.imagePrincipale, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(designForm.couleurFond, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(designForm.couleurTexteGeneral, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(designForm.couleurMotivationFooter, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(designForm.couleurTexteMotivationFooter, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(designForm.couleurNavigation, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(designForm.couleurTexteNavigation, {'attr': {'class': 'form-input'}}) }}</p>
-            </div>
-        </div>
+            {% if not isMobile %}
+                <div class ="Form">
+                    <div class="FormText1">
+                        <p>{{ form_label(designForm.imagePrincipale, 'Image principale :') }}</p>
+                        <p>{{ form_label(designForm.couleurFond, 'Couleur de fond du site :') }}</p>
+                        <p>{{ form_label(designForm.couleurTexteGeneral, 'Texte général du site :') }}</p>
+                        <p>{{ form_label(designForm.couleurMotivationFooter, 'Couleur fond Motivation/footer :') }}</p>
+                        <p>{{ form_label(designForm.couleurTexteMotivationFooter, 'Couleur texte motivation/footer :') }}</p>
+                        <p>{{ form_label(designForm.couleurNavigation, 'Couleur barre navigation :') }}</p>
+                        <p>{{ form_label(designForm.couleurTexteNavigation, 'Couleur texte barre navigation :') }}</p>
+                    </div>
+                    <div class="FormInput">
+                        <p>{{ form_widget(designForm.imagePrincipale, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(designForm.couleurFond, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(designForm.couleurTexteGeneral, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(designForm.couleurMotivationFooter, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(designForm.couleurTexteMotivationFooter, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(designForm.couleurNavigation, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(designForm.couleurTexteNavigation, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="FormMobile">
+                    <div class="form-row">
+                        <p>{{ form_label(designForm.imagePrincipale, 'Image principale :') }}</p>
+                        <p>{{ form_widget(designForm.imagePrincipale, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(designForm.couleurFond, 'Couleur de fond du site :') }}</p>
+                        <p>{{ form_widget(designForm.couleurFond, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(designForm.couleurTexteGeneral, 'Texte général du site :') }}</p>
+                        <p>{{ form_widget(designForm.couleurTexteGeneral, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(designForm.couleurMotivationFooter, 'Couleur fond Motivation/footer :') }}</p>
+                        <p>{{ form_widget(designForm.couleurMotivationFooter, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(designForm.couleurTexteMotivationFooter, 'Couleur texte motivation/footer :') }}</p>
+                        <p>{{ form_widget(designForm.couleurTexteMotivationFooter, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(designForm.couleurNavigation, 'Couleur barre navigation :') }}</p>
+                        <p>{{ form_widget(designForm.couleurNavigation, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(designForm.couleurTexteNavigation, 'Couleur texte barre navigation :') }}</p>
+                        <p>{{ form_widget(designForm.couleurTexteNavigation, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                </div>
+            {% endif %}
         <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
         {{ form_end(designForm) }}
 
         <h2>Information personelle :</h2>
 
         {{ form_start(IPForm) }}
-        <div class ="Form">
-            <div class="FormText2">
-                <p>{{ form_label(IPForm.nom, 'Nom :') }}</p>
-                <p>{{ form_label(IPForm.prenom, 'Prenom :') }}</p>
-                <p class = "Longtexte">{{ form_label(IPForm.description, 'Description :') }}</p>
-                <p>{{ form_label(IPForm.mail, 'Mail :') }}</p>
-                <p>{{ form_label(IPForm.telephone, 'Telephone :') }}</p>
-                <p class = "Petitlongtexte">{{ form_label(IPForm.localisationMap, 'Adresse localisation google map:') }}</p>
-                <p>{{ form_label(IPForm.linkedin, 'Lien Linkedin :') }}</p>
-                <p class = "centreInteretImg">{{ form_label(IPForm.centreInteretImg, 'Image centre intéret (4 max) :') }}</p>
-                <p>{{ form_label(IPForm.ordrePerso, 'Ordre image :') }}</p>
-                <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre intéret (Séparer par une virgule dans l ordre des images :') }}</p>
-                <p>{{ form_label(IPForm.metier, 'Metier :') }}</p>
-                <p class = "Petitlongtexte">{{ form_label(IPForm.photo, 'Photo de profil :') }}</p>
-                
-            </div>
-            <div class="FormInput">
-                <p>{{ form_widget(IPForm.nom, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.prenom, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.description, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.mail, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.telephone, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.localisationMap, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
-                <div class="images-centre-interet">
-                    {% if centreInterets %}
-                        {% for interet in centreInterets %}
-                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
-                        {% endfor %}
+            {% if not isMobile %}
+                <div class ="Form">
+                    <div class="FormText2">
+                        <p>{{ form_label(IPForm.nom, 'Nom :') }}</p>
+                        <p>{{ form_label(IPForm.prenom, 'Prenom :') }}</p>
+                        <p class = "Longtexte">{{ form_label(IPForm.description, 'Description :') }}</p>
+                        <p>{{ form_label(IPForm.mail, 'Mail :') }}</p>
+                        <p>{{ form_label(IPForm.telephone, 'Telephone :') }}</p>
+                        <p class = "Petitlongtexte">{{ form_label(IPForm.localisationMap, 'Adresse localisation google map:') }}</p>
+                        <p>{{ form_label(IPForm.linkedin, 'Lien Linkedin :') }}</p>
+                        <p class = "centreInteretImg">{{ form_label(IPForm.centreInteretImg, 'Image centre intéret (4 max) :') }}</p>
+                        <p>{{ form_label(IPForm.ordrePerso, 'Ordre image :') }}</p>
+                        <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre intéret (Séparer par une virgule dans l ordre des images :') }}</p>
+                        <p>{{ form_label(IPForm.metier, 'Metier :') }}</p>
+                        <p class = "Petitlongtexte">{{ form_label(IPForm.photo, 'Photo de profil :') }}</p>
+                        
+                    </div>
+                    <div class="FormInput">
+                        <p>{{ form_widget(IPForm.nom, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.prenom, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.description, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.mail, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.telephone, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.localisationMap, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                        <div class="images-centre-interet">
+                            {% if centreInterets %}
+                                {% for interet in centreInterets %}
+                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <p>{{ form_widget(IPForm.ordrePerso, {'attr': {'class': 'ordrePerso'}}) }}</p>
+                        <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
+                        <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
+                        {% if photo %}
+                            <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo" class="img-centre-interet">
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="FormMobile">
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.nom, 'Nom :') }}</p>
+                        <p>{{ form_widget(IPForm.nom, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.prenom, 'Prenom :') }}</p>
+                        <p>{{ form_widget(IPForm.prenom, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.description, 'Description :') }}</p>
+                        <p>{{ form_widget(IPForm.description, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.mail, 'Mail :') }}</p>
+                        <p>{{ form_widget(IPForm.mail, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.telephone, 'Telephone :') }}</p>
+                        <p>{{ form_widget(IPForm.telephone, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.localisationMap, 'Adresse localisation google map:') }}</p>
+                        <p>{{ form_widget(IPForm.localisationMap, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.linkedin, 'Lien Linkedin :') }}</p>
+                        <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.centreInteretImg, 'Image centre intéret (4 max) :') }}</p>
+                        <p>{{ form_widget(IPForm.centreInteretImg, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                    </div>
+                    <div class="images-centre-interet">
+                        {% if centreInterets %}
+                            {% for interet in centreInterets %}
+                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.ordrePerso, 'Ordre image :') }}</p>
+                        <p>{{ form_widget(IPForm.ordrePerso, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre intéret (Séparer par une virgule dans l ordre des images :') }}</p>
+                        <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.metier, 'Metier :') }}</p>
+                        <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IPForm.photo, 'Photo de profil :') }}</p>
+                        <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    {% if photo %}
+                        <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo" class="img-centre-interet">
                     {% endif %}
                 </div>
-                <p>{{ form_widget(IPForm.ordrePerso, {'attr': {'class': 'ordrePerso'}}) }}</p>
-                <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
-                <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
-                {% if photo %}
-                    <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo" class="img-centre-interet">
-                {% endif %}
-
-                
-                
-            </div>
-        </div>
-        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
+            {% endif %}
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
         {{ form_end(IPForm) }}
 
         <h2>Expérience :</h2>
 
         {{ form_start(IProForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
-        <div class="Form">
-            <div class="FormText2">
-                <p>{{ form_label(IProForm.nomEntreprise, 'Nom entreprise :') }}</p>
-                <p class = "Petitlongtexte">{{ form_label(IProForm.titrePoste, 'Titre du poste :') }}</p>
-                <p class="Longtexte">{{ form_label(IProForm.descriptionEntreprise1, 'Description entreprise :') }}</p>
-                <p class = "Petitlongtexte">{{ form_label(IProForm.lienSite, 'Lien du site :') }}</p>
-                <p class = "centreInteretImg">{{ form_label(IProForm.logo, 'Logos entreprise (plusieurs possibles) :') }}</p>
-                <p>{{ form_label(IProForm.ordrepro, 'Ordre image :') }}</p>
-            </div>
+            {% if not isMobile %}
+                <div class="Form">
+                    <div class="FormText2">
+                        <p>{{ form_label(IProForm.nomEntreprise, 'Nom entreprise :') }}</p>
+                        <p class = "Petitlongtexte">{{ form_label(IProForm.titrePoste, 'Titre du poste :') }}</p>
+                        <p class="Longtexte">{{ form_label(IProForm.descriptionEntreprise1, 'Description entreprise :') }}</p>
+                        <p class = "Petitlongtexte">{{ form_label(IProForm.lienSite, 'Lien du site :') }}</p>
+                        <p class = "centreInteretImg">{{ form_label(IProForm.logo, 'Logos entreprise (plusieurs possibles) :') }}</p>
+                        <p>{{ form_label(IProForm.ordrepro, 'Ordre image :') }}</p>
+                    </div>
 
-            <div class="FormInput">
-                <p>{{ form_widget(IProForm.nomEntreprise, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IProForm.titrePoste, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IProForm.descriptionEntreprise1, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IProForm.lienSite, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(IProForm.logo, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
-                <div class="images-centre-interet">
-                    {% if Grouplogo %}
-                        {% for interet in Grouplogo %}
-                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
-                        {% endfor %}
-                    {% endif %}
+                    <div class="FormInput">
+                        <p>{{ form_widget(IProForm.nomEntreprise, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IProForm.titrePoste, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IProForm.descriptionEntreprise1, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IProForm.lienSite, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(IProForm.logo, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                        <div class="images-centre-interet">
+                            {% if Grouplogo %}
+                                {% for interet in Grouplogo %}
+                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <p>{{ form_widget(IProForm.ordrepro, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
                 </div>
-                <p>{{ form_widget(IProForm.ordrepro, {'attr': {'class': 'form-input'}}) }}</p>
-            </div>
-        </div>
-
-        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
-            Enregistrer
-        </button>
+            {% else %}
+                <div class="FormMobile">
+                    <div class="form-row">
+                        <p>{{ form_label(IProForm.nomEntreprise, 'Nom entreprise :') }}</p>
+                        <p>{{ form_widget(IProForm.nomEntreprise, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IProForm.titrePoste, 'Titre du poste :') }}</p>
+                        <p>{{ form_widget(IProForm.titrePoste, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IProForm.descriptionEntreprise1, 'Description entreprise :') }}</p>
+                        <p>{{ form_widget(IProForm.descriptionEntreprise1, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IProForm.lienSite, 'Lien du site :') }}</p>
+                        <p>{{ form_widget(IProForm.lienSite, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IProForm.logo, 'Logos entreprise (plusieurs possibles) :') }}</p>
+                        <p>{{ form_widget(IProForm.logo, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                    </div>
+                    <div class="images-centre-interet">
+                        {% if Grouplogo %}
+                            {% for interet in Grouplogo %}
+                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Logo entreprise" class="img-centre-interet">
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-row">
+                        <p>{{ form_label(IProForm.ordrepro, 'Ordre image :') }}</p>
+                        <p>{{ form_widget(IProForm.ordrepro, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+                Enregistrer
+            </button>
         {{ form_end(IProForm) }}
 
 
         <h2>Compétence :</h2>
 
         {{ form_start(CompForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
-        <div class="Form">
-            <div class="FormText2">
-                <p class="centreInteretImg">
-                    {{ form_label(CompForm.logoLigne1, 'Logos compétences ligne 1 (plusieurs possibles) :') }}
-                </p>
-                <p class="centreInteretImg">
-                    {{ form_label(CompForm.logoLigne2, 'Logos compétences ligne 2 (plusieurs possibles) :') }}
-                </p>
-            </div>
+            {% if not isMobile %}
+                <div class="Form">
+                    <div class="FormText2">
+                        <p class="centreInteretImg">
+                            {{ form_label(CompForm.logoLigne1, 'Logos compétences ligne 1 (plusieurs possibles) :') }}
+                        </p>
+                        <p class="centreInteretImg">
+                            {{ form_label(CompForm.logoLigne2, 'Logos compétences ligne 2 (plusieurs possibles) :') }}
+                        </p>
+                    </div>
 
-            <div class="FormInput">
-                <p>{{ form_widget(CompForm.logoLigne1, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
-                <div class="images-centre-interet">
-                    {% if GrouplogoC1 %}
-                        {% for interet in GrouplogoC1 %}
-                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
-                        {% endfor %}
-                    {% endif %}
+                    <div class="FormInput">
+                        <p>{{ form_widget(CompForm.logoLigne1, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                        <div class="images-centre-interet">
+                            {% if GrouplogoC1 %}
+                                {% for interet in GrouplogoC1 %}
+                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <p>{{ form_widget(CompForm.logoLigne2, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                        <div class="images-centre-interet">
+                            {% if GrouplogoC2 %}
+                                {% for interet in GrouplogoC2 %}
+                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
+            {% else %}
+                <div class="FormMobile">
+                    <div class="form-row">
+                        <p>{{ form_label(CompForm.logoLigne1, 'Logos compétences ligne 1 (plusieurs possibles) :') }}</p>
+                        <p>{{ form_widget(CompForm.logoLigne1, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                    </div>
+                    <div class="images-centre-interet">
+                        {% if GrouplogoC1 %}
+                            {% for interet in GrouplogoC1 %}
+                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Logo compétence ligne 1" class="img-centre-interet">
+                            {% endfor %}
+                        {% endif %}
+                    </div>
 
-                <p>{{ form_widget(CompForm.logoLigne2, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
-                <div class="images-centre-interet">
-                    {% if GrouplogoC2 %}
-                        {% for interet in GrouplogoC2 %}
-                            <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
-                        {% endfor %}
-                    {% endif %}
+                    <div class="form-row">
+                        <p>{{ form_label(CompForm.logoLigne2, 'Logos compétences ligne 2 (plusieurs possibles) :') }}</p>
+                        <p>{{ form_widget(CompForm.logoLigne2, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                    </div>
+                    <div class="images-centre-interet">
+                        {% if GrouplogoC2 %}
+                            {% for interet in GrouplogoC2 %}
+                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Logo compétence ligne 2" class="img-centre-interet">
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        </div>
+            {% endif %}
 
-        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
-            Enregistrer
-        </button>
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+                Enregistrer
+            </button>
         {{ form_end(CompForm) }}
 
         <h2>Projet :</h2>
 
         {{ form_start(ProjetForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
-        <div class="Form">
-            <div class="FormText2">
-                <p>{{ form_label(ProjetForm.titreP, 'Nom du projet :') }}</p>
-            </div>
+            {% if not isMobile %}
+                <div class="Form">
+                    <div class="FormText2">
+                        <p>{{ form_label(ProjetForm.titreP, 'Nom du projet :') }}</p>
+                    </div>
 
-            <div class="FormInput">
-                <p>{{ form_widget(ProjetForm.titreP, {'attr': {'class': 'form-input'}}) }}</p>
-                <p>{{ form_widget(ProjetForm.pdf, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
-                <div class="pdf-list">
-                    {% if Grouppdf %}
-                        {% for doc in Grouppdf %}
-                            <div class="pdf-preview">
-                                <a href="{{ asset('uploads/' ~ doc.file) }}" target="_blank" class="pdf-link">
-                                    📄 {{ doc.file|split('\\\\')|last }}
-                                </a>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+                    <div class="FormInput">
+                        <p>{{ form_widget(ProjetForm.titreP, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(ProjetForm.pdf, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                        <div class="pdf-list">
+                            {% if Grouppdf %}
+                                {% for doc in Grouppdf %}
+                                    <div class="pdf-preview">
+                                        <a href="{{ asset('uploads/' ~ doc.file) }}" target="_blank" class="pdf-link">
+                                            📄 {{ doc.file|split('\\\\')|last }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            {% else %}
+                <div class="FormMobile">
+                    <div class="form-row">
+                        <p>{{ form_label(ProjetForm.titreP, 'Nom du projet :') }}</p>
+                        <p>{{ form_widget(ProjetForm.titreP, {'attr': {'class': 'form-input'}}) }}</p>
+                    </div>
 
-        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
-            Enregistrer
-        </button>
+                    <div class="form-row">
+                        <p>{{ form_label(ProjetForm.pdf, 'Documents PDF du projet :') }}</p>
+                        <p>{{ form_widget(ProjetForm.pdf, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}</p>
+                    </div>
+
+                    <div class="pdf-list">
+                        {% if Grouppdf %}
+                            {% for doc in Grouppdf %}
+                                <div class="pdf-preview">
+                                    <a href="{{ asset('uploads/' ~ doc.file) }}" target="_blank" class="pdf-link">
+                                        📄 {{ doc.file|split('\\\\')|last }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+                Enregistrer
+            </button>
         {{ form_end(ProjetForm) }}
-        
-        <h2>Contact :</h2>
 
 
     </section>

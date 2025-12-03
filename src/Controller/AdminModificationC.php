@@ -218,6 +218,9 @@ class AdminModificationC extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Informations pro mises à jour avec succès !');
         }
+        // Détection simple du mobile via l'User-Agent
+        $userAgent = $request->headers->get('User-Agent', '');
+        $isMobile = preg_match('/Mobile|Android|iPhone|iPad/i', $userAgent) === 1;
         
 
         // Affichage de la vue
@@ -227,6 +230,7 @@ class AdminModificationC extends AbstractController
             'IProForm' => $IProForm->createView(),
             'CompForm' => $CompForm->createView(),
             'ProjetForm' => $ProjetForm->createView(),
+            'isMobile' => $isMobile,
         ]);
 
     }
