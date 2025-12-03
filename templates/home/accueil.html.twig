@@ -52,29 +52,27 @@
 
             {% for pos in ordre %}
                 {% set i = pos|trim - 1 %} {# -1 car ton ordre est 1-based #}
+                    <div class="entrepriseGénéral">
+                        {% if i is even %}
+                            <img class="logo logo-left" src="{{ asset('uploads/' ~ logos[i].image) }}">
+                        {% endif %}
+                        <div>
+                            <ul>
+                                <h3>{{ postes[i] }}</h3>
+                                {% for line in descriptions[i]|split('\n') %}
+                                    <li>{{ line }}</li>
+                                {% endfor %}
+                            </ul>
+                            <a class="lienEntreprise{{ i+1 }}" href="{{ liens[i] }}">Site de l'entreprise</a>
+                        </div>
 
-                <div class="entrepriseGénéral">
-                    {% if i is even %}
-                        <img class="logo logo-left" src="{{ asset('uploads/' ~ logos[i].image) }}">
-                    {% endif %}
-
-                    <div>
-                        <ul>
-                            <h3>{{ postes[i] }}</h3>
-                            {% for line in descriptions[i]|split('\n') %}
-                                <li>{{ line }}</li>
-                            {% endfor %}
-                        </ul>
-                        <a class="lienEntreprise{{ i+1 }}" href="{{ liens[i] }}">Site de l'entreprise</a>
+                        {% if i is odd %}
+                            <img class="logo logo-right" src="{{ asset('uploads/' ~ logos[i].image) }}">
+                        {% endif %}
                     </div>
 
-                    {% if i is odd %}
-                        <img class="logo logo-right" src="{{ asset('uploads/' ~ logos[i].image) }}">
-                    {% endif %}
-                </div>
-
                 {% if not loop.last %}
-                    <div class="separateur" style="background-color: {{ couleurNavigation }};"></div>
+                    <div class = "separateur" style="background-color: {{ couleurNavigation }};"></div>
                 {% endif %}
             {% endfor %}
 

@@ -125,10 +125,10 @@ html {
 
 }
 .photoProfil {
-  width: 20%;
-  border-radius: 70%;
-  height: 20%;
-  border: 2px solid #c8ad7f;
+    width: 20%;
+    border-radius: 70%;
+    height: 20%;
+    border: 2px solid #c8ad7f;
 }
 header {
     display: flex;
@@ -136,9 +136,9 @@ header {
 }
 .contact {
     display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 3rem;
 }
 .cercle {
     width: 20vh;          /* taille fixe du cercle */
@@ -260,8 +260,8 @@ header {
 }
 
 .pdf-frame {
-    width: 650px; 
-    height: 600px; 
+    width: 40rem; 
+    height: 35rem; 
     border: 1px solid #ccc; 
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
@@ -512,28 +512,134 @@ CSS pour téléphone ( à travailler)
 -----------------------------------------------------------------
 */
 
+/* === Responsive === */
 @media screen and (max-width: 600px) {
     .navbar {
-        max-width: 90%;
-        margin-left: 5%;
-        padding: 2% 0;
+        position: static;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
     }
-
     .navbar ul {
-        flex-wrap: wrap;
+        display: flex;
+        flex-wrap: wrap;       /* permet de passer à la ligne si pas assez de place */
         justify-content: center;
-        gap: 10px;
+        gap: 10px;             /* espace entre les liens */
+        list-style: none;
+        margin: 0%;
+        padding: 0;
     }
 
     .navbar li {
-        flex: 1 1 40%; /* chaque lien prend 40% de la largeur, donc 2 par ligne */
-        text-align: center;
+        flex: 0 1 auto;        /* largeur auto, ne force pas 100% */
     }
 
     .navbar li a {
-        font-size: 18px; /* agrandit le texte si besoin */
         display: block;
-        padding: 10px 0;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    #nom{
+        font-size: 200%;
+        animation: opaciterNom 5s ;
+        min-width: 12ch;
+    }
+    .accueil {
+        margin-top: 50%;
+    }
+    .container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 0;
+        margin-top: 40%;
+    }
+    .bas-btn {
+        width: 18%; 
+    }
+    header {
+        display:block;
+        margin-top: 7%;
+    }
+    .photoProfil {
+        width: 50%;
+        height: 50%;
+        margin-left: 25%;
+    }
+    .entrepriseGénéral {
+        flex-direction: column;   /* empile verticalement */
+        align-items: center;      /* centre horizontalement */
+        text-align: center;
+    }
+
+    .logo-left,
+    .logo-right {
+        order: 0;                 /* logo en premier */
+        margin-bottom: 10px;
+        width: 70%;
+    }
+
+    .entrepriseGénéral div {
+        order: 1;                 /* texte après le logo */
+        width: 100%;              /* occupe toute la largeur */
+    }
+    .competence1,
+    .competence2 {
+        display: flex;
+        flex-wrap: wrap;       /* autorise les logos à passer à la ligne */
+        justify-content: center; /* centre les logos */
+        gap: 10px;             /* espace entre les logos */
+    }
+    .logo3 {
+        width: 20%;
+    }
+    .pdf {
+        display: block;
+    }
+    .pdf-frame {
+        width: 22rem; 
+        height: 15rem; 
+    }
+    .mapgg {
+        width: 100%;
+        margin-left: 0%;
+    }
+    .info {
+        margin-left: 0%;
+
+    }
+    .info2 {
+        margin-left: 0%;
+
+    }
+    .Form {
+        flex-direction: column;
+    }
+
+    .FormText2, .FormInput {
+        flex: 1 1 100%;
+    }
+
+    .img-centre-interet {
+        width: 80px;
+        height: 80px;
+    }
+
+    .img-profil {
+        width: 150px;
+        height: 150px;
+    }
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* évite le décalage horizontal */
     }
 }
 
