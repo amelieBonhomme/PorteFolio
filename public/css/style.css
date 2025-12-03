@@ -656,6 +656,9 @@ CSS pour téléphone ( à travailler)
         border-radius: 4px;
         box-sizing: border-box;
     }
-    
+    #loginAdmin {
+        max-width: 100%;
+        margin-left: 0%;
+    }
 }
 
