@@ -400,6 +400,12 @@
             {% endif %}
             <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
         {{ form_end(PAForm) }}
+        
+        <div class="logout-container">
+            <a href="{{ path('logout') }}" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+                Déconnexion
+            </a>
+        </div>
 
     </section>
 </section>
