@@ -379,11 +379,11 @@
                 <div class ="Form">
                     <div class="FormText1">
                         <p>{{ form_label(PAForm.login, 'Login :') }}</p>
-                        <p>{{ form_label(PAForm.mdp, 'Mot de passe :') }}</p>
+                        <p>{{ form_label(PAForm.password, 'Mot de passe :') }}</p>
                     </div>
                     <div class="FormInput">
                         <p>{{ form_widget(PAForm.login, {'attr': {'class': 'form-input'}}) }}</p>
-                        <p>{{ form_widget(PAForm.mdp, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_widget(PAForm.password, {'attr': {'class': 'form-input'}}) }}</p>
                     </div>
                 </div>
             {% else %}
@@ -393,8 +393,8 @@
                         <p>{{ form_widget(PAForm.login, {'attr': {'class': 'form-input'}}) }}</p>
                     </div>
                     <div class="form-row">
-                        <p>{{ form_label(PAForm.mdp, 'Mot de passe :') }}</p>
-                        <p>{{ form_widget(PAForm.mdp, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_label(PAForm.password, 'Mot de passe :') }}</p>
+                        <p>{{ form_widget(PAForm.password, {'attr': {'class': 'form-input'}}) }}</p>
                     </div>
                 </div>
             {% endif %}

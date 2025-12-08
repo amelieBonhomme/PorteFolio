@@ -15,14 +15,21 @@ class LoginType extends AbstractType
        $builder
             ->add('login', TextType::class, [
                 'label' => 'Identifiant',
+                'mapped' => false,
             ])
             ->add('mdp', PasswordType::class, [
                 'label' => 'Mot de passe',
+                'mapped' => false,
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([]);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return ''; // ⚡ supprime le "form[...]"
     }
 }

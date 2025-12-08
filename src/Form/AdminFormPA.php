@@ -16,8 +16,8 @@ class AdminFormPA extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('login', TextType::class)
-            ->add('mdp', PasswordType::class);
+        ->add('login', TextType::class)
+        ->add('password', PasswordType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

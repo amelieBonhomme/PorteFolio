@@ -2,18 +2,21 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
-class PAdmin
+class PAdmin implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\Column(name: 'IDAdmin', type: 'string', length: 50)]
     private string $IDAdmin;
 
-    #[ORM\Column(name: 'login',length: 50, unique: true)]
+    #[ORM\Column(name: 'login', length: 50, unique: true)]
     private string $login;
 
-    #[ORM\Column(name: 'mdp',length: 255)]
+    // ⚡ longueur augmentée pour stocker un hash
+    #[ORM\Column(name: 'mdp', length: 255)]
     private string $mdp;
 
     #[ORM\ManyToOne(targetEntity: Designe::class)]
@@ -28,6 +31,7 @@ class PAdmin
     #[ORM\JoinColumn(name: 'IDInfoP', referencedColumnName: 'IDInfoP')]
     private ?InformationPersonelle $informationPersonelle = null;
 
+    // --- Getters / Setters ---
     public function getIDAdmin(): ?string
     {
         return $this->IDAdmin;
@@ -41,10 +45,10 @@ class PAdmin
     public function setLogin(string $login): static
     {
         $this->login = $login;
-
         return $this;
     }
 
+    // --- Compatibilité FormType (champ "mdp") ---
     public function getMdp(): ?string
     {
         return $this->mdp;
@@ -53,10 +57,38 @@ class PAdmin
     public function setMdp(string $mdp): static
     {
         $this->mdp = $mdp;
-
         return $this;
     }
 
+    // --- Compatibilité Symfony Security ---
+    public function getPassword(): string
+    {
+        return $this->mdp;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->mdp = $password;
+        return $this;
+    }
+
+    // --- Méthodes UserInterface obligatoires ---
+    public function getUserIdentifier(): string
+    {
+        return $this->login; // identifiant unique
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_ADMIN']; // tu peux adapter si tu veux gérer plusieurs rôles
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Si tu stockes des données sensibles temporaires, nettoie-les ici
+    }
+
+    // --- Relations ---
     public function getDesigne(): ?Designe
     {
         return $this->designe;
@@ -65,7 +97,6 @@ class PAdmin
     public function setDesigne(?Designe $designe): static
     {
         $this->designe = $designe;
-
         return $this;
     }
 
@@ -77,7 +108,6 @@ class PAdmin
     public function setInformationPro(?InformationPro $informationPro): static
     {
         $this->informationPro = $informationPro;
-
         return $this;
     }
 
@@ -89,7 +119,6 @@ class PAdmin
     public function setInformationPersonelle(?InformationPersonelle $informationPersonelle): static
     {
         $this->informationPersonelle = $informationPersonelle;
-
         return $this;
     }
 }

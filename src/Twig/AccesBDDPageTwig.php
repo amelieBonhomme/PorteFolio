@@ -6,6 +6,7 @@ use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
 use App\Entity\Competence;
 use App\Entity\Projet;
+use App\Entity\PAdmin;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -79,6 +80,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
                 ];
             }
         }
+        $PA = $this->em->getRepository(PAdmin::class)->find('Admin001');
 
 
         return [
@@ -110,6 +112,8 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'titreP'=> $P ? $P->gettitreP() :'',
             'Grouppdf' => $Grouppdf,
             'photo' => $IP ? $IP->getphoto() : '',
+            'adminLogin' => $PA ? $PA->getLogin() : '',
+            'adminId'    => $PA ? $PA->getIDAdmin() : '',
         ];
     }
 }
