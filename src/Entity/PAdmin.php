@@ -10,10 +10,10 @@ class PAdmin
     #[ORM\Column(name: 'IDAdmin', type: 'string', length: 50)]
     private string $IDAdmin;
 
-    #[ORM\Column(length: 50, unique: true)]
+    #[ORM\Column(name: 'login',length: 50, unique: true)]
     private string $login;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(name: 'mdp',length: 255)]
     private string $mdp;
 
     #[ORM\ManyToOne(targetEntity: Designe::class)]

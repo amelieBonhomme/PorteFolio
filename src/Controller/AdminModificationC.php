@@ -7,21 +7,25 @@ use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
 use App\Entity\Competence;
 use App\Entity\Projet;
+use App\Entity\PAdmin;
 use App\Form\AdminFormDesigne;
 use App\Form\AdminFormIP;
 use App\Form\AdminFormPro;
 use App\Form\AdminFormComp;
 use App\Form\AdminFormProjet;
+use App\Form\AdminFormPA;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 class AdminModificationC extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function editAdmin(Request $request, EntityManagerInterface $em): Response
+    public function editAdmin(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
         // Récupération des entités
         $design = $em->getRepository(Designe::class)->find('designe002');
@@ -29,9 +33,10 @@ class AdminModificationC extends AbstractController
         $IPro = $em->getRepository(InformationPro::class)->find('pro001');
         $Comp = $em->getRepository(Competence::class)->find('C001');
         $P= $em->getRepository(Projet::class)->find('P001');
+        $PA = $em->getRepository(PAdmin::class)->find('Admin001');
 
-        if (!$design || !$IP || !$IPro || !$Comp || !$P) {
-            throw $this->createNotFoundException('Design ou Information Personnelle introuvable.');
+        if (!$design || !$IP || !$IPro || !$Comp || !$P || !$PA) {
+            throw $this->createNotFoundException('Une des BDD est introuvable (AdminModificationC).');
         }
 
         // Création des formulaires
@@ -40,6 +45,7 @@ class AdminModificationC extends AbstractController
         $IProForm = $this->createForm(AdminFormPro::class, $IPro);
         $CompForm = $this->createForm(AdminFormComp::class, $Comp);
         $ProjetForm = $this->createForm(AdminFormProjet::class, $P);
+        $PAForm = $this->createForm(AdminFormPA::class, $PA);
 
         // Gestion des requêtes
         $designForm->handleRequest($request);
@@ -47,6 +53,7 @@ class AdminModificationC extends AbstractController
         $IProForm->handleRequest($request);
         $CompForm->handleRequest($request);
         $ProjetForm->handleRequest($request);
+        $PAForm ->handleRequest($request);
 
         // Traitement du formulaire de design
         if ($designForm->isSubmitted() && $designForm->isValid()) {
@@ -218,6 +225,19 @@ class AdminModificationC extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Informations pro mises à jour avec succès !');
         }
+        if ($PAForm->isSubmitted() && $PAForm->isValid()) {
+            // Récupérer le mot de passe en clair
+            $plainPassword = $PA->getMdp();
+
+            // Hasher le mot de passe
+            $hashedPassword = $passwordHasher->hashPassword($PA, $plainPassword);
+            $PA->setMdp($hashedPassword);
+
+            $em->flush();
+            $this->addFlash('success', 'Mot de passe mis à jour avec succès !');
+        }
+
+
         // Détection simple du mobile via l'User-Agent
         $userAgent = $request->headers->get('User-Agent', '');
         $isMobile = preg_match('/Mobile|Android|iPhone|iPad/i', $userAgent) === 1;
@@ -231,6 +251,7 @@ class AdminModificationC extends AbstractController
             'CompForm' => $CompForm->createView(),
             'ProjetForm' => $ProjetForm->createView(),
             'isMobile' => $isMobile,
+            'PAForm' => $PAForm->createView(),
         ]);
 
     }
