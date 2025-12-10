@@ -8,7 +8,27 @@
     </video>
 
     <div class = "accueil">
-        <h3><span id="nom" data-fulltext="{{ prenom }} {{ nom }}"></span></h3>
+
+
+        <form method="get" action="{{ path('home') }}">
+            <label for="personId">Choisir une personne :</label>
+            <select name="personId" id="personId">
+                {% for personne in personnes %}
+                    <option value="{{ personne.getIDInfoP() }}"
+                        {% if loop.first and not numero %}selected{% endif %}
+                        {% if numero == personne.getIDInfoP()|slice(-3) %}selected{% endif %}>
+                        {{ personne.getPrenom() }} {{ personne.getNom() }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Afficher</button>
+        </form>
+
+
+
+
+
         <h2>{{ metier }}</h2>  
         <a href="#partie1" class="bas-btn"></a>
     </div>

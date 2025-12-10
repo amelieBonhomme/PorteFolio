@@ -21,51 +21,60 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-
 class AdminModificationC extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
     public function editAdmin(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
+        // =========================
         // Récupération des entités
+        // =========================
         $design = $em->getRepository(Designe::class)->find('designe002');
-        $IP = $em->getRepository(InformationPersonelle::class)->find('info001');
-        $IPro = $em->getRepository(InformationPro::class)->find('pro001');
-        $Comp = $em->getRepository(Competence::class)->find('C001');
-        $P= $em->getRepository(Projet::class)->find('P001');
-        $PA = $em->getRepository(PAdmin::class)->find('Admin001');
+        $IP     = $em->getRepository(InformationPersonelle::class)->find('info001');
+        $IPro   = $em->getRepository(InformationPro::class)->find('pro001');
+        $Comp   = $em->getRepository(Competence::class)->find('C001');
+        $P      = $em->getRepository(Projet::class)->find('P001');
+        $PA     = $em->getRepository(PAdmin::class)->find('Admin001');
 
         if (!$design || !$IP || !$IPro || !$Comp || !$P || !$PA) {
             throw $this->createNotFoundException('Une des BDD est introuvable (AdminModificationC).');
         }
 
+        // =========================
         // Création des formulaires
+        // =========================
         $designForm = $this->createForm(AdminFormDesigne::class, $design);
-        $IPForm = $this->createForm(AdminFormIP::class, $IP);
-        $IProForm = $this->createForm(AdminFormPro::class, $IPro);
-        $CompForm = $this->createForm(AdminFormComp::class, $Comp);
+        $IPForm     = $this->createForm(AdminFormIP::class, $IP);
+        $IProForm   = $this->createForm(AdminFormPro::class, $IPro);
+        $CompForm   = $this->createForm(AdminFormComp::class, $Comp);
         $ProjetForm = $this->createForm(AdminFormProjet::class, $P);
-        $PAForm = $this->createForm(AdminFormPA::class, $PA);
+        $PAForm     = $this->createForm(AdminFormPA::class, $PA);
 
+        // =========================
         // Gestion des requêtes
+        // =========================
         $designForm->handleRequest($request);
         $IPForm->handleRequest($request);
         $IProForm->handleRequest($request);
         $CompForm->handleRequest($request);
         $ProjetForm->handleRequest($request);
-        $PAForm ->handleRequest($request);
+        $PAForm->handleRequest($request);
 
-        // Traitement du formulaire de design
+        // =========================
+        // Traitement du formulaire Design
+        // =========================
         if ($designForm->isSubmitted() && $designForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Design mis à jour avec succès !');
         }
 
-        // Traitement du formulaire d’informations personnelles
+        // =========================
+        // Traitement du formulaire Informations personnelles
+        // =========================
         if ($IPForm->isSubmitted() && $IPForm->isValid()) {
             $imageFiles = $IPForm->get('centreInteretImg')->getData(); // tableau d'UploadedFile
-            $photoFile = $IPForm->get('photo')->getData(); // un seul UploadedFile
-            $filenames = [];
+            $photoFile  = $IPForm->get('photo')->getData();            // un seul UploadedFile
+            $filenames  = [];
 
             // 🔹 Gestion des images multiples (centreInteretImg)
             if ($imageFiles) {
@@ -105,23 +114,23 @@ class AdminModificationC extends AbstractController
                 $newPhotoFilename = uniqid().'.'.$photoFile->guessExtension();
                 $photoFile->move($this->getParameter('images_directory'), $newPhotoFilename);
 
-                // ⚡ Ici tu stockes juste le nom du fichier (string) ou un tableau JSON avec un seul élément
-                $IP->setPhoto([$newPhotoFilename]);
-
+                $IP->setPhoto([$newPhotoFilename]); // stocke en tableau JSON
             }
 
             $em->flush();
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
 
-
+        // =========================
+        // Traitement du formulaire Informations professionnelles
+        // =========================
         if ($IProForm->isSubmitted() && $IProForm->isValid()) {
-            $imageFiles = $IProForm->get('logo')->getData(); // tableau d'UploadedFile
-            $filenames = [];
+            $imageFiles = $IProForm->get('logo')->getData();
+            $filenames  = [];
 
             if ($imageFiles) {
-                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
-                $oldFiles = $IPro->getLogo(); // tableau JSON stocké en BDD
+                // Supprimer les anciens fichiers
+                $oldFiles = $IPro->getLogo();
                 if ($oldFiles) {
                     foreach ($oldFiles as $oldFileName) {
                         $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
@@ -144,15 +153,18 @@ class AdminModificationC extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Informations pro mises à jour avec succès !');
         }
+
+        // =========================
+        // Traitement du formulaire Compétences
+        // =========================
         if ($CompForm->isSubmitted() && $CompForm->isValid()) {
-            $imageFiles1 = $CompForm->get('logoLigne1')->getData(); // tableau d'UploadedFile
-            $imageFiles2 = $CompForm->get('logoLigne2')->getData(); // tableau d'UploadedFile
-            $filenames1 = [];
-            $filenames2 = [];
+            $imageFiles1 = $CompForm->get('logoLigne1')->getData();
+            $imageFiles2 = $CompForm->get('logoLigne2')->getData();
+            $filenames1  = [];
+            $filenames2  = [];
 
             if ($imageFiles1) {
-                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
-                $oldFiles = $Comp->getlogoLigne1(); // tableau JSON stocké en BDD
+                $oldFiles = $Comp->getlogoLigne1();
                 if ($oldFiles) {
                     foreach ($oldFiles as $oldFileName) {
                         $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
@@ -162,7 +174,6 @@ class AdminModificationC extends AbstractController
                     }
                 }
 
-                // Ajouter les nouveaux fichiers
                 foreach ($imageFiles1 as $imageFile) {
                     $newFilename = uniqid().'.'.$imageFile->guessExtension();
                     $imageFile->move($this->getParameter('images_directory'), $newFilename);
@@ -171,9 +182,9 @@ class AdminModificationC extends AbstractController
 
                 $Comp->setLogoLigne1($filenames1);
             }
+
             if ($imageFiles2) {
-                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
-                $oldFiles = $Comp->getlogoLigne2(); // tableau JSON stocké en BDD
+                $oldFiles = $Comp->getlogoLigne2();
                 if ($oldFiles) {
                     foreach ($oldFiles as $oldFileName) {
                         $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
@@ -183,7 +194,6 @@ class AdminModificationC extends AbstractController
                     }
                 }
 
-                // Ajouter les nouveaux fichiers
                 foreach ($imageFiles2 as $imageFile) {
                     $newFilename = uniqid().'.'.$imageFile->guessExtension();
                     $imageFile->move($this->getParameter('images_directory'), $newFilename);
@@ -194,15 +204,18 @@ class AdminModificationC extends AbstractController
             }
 
             $em->flush();
-            $this->addFlash('success', 'Informations pro mises à jour avec succès !');
+            $this->addFlash('success', 'Compétences mises à jour avec succès !');
         }
+
+        // =========================
+        // Traitement du formulaire Projets
+        // =========================
         if ($ProjetForm->isSubmitted() && $ProjetForm->isValid()) {
-            $imageFiles = $ProjetForm->get('pdf')->getData(); // tableau d'UploadedFile
-            $filenames = [];
+            $imageFiles = $ProjetForm->get('pdf')->getData();
+            $filenames  = [];
 
             if ($imageFiles) {
-                // 🔥 Supprimer les anciens fichiers avant d'ajouter les nouveaux
-                $oldFiles = $P->getpdf(); // tableau JSON stocké en BDD
+                $oldFiles = $P->getpdf();
                 if ($oldFiles) {
                     foreach ($oldFiles as $oldFileName) {
                         $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
@@ -212,19 +225,22 @@ class AdminModificationC extends AbstractController
                     }
                 }
 
-                // Ajouter les nouveaux fichiers
                 foreach ($imageFiles as $imageFile) {
                     $newFilename = uniqid().'.'.$imageFile->guessExtension();
                     $imageFile->move($this->getParameter('images_directory'), $newFilename);
                     $filenames[] = $newFilename;
                 }
 
-                $P->setpdf($filenames);
+                $P->setPdf($filenames);
             }
 
             $em->flush();
-            $this->addFlash('success', 'Informations pro mises à jour avec succès !');
+            $this->addFlash('success', 'Projets mis à jour avec succès !');
         }
+
+        // =========================
+        // Traitement du formulaire Admin
+        // =========================
         if ($PAForm->isSubmitted() && $PAForm->isValid()) {
             // Récupérer le mot de passe en clair
             $plainPassword = $PA->getMdp();
@@ -237,22 +253,23 @@ class AdminModificationC extends AbstractController
             $this->addFlash('success', 'Mot de passe mis à jour avec succès !');
         }
 
-
-        // Détection simple du mobile via l'User-Agent
+        // =========================
+        // Détection simple du mobile via l’User-Agent
+        // =========================
         $userAgent = $request->headers->get('User-Agent', '');
-        $isMobile = preg_match('/Mobile|Android|iPhone|iPad/i', $userAgent) === 1;
-        
+        $isMobile  = preg_match('/Mobile|Android|iPhone|iPad/i', $userAgent) === 1;
 
+        // =========================
         // Affichage de la vue
+        // =========================
         return $this->render('home/admin.html.twig', [
             'designForm' => $designForm->createView(),
-            'IPForm' => $IPForm->createView(),
-            'IProForm' => $IProForm->createView(),
-            'CompForm' => $CompForm->createView(),
+            'IPForm'     => $IPForm->createView(),
+            'IProForm'   => $IProForm->createView(),
+            'CompForm'   => $CompForm->createView(),
             'ProjetForm' => $ProjetForm->createView(),
-            'isMobile' => $isMobile,
-            'PAForm' => $PAForm->createView(),
+            'PAForm'     => $PAForm->createView(),
+            'isMobile'   => $isMobile,
         ]);
-
     }
 }

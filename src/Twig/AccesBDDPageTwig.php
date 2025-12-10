@@ -14,104 +14,140 @@ use Twig\Extension\GlobalsInterface;
 class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 {
     private EntityManagerInterface $em;
+    private string $numero = '001';
 
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
+    public function setNumero(string $numero): void
+    {
+        $this->numero = $numero;
+    }
 
     public function getGlobals(): array
     {
-        $design = $this->em->getRepository(Designe::class)->find('designe002');
-        $IP = $this->em->getRepository(InformationPersonelle::class)->find('info001');
+        // =========================
+        // Design
+        // =========================
+        $design = $this->em->getRepository(Designe::class)->find('designe' . $this->numero);
+
+        // =========================
+        // Informations personnelles
+        // =========================
+        $IP = $this->em->getRepository(InformationPersonelle::class)->find('info'. $this->numero);
         $centreInterets = [];
         if ($IP) {
-            $images = $IP->getCentreInteretImg(); // tableau JSON
-            $textesString = $IP->getCentreInteretTexte(); // chaîne "Texte1,Texte2,..."
-            $textes = explode(',', $textesString); // transforme en tableau
+            $images = $IP->getCentreInteretImg();          // tableau JSON
+            $textesString = $IP->getCentreInteretTexte();  // chaîne "Texte1,Texte2,..."
+            $textes = explode(',', $textesString);         // transforme en tableau
 
             foreach ($images as $index => $img) {
                 $centreInterets[] = [
                     'image' => $img,
-                    'texte' => $textes[$index] ?? '' // associe texte par index
+                    'texte' => $textes[$index] ?? ''
                 ];
             }
         }
-        $IPro = $this->em->getRepository(InformationPro::class)->find('Pro001');
+
+        // =========================
+        // Informations professionnelles
+        // =========================
+        $IPro = $this->em->getRepository(InformationPro::class)->find('pro'. $this->numero);
         $Grouplogo = [];
         if ($IPro) {
-            $images = $IPro->getlogo(); // tableau JSON
-
-            foreach ($images as $index => $img) {
-                $Grouplogo[] = [
-                    'image' => $img,
-                ];
+            foreach ($IPro->getlogo() as $img) {
+                $Grouplogo[] = ['image' => $img];
             }
         }
-        $Comp = $this->em->getRepository(Competence::class)->find('C001');
+
+        // =========================
+        // Compétences
+        // =========================
+        $Comp = $this->em->getRepository(Competence::class)->find('C'. $this->numero);
         $GrouplogoC1 = [];
         $GrouplogoC2 = [];
         if ($Comp) {
-            $images1 = $Comp->getlogoLigne1(); // tableau JSON
-            $images2 = $Comp->getlogoLigne2(); // tableau JSON
-
-            foreach ($images1 as $index => $img) {
-                $GrouplogoC1[] = [
-                    'image' => $img,
-                ];
+            foreach ($Comp->getlogoLigne1() as $img) {
+                $GrouplogoC1[] = ['image' => $img];
             }
-            foreach ($images2 as $index => $img) {
-                $GrouplogoC2[] = [
-                    'image' => $img,
-                ];
+            foreach ($Comp->getlogoLigne2() as $img) {
+                $GrouplogoC2[] = ['image' => $img];
             }
         }
-        $P = $this->em->getRepository(Projet::class)->find('P001');
+
+        // =========================
+        // Projets
+        // =========================
+        $P = $this->em->getRepository(Projet::class)->find('P'. $this->numero);
         $Grouppdf = [];
         if ($P) {
-            $pdfs = $P->getPdf(); // tableau JSON stocké en BDD
-            $titresString = $P->gettitreP(); // ⚡ ta colonne avec les titres séparés par ";"
+            $pdfs = $P->getPdf();                  // tableau JSON
+            $titresString = $P->gettitreP();       // titres séparés par ";"
             $titres = explode(';', $titresString);
 
             foreach ($pdfs as $index => $pdf) {
                 $Grouppdf[] = [
-                    'file' => $pdf,
-                    'titre' => $titres[$index] ?? '' // associe le titre par index
+                    'file'  => $pdf,
+                    'titre' => $titres[$index] ?? ''
                 ];
             }
         }
-        $PA = $this->em->getRepository(PAdmin::class)->find('Admin001');
 
+        // =========================
+        // Admin
+        // =========================
+        $PA = $this->em->getRepository(PAdmin::class)->find('Admin'. $this->numero);
+
+        // =========================
+        // Retour des variables globales
+        // =========================
+        dump([
+            'numero' => $this->numero,
+            'ordrePerso' => $IP ? $IP->getordrePerso() : null,
+            'ordrepro'   => $IPro ? $IPro->getordrepro() : null,
+        ]);
 
         return [
-            'couleurFond' => $design ? $design->getCouleurFond() : '#EBBFA9',
-            'couleurTexte' => $design ? $design->getCouleurTexteGeneral() : '#000000',
-            'imagePrincipale' => $design ? $design->getImagePrincipale() : '',
-            'nom' => $IP ? $IP->getNom() : '',
-            'prenom'=> $IP ? $IP->getPrenom() :'',
-            'metier'=> $IP ? $IP->getMetier() :'',
-            'ordrePerso'=> $IP ? $IP->getordrePerso() :'',
-            'description'=> $IP ? $IP->getDescription() :'',
-            'mail'=> $IP ? $IP->getMail() :'',
-            'linkedin'=> $IP ? $IP->getLinkedin() :'',
-            'tel'=> $IP ? $IP->getTelephone() :'',
-            'localisationMap'=> $IP ? $IP->getlocalisationMap() :'',
-            'couleurMotivationFooter'=> $design ? $design->getcouleurMotivationFooter() :'',
-            'couleurTexteMotivationFooter'=> $design ? $design->getcouleurTexteMotivationFooter() :'',
-            'couleurNavigation'=> $design ? $design->getcouleurNavigation() :'',
-            'couleurTexteNavigation'=> $design ? $design->getcouleurTexteNavigation() :'',
-            'centreInterets' => $centreInterets,
-            'Grouplogo' => $Grouplogo,
-            'nomEntreprise'=> $IPro ? $IPro->getnomEntreprise() :'',
-            'titrePoste'=> $IPro ? $IPro->gettitrePoste() :'',
-            'descriptionEntreprise1'=> $IPro ? $IPro->getdescriptionEntreprise1() :'',
-            'lienSite'=> $IPro ? $IPro->getlienSite() :'',
-            'ordrepro'=> $IPro ? $IPro->getordrepro() :'',
+            // Design
+            'couleurFond'               => $design ? $design->getCouleurFond() : '#EBBFA9',
+            'couleurTexte'              => $design ? $design->getCouleurTexteGeneral() : '#000000',
+            'imagePrincipale'           => $design ? $design->getImagePrincipale() : '',
+            'couleurMotivationFooter'   => $design ? $design->getcouleurMotivationFooter() : '',
+            'couleurTexteMotivationFooter' => $design ? $design->getcouleurTexteMotivationFooter() : '',
+            'couleurNavigation'         => $design ? $design->getcouleurNavigation() : '',
+            'couleurTexteNavigation'    => $design ? $design->getcouleurTexteNavigation() : '',
+
+            // Informations personnelles
+            'nom'           => $IP ? $IP->getNom() : '',
+            'prenom'        => $IP ? $IP->getPrenom() : '',
+            'metier'        => $IP ? $IP->getMetier() : '',
+            'ordrePerso'    => $IP ? $IP->getordrePerso() : '',
+            'description'   => $IP ? $IP->getDescription() : '',
+            'mail'          => $IP ? $IP->getMail() : '',
+            'linkedin'      => $IP ? $IP->getLinkedin() : '',
+            'tel'           => $IP ? $IP->getTelephone() : '',
+            'localisationMap' => $IP ? $IP->getlocalisationMap() : '',
+            'photo'         => $IP ? $IP->getphoto() : '',
+            'centreInterets'=> $centreInterets,
+
+            // Informations professionnelles
+            'nomEntreprise'         => $IPro ? $IPro->getnomEntreprise() : '',
+            'titrePoste'            => $IPro ? $IPro->gettitrePoste() : '',
+            'descriptionEntreprise1'=> $IPro ? $IPro->getdescriptionEntreprise1() : '',
+            'lienSite'              => $IPro ? $IPro->getlienSite() : '',
+            'ordrepro'              => $IPro ? $IPro->getordrepro() : '',
+            'Grouplogo'             => $Grouplogo,
+
+            // Compétences
             'GrouplogoC1' => $GrouplogoC1,
             'GrouplogoC2' => $GrouplogoC2,
-            'titreP'=> $P ? $P->gettitreP() :'',
-            'Grouppdf' => $Grouppdf,
-            'photo' => $IP ? $IP->getphoto() : '',
+
+            // Projets
+            'titreP'    => $P ? $P->gettitreP() : '',
+            'Grouppdf'  => $Grouppdf,
+
+            // Admin
             'adminLogin' => $PA ? $PA->getLogin() : '',
             'adminId'    => $PA ? $PA->getIDAdmin() : '',
         ];
