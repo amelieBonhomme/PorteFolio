@@ -102,11 +102,6 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
         // =========================
         // Retour des variables globales
         // =========================
-        dump([
-            'numero' => $this->numero,
-            'ordrePerso' => $IP ? $IP->getordrePerso() : null,
-            'ordrepro'   => $IPro ? $IPro->getordrepro() : null,
-        ]);
 
         return [
             // Design

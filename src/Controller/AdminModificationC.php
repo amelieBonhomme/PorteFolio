@@ -24,17 +24,31 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdminModificationC extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function editAdmin(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
-    {
-        // =========================
-        // Récupération des entités
-        // =========================
-        $design = $em->getRepository(Designe::class)->find('designe002');
-        $IP     = $em->getRepository(InformationPersonelle::class)->find('info001');
-        $IPro   = $em->getRepository(InformationPro::class)->find('pro001');
-        $Comp   = $em->getRepository(Competence::class)->find('C001');
-        $P      = $em->getRepository(Projet::class)->find('P001');
-        $PA     = $em->getRepository(PAdmin::class)->find('Admin001');
+    public function editAdmin(
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $passwordHasher,
+        \App\Twig\AccesBDDPageTwig $accesBDD
+    ): Response {
+        /** @var PAdmin $admin */
+        $admin = $this->getUser();
+        if (!$admin) {
+            throw $this->createAccessDeniedException('Vous devez être connecté en admin.');
+        }
+
+        $idAdmin = $admin->getIDAdmin();   // ex: "Admin002"
+        $numero  = substr($idAdmin, -3);   // ex: "002"
+
+        // ⚡ transmettre le numéro à l’extension
+        $accesBDD->setNumero($numero);
+
+        // Charger les entités en fonction du numéro
+        $design = $em->getRepository(Designe::class)->find('designe'.$numero);
+        $IP     = $em->getRepository(InformationPersonelle::class)->find('info'.$numero);
+        $IPro   = $em->getRepository(InformationPro::class)->find('pro'.$numero);
+        $Comp   = $em->getRepository(Competence::class)->find('C'.$numero);
+        $P      = $em->getRepository(Projet::class)->find('P'.$numero);
+        $PA     = $em->getRepository(PAdmin::class)->find('Admin'.$numero);
 
         if (!$design || !$IP || !$IPro || !$Comp || !$P || !$PA) {
             throw $this->createNotFoundException('Une des BDD est introuvable (AdminModificationC).');
@@ -100,11 +114,13 @@ class AdminModificationC extends AbstractController
             }
 
             // 🔹 Gestion de la photo unique
+            // 🔹 Gestion de la photo unique
             if ($photoFile) {
                 // Supprimer l’ancienne photo
                 $oldPhoto = $IP->getPhoto();
-                if ($oldPhoto) {
-                    $oldPath = $this->getParameter('images_directory').'/'.$oldPhoto;
+                if ($oldPhoto && is_array($oldPhoto)) {
+                    $oldFileName = $oldPhoto[0]; // ⚡ première image du tableau
+                    $oldPath = $this->getParameter('images_directory').'/'.$oldFileName;
                     if (file_exists($oldPath)) {
                         unlink($oldPath);
                     }
@@ -116,6 +132,7 @@ class AdminModificationC extends AbstractController
 
                 $IP->setPhoto([$newPhotoFilename]); // stocke en tableau JSON
             }
+
 
             $em->flush();
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
