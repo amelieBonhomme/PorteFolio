@@ -41,10 +41,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
         if ($IP) {
             $images = $IP->getCentreInteretImg();          // tableau JSON
             $textesString = $IP->getCentreInteretTexte();  // chaîne "Texte1,Texte2,..."
-            $textes = explode(',', $textesString);         // transforme en tableau
-
-            dump($images); // ⚡ Vérifie si des images sont trouvées
-            dump($textes); 
+            $textes = explode(',', $textesString);         // transforme en tableau 
 
             foreach ($images as $index => $img) {
                 $centreInterets[] = [
@@ -127,7 +124,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'linkedin'      => $IP ? $IP->getLinkedin() : '',
             'tel'           => $IP ? $IP->getTelephone() : '',
             'localisationMap' => $IP ? $IP->getlocalisationMap() : '',
-            'photo'         => $IP ? $IP->getphoto() : '',
+            'photo' => $IP && $IP->getPhoto() ? $basePath.$IP->getPhoto()[0] : '',
             'centreInterets'=> $centreInterets,
 
             // Informations professionnelles

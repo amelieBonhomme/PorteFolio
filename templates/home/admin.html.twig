@@ -65,7 +65,7 @@
                     </div>
                 </div>
             {% endif %}
-        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
+        <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }}; color: {{ couleurTexteNavigation }};">Enregistrer</button>
         {{ form_end(designForm) }}
 
         <h2>Information personelle :</h2>
@@ -100,7 +100,7 @@
                         <div class="images-centre-interet">
                             {% if centreInterets %}
                                 {% for interet in centreInterets %}
-                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                    <img src="{{ interet.image }}" alt="Centre d’intérêt" class="img-centre-interet">
                                 {% endfor %}
                             {% endif %}
                         </div>
@@ -109,7 +109,7 @@
                         <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
                         <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
                         {% if photo %}
-                            <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo" class="img-centre-interet">
+                            <img src="{{ photo }}" alt="Photo" class="img-centre-interet">
                         {% endif %}
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                     <div class="images-centre-interet">
                         {% if centreInterets %}
                             {% for interet in centreInterets %}
-                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                <img src="{{ interet.image }}" alt="Centre d’intérêt" class="img-centre-interet">
                             {% endfor %}
                         {% endif %}
                     </div>
@@ -171,11 +171,11 @@
                         <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
                     </div>
                     {% if photo %}
-                        <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo" class="img-centre-interet">
+                        <img src="{{ photo }}" alt="Photo" class="img-centre-interet">
                     {% endif %}
                 </div>
             {% endif %}
-            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }}; color: {{ couleurTexteNavigation }};">Enregistrer</button>
         {{ form_end(IPForm) }}
 
         <h2>Expérience :</h2>
@@ -201,7 +201,7 @@
                         <div class="images-centre-interet">
                             {% if Grouplogo %}
                                 {% for interet in Grouplogo %}
-                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                    <img src="{{ interet.image }}" alt="Centre d’intérêt" class="img-centre-interet">
                                 {% endfor %}
                             {% endif %}
                         </div>
@@ -233,7 +233,7 @@
                     <div class="images-centre-interet">
                         {% if Grouplogo %}
                             {% for interet in Grouplogo %}
-                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Logo entreprise" class="img-centre-interet">
+                                <img src="{{ interet.image }}" alt="Logo entreprise" class="img-centre-interet">
                             {% endfor %}
                         {% endif %}
                     </div>
@@ -243,7 +243,7 @@
                     </div>
                 </div>
             {% endif %}
-            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }}; color: {{ couleurTexteNavigation }};">
                 Enregistrer
             </button>
         {{ form_end(IProForm) }}
@@ -268,7 +268,7 @@
                         <div class="images-centre-interet">
                             {% if GrouplogoC1 %}
                                 {% for interet in GrouplogoC1 %}
-                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                    <img src="{{ interet.image }}" alt="Centre d’intérêt" class="img-centre-interet">
                                 {% endfor %}
                             {% endif %}
                         </div>
@@ -277,7 +277,7 @@
                         <div class="images-centre-interet">
                             {% if GrouplogoC2 %}
                                 {% for interet in GrouplogoC2 %}
-                                    <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Centre d’intérêt" class="img-centre-interet">
+                                    <img src="{{ interet.image }}" alt="Centre d’intérêt" class="img-centre-interet">
                                 {% endfor %}
                             {% endif %}
                         </div>
@@ -292,7 +292,7 @@
                     <div class="images-centre-interet">
                         {% if GrouplogoC1 %}
                             {% for interet in GrouplogoC1 %}
-                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Logo compétence ligne 1" class="img-centre-interet">
+                                <img src="{{ interet.image }}" alt="Logo compétence ligne 1" class="img-centre-interet">
                             {% endfor %}
                         {% endif %}
                     </div>
@@ -304,14 +304,14 @@
                     <div class="images-centre-interet">
                         {% if GrouplogoC2 %}
                             {% for interet in GrouplogoC2 %}
-                                <img src="{{ asset('uploads/' ~ interet.image) }}" alt="Logo compétence ligne 2" class="img-centre-interet">
+                                <img src="{{ interet.image }}" alt="Logo compétence ligne 2" class="img-centre-interet">
                             {% endfor %}
                         {% endif %}
                     </div>
                 </div>
             {% endif %}
 
-            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }}; color: {{ couleurTexteNavigation }};">
                 Enregistrer
             </button>
         {{ form_end(CompForm) }}
@@ -332,7 +332,7 @@
                             {% if Grouppdf %}
                                 {% for doc in Grouppdf %}
                                     <div class="pdf-preview">
-                                        <a href="{{ asset('uploads/' ~ doc.file) }}" target="_blank" class="pdf-link">
+                                        <a href="{{ doc.file }}" target="_blank" class="pdf-link">
                                             📄 {{ doc.file|split('\\\\')|last }}
                                         </a>
                                     </div>
@@ -357,7 +357,7 @@
                         {% if Grouppdf %}
                             {% for doc in Grouppdf %}
                                 <div class="pdf-preview">
-                                    <a href="{{ asset('uploads/' ~ doc.file) }}" target="_blank" class="pdf-link">
+                                    <a href="{{ doc.file }}" target="_blank" class="pdf-link">
                                         📄 {{ doc.file|split('\\\\')|last }}
                                     </a>
                                 </div>
@@ -367,7 +367,7 @@
                 </div>
             {% endif %}
 
-            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }}; color: {{ couleurTexteNavigation }};">
                 Enregistrer
             </button>
         {{ form_end(ProjetForm) }}
@@ -398,11 +398,11 @@
                     </div>
                 </div>
             {% endif %}
-            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">Enregistrer</button>
+            <button type="submit" class="form-button boutonform" style="background-color: {{ couleurNavigation }}; color: {{ couleurTexteNavigation }};">Enregistrer</button>
         {{ form_end(PAForm) }}
         
         <div class="logout-container">
-            <a href="{{ path('logout') }}" class="form-button boutonform" style="background-color: {{ couleurNavigation }};">
+            <a href="{{ path('logout') }}" class="form-button boutonform" style="background-color: {{ couleurNavigation }}; color: {{ couleurTexteNavigation }};">
                 Déconnexion
             </a>
         </div>

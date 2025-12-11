@@ -354,7 +354,7 @@ body.zoomEffect {
     padding-top: 1%;
     padding-bottom: 2%;
     text-align: center;
-    /*background-color: #f9f9f9;*/
+    background-color: #f9f9f9;
     border-radius: 12px;
     max-width: 40%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -365,7 +365,7 @@ body.zoomEffect {
 #loginAdmin h1 {
     margin-bottom: 10%;
     font-size: 28px;
-    /*color: #000000;*/
+    color: #000000;
 }
 
 /* Erreur */
@@ -387,7 +387,7 @@ body.zoomEffect {
 
 /* Bouton */
 .form-button {
-    /*background-color: #c8ad7f;*/
+    background-color: #c8ad7f;
     /*color: white;*/
     padding: 12px 24px;
     border: none;
@@ -400,12 +400,12 @@ body.zoomEffect {
 }
 /*quand on le survole*/
 .form-button:hover {
-    /*background-color: #685a42;*/
+    background-color: #685a42;
     transform: scale(1.05);
 }
 /*au clic sur le bouton*/
 .form-button:active {
-    /*background-color: #685a42;*/
+    background-color: #685a42;
     transform: scale(0.98);
 }
 .boutonform {
