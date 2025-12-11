@@ -19,11 +19,12 @@ html {
     scroll-behavior: smooth;
 }
 .separateur{
-    border: 3px solid #c8ad7f;
+    /*border: 3px solid #c8ad7f;*/
     width: 150vh;
     height: 0.01vh;
     margin-left: 10%;
     margin-top: 5%;
+    border-radius: 10px;
 }
 /*
 ---------------------------------------- Zone Accueil --------------------------------------------------------------
@@ -70,11 +71,31 @@ html {
     text-align: center;
     margin-bottom: 0%;
     margin-top: 11%;
+    justify-content: center;
 }
-#nom{
+.accueil form {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+.accueil form label {
+    display: none; /* cache le label "Choisir une personne :" */
+}
+#personId {
+    background-color: transparent;   /* enlève le fond blanc */
+    appearance: none; /* enlève le style natif (flèche par défaut) */
     font-size: 400%;
     animation: opaciterNom 5s ;
     min-width: 12ch;
+    border-color: transparent;
+    background: transparent;
+}
+/* Option interne : fond transparent aussi */
+#personId option {
+    background-color: transparent;
+    border-color: transparent;
+    color: black;
 }
 
 .bas-btn {
@@ -82,7 +103,7 @@ html {
     width: 4.5%;
     height: 18vh; /*en vh pour se référer à la taille de l'écran*/
     background-color: transparent;
-    border: 3px solid #c8ad7f;
+    /*border: 3px solid #c8ad7f;*/
     border-radius: 30px;
     cursor: pointer;
     overflow: hidden;
@@ -99,7 +120,7 @@ html {
     left: 50%;
     transform: translateX(-50%);
     font-size: 200%;
-    color: #c8ad7f;
+    color: var(--arrow-color); /* ⚡ récupère la variable inline */
     animation: descend 2s infinite;
 }
 @keyframes descend {
@@ -117,7 +138,7 @@ html {
     background: rgba(255, 255, 255, 0.651);
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     border-radius: 30px;
-    color :#000000;
+    /*color :#000000;*/
 }
 #motivation{
     margin-left: 5%;
@@ -128,7 +149,7 @@ html {
     width: 20%;
     border-radius: 70%;
     height: 20%;
-    border: 2px solid #c8ad7f;
+    /*border: 2px solid #c8ad7f;*/
 }
 header {
     display: flex;
@@ -145,7 +166,7 @@ header {
     height: 20vh;
     border-radius: 50%;    /* rend le conteneur circulaire */
     overflow: hidden;      /* cache ce qui dépasse du cercle */
-    border: 2px solid #c8ad7f; /* optionnel : contour */
+    /*border: 2px solid #c8ad7f; /* optionnel : contour */
 }
 .cercle img {
     width: 100%;
@@ -277,7 +298,7 @@ header {
 .contactener {
     margin-top: 10%;
     padding: 1%;
-    background: rgba(255, 255, 255, 0.651);
+    /*background: rgba(255, 255, 255, 0.651);*/
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 .mapgg {
@@ -333,7 +354,7 @@ body.zoomEffect {
     padding-top: 1%;
     padding-bottom: 2%;
     text-align: center;
-    background-color: #f9f9f9;
+    /*background-color: #f9f9f9;*/
     border-radius: 12px;
     max-width: 40%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -367,7 +388,7 @@ body.zoomEffect {
 /* Bouton */
 .form-button {
     /*background-color: #c8ad7f;*/
-    color: white;
+    /*color: white;*/
     padding: 12px 24px;
     border: none;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -379,12 +400,12 @@ body.zoomEffect {
 }
 /*quand on le survole*/
 .form-button:hover {
-    background-color: #685a42;
+    /*background-color: #685a42;*/
     transform: scale(1.05);
 }
 /*au clic sur le bouton*/
 .form-button:active {
-    background-color: #685a42;
+    /*background-color: #685a42;*/
     transform: scale(0.98);
 }
 .boutonform {
@@ -404,7 +425,7 @@ body.zoomEffect {
 }
 
 .adminteneur {
-    background-color: #f9f9f996;
+    /*background-color: #f9f9f996;*/
     padding: 2% 5%;
     border-radius: 15px;
 }
@@ -483,7 +504,7 @@ body.zoomEffect {
     font-size: 16px;
     border: none;
     border-radius: 6px;
-    color: white;
+    /*color: white;*/
     cursor: pointer;
 }
 

@@ -10,7 +10,7 @@
     <div class = "accueil">
         <form method="get" action="{{ path('home') }}">
             <label for="personId">Choisir une personne :</label>
-            <select name="personId" id="personId">
+            <select name="personId" id="personId"  style=" color: {{ couleurTexteNavigation }};">
                 {% for personne in personnes %}
                     <option value="{{ personne.getIDInfoP() }}"
                         {% if loop.first and not numero %}selected{% endif %}
@@ -19,17 +19,21 @@
                     </option>
                 {% endfor %}
             </select>
-
+            <br>
             <button type="submit">Afficher</button>
         </form>
-        <h2>{{ metier }}</h2>  
-        <a href="#partie1" class="bas-btn"></a>
+
+        <h2 style=" color: {{ couleurTexteNavigation }};">{{ metier }}</h2>
+        <a href="#partie1" 
+            class="bas-btn" 
+            style="border: 3px solid {{ couleurNavigation }}; --arrow-color: {{ couleurNavigation }};">
+        </a>
     </div>
     
     <div class="container" style="background-color: {{ couleurMotivationFooter }}; color: {{ couleurTexteMotivationFooter }};">
     <div id="partie1"></div>
         <header>
-            <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo de profil" class="photoProfil">
+            <img src="{{ asset('uploads/' ~ photo[0]) }}" alt="Photo de profil" class="photoProfil" style="border: 2px solid {{ couleurNavigation }};">
             <div>
                 <h1>Motivation et présentation </h1>
                 <p id="motivation">{{ description|nl2br }}</p>
@@ -44,8 +48,8 @@
                 {% set i = pos|trim - 1 %} {# -1 car tableau commence à 0 #}
 
                 <div class="imageTaille">
-                    <div class="cercle">
-                        <img src="{{ asset('uploads/' ~ interets[i].image) }}" alt="Centre d’intérêt">
+                    <div class="cercle" style="border: 2px solid {{ couleurNavigation }};">
+                        <img src="{{ interets[i].image }}" alt="Centre d’intérêt">
                     </div>
                     <h3>{{ interets[i].texte }}</h3>
                 </div>
@@ -85,7 +89,7 @@
                     </div>
 
                 {% if not loop.last %}
-                    <div class = "separateur" style="background-color: {{ couleurNavigation }};"></div>
+                    <div class = "separateur" style="border: 3px solid {{ couleurNavigation }};"></div>
                 {% endif %}
             {% endfor %}
 

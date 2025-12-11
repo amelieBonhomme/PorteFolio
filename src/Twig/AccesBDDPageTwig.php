@@ -27,6 +27,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 
     public function getGlobals(): array
     {
+        $basePath = '/uploads/'.$this->numero.'/';
         // =========================
         // Design
         // =========================
@@ -42,9 +43,12 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             $textesString = $IP->getCentreInteretTexte();  // chaîne "Texte1,Texte2,..."
             $textes = explode(',', $textesString);         // transforme en tableau
 
+            dump($images); // ⚡ Vérifie si des images sont trouvées
+            dump($textes); 
+
             foreach ($images as $index => $img) {
                 $centreInterets[] = [
-                    'image' => $img,
+                    'image' => $basePath.$img,
                     'texte' => $textes[$index] ?? ''
                 ];
             }
@@ -57,7 +61,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
         $Grouplogo = [];
         if ($IPro) {
             foreach ($IPro->getlogo() as $img) {
-                $Grouplogo[] = ['image' => $img];
+                $Grouplogo[] = ['image' => $basePath.$img];
             }
         }
 
@@ -69,10 +73,10 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
         $GrouplogoC2 = [];
         if ($Comp) {
             foreach ($Comp->getlogoLigne1() as $img) {
-                $GrouplogoC1[] = ['image' => $img];
+                $GrouplogoC1[] = ['image' => $basePath.$img];
             }
             foreach ($Comp->getlogoLigne2() as $img) {
-                $GrouplogoC2[] = ['image' => $img];
+                $GrouplogoC2[] = ['image' => $basePath.$img];
             }
         }
 
@@ -88,7 +92,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 
             foreach ($pdfs as $index => $pdf) {
                 $Grouppdf[] = [
-                    'file'  => $pdf,
+                    'file'  => $basePath.$pdf,
                     'titre' => $titres[$index] ?? ''
                 ];
             }
