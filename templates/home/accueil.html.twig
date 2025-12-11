@@ -71,7 +71,7 @@
                 {% set i = pos|trim - 1 %} {# -1 car ton ordre est 1-based #}
                     <div class="entrepriseGénéral">
                         {% if i is even %}
-                            <img class="logo logo-left" src="{{ asset('uploads/' ~ logos[i].image) }}">
+                            <img class="logo logo-left" src="{{ logos[i].image }}">
                         {% endif %}
                         <div>
                             <ul>
@@ -84,7 +84,7 @@
                         </div>
 
                         {% if i is odd %}
-                            <img class="logo logo-right" src="{{ asset('uploads/' ~ logos[i].image) }}">
+                            <img class="logo logo-right" src="{{ logos[i].image }}">
                         {% endif %}
                     </div>
 
@@ -100,7 +100,7 @@
             <div class="competence1">
                 {% if GrouplogoC1 %}
                     {% for logo in GrouplogoC1 %}
-                        <img alt="logo compétence ligne 1" class="logo3" src="{{ asset('uploads/' ~ logo.image) }}">
+                        <img alt="logo compétence ligne 1" class="logo3" src="{{ logo.image }}">
                     {% endfor %}
                 {% endif %}
             </div>
@@ -108,7 +108,7 @@
             <div class="competence2">
                 {% if GrouplogoC2 %}
                     {% for logo in GrouplogoC2 %}
-                        <img alt="logo compétence ligne 2" class="logo3" src="{{ asset('uploads/' ~ logo.image) }}">
+                        <img alt="logo compétence ligne 2" class="logo3" src="{{ logo.image }}">
                     {% endfor %}
                 {% endif %}
             </div>
@@ -120,7 +120,7 @@
                 {% for doc in Grouppdf %}
                     <div class="espace">
                         <h3>{{ doc.titre }}</h3>
-                        <iframe class="pdf-frame" src="{{ asset('uploads/' ~ doc.file) }}" style="border: none;"></iframe>
+                        <iframe class="pdf-frame" src="{{ doc.file }}" style="border: none;"></iframe>
                     </div>
                 {% endfor %}
             </div>
