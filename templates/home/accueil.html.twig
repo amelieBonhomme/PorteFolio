@@ -1,130 +1,123 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
+
     <video autoplay muted loop id="background-video">
         <source src="{{ imagePrincipale }}" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo HTML5.
     </video>
 
-    <div class = "accueil">
+    <div class="accueil">
         <form method="get" action="{{ path('home') }}">
             <label for="personId">Choisir une personne :</label>
-            <select name="personId" id="personId"  style=" color: {{ couleurTexteNavigation }};">
+
+            <select name="personId" id="personId" style="color: {{ couleurTexteNavigation }};">
                 {% for personne in personnes %}
-                    <option value="{{ personne.getIDInfoP() }}"
-                        {% if loop.first and not numero %}selected{% endif %}
-                        {% if numero == personne.getIDInfoP()|slice(-3) %}selected{% endif %}>
-                        {{ personne.getPrenom() }} {{ personne.getNom() }}
+                    <option value="{{ personne.id }}"
+                        {% if selectedPersonId == personne.id %}selected{% endif %}>
+                        {{ personne.prenom }} {{ personne.nom }}
                     </option>
                 {% endfor %}
             </select>
+
             <br>
             <button type="submit">Afficher</button>
         </form>
 
-        <h2 style=" color: {{ couleurTexteNavigation }};">{{ metier }}</h2>
-        <a href="#partie1" 
-            class="bas-btn" 
-            style="border: 3px solid {{ couleurNavigation }}; --arrow-color: {{ couleurNavigation }};">
+        <h2 style="color: {{ couleurTexteNavigation }};">{{ metier }}</h2>
+
+        <a href="#partie1"
+           class="bas-btn"
+           style="border: 3px solid {{ couleurNavigation }}; --arrow-color: {{ couleurNavigation }};">
         </a>
     </div>
-    
+
     <div class="container" style="background-color: {{ couleurMotivationFooter }}; color: {{ couleurTexteMotivationFooter }};">
-    <div id="partie1"></div>
+        <div id="partie1"></div>
+
         <header>
-            <img src="{{ photo }}" alt="Photo de profil" class="photoProfil" style="border: 2px solid {{ couleurNavigation }};">
+            {#<img src="{{ photo }}" alt="Photo de profil" class="photoProfil" style="border: 2px solid {{ couleurNavigation }};">#}
             <div>
-                <h1>Motivation et présentation </h1>
+                <h1>Motivation et présentation</h1>
                 <p id="motivation">{{ description|nl2br }}</p>
             </div>
         </header>
+
         <h2>Centre d'intérêt personnel :</h2>
+
         <section class="contact">
             {% set ordre = ordrePerso|split(';') %}
-            {% set interets = centreInterets %}
-
             {% for pos in ordre %}
-                {% set i = pos|trim - 1 %} {# -1 car tableau commence à 0 #}
-
+                {% set i = pos|trim - 1 %}
                 <div class="imageTaille">
                     <div class="cercle" style="border: 2px solid {{ couleurNavigation }};">
-                        <img src="{{ interets[i].image }}" alt="Centre d’intérêt">
+                        {#<img src="{{ centreInterets[i].image }}" alt="Centre d’intérêt">#}
                     </div>
-                    <h3>{{ interets[i].texte }}</h3>
+                    {#<h3>{{ centreInterets[i].texte }}</h3>#}
                 </div>
             {% endfor %}
-
         </section>
     </div>
 
     <section id="entreprise">
-            <h1>Expérience :</h1>
-            {% set ordre = ordrepro|split(';') %}
-            {% set noms = nomEntreprise|split(';') %}
-            {% set postes = titrePoste|split(';') %}
-            {% set descriptions = descriptionEntreprise1|split(';') %}
-            {% set liens = lienSite|split(';') %}
-            {% set logos = Grouplogo %}
+        <h1>Expérience :</h1>
 
-            {% for pos in ordre %}
-                {% set i = pos|trim - 1 %} {# -1 car ton ordre est 1-based #}
-                    <div class="entrepriseGénéral">
-                        {% if i is even %}
-                            <img class="logo logo-left" src="{{ logos[i].image }}">
-                        {% endif %}
-                        <div>
-                            <ul>
-                                <h3>{{ postes[i] }}</h3>
-                                {% for line in descriptions[i]|split('\n') %}
-                                    <li>{{ line }}</li>
-                                {% endfor %}
-                            </ul>
-                            <a class="lienEntreprise{{ i+1 }}" href="{{ liens[i] }}">Site de l'entreprise</a>
-                        </div>
+        {% set ordre = ordrepro|split(';') %}
+        {% set noms = nomEntreprise|split(';') %}
+        {% set postes = titrePoste|split(';') %}
+        {% set descriptions = descriptionEntreprise|split(';') %}
+        {% set liens = lienSite|split(';') %}
+        {% set logos = Grouplogo %}
 
-                        {% if i is odd %}
-                            <img class="logo logo-right" src="{{ logos[i].image }}">
-                        {% endif %}
-                    </div>
+        {% for pos in ordre %}
+            {% set i = pos|trim - 1 %}
 
-                {% if not loop.last %}
-                    <div class = "separateur" style="border: 3px solid {{ couleurNavigation }};"></div>
+            <div class="entrepriseGénéral">
+                {% if i is even %}
+                    {#<img class="logo logo-left" src="{{ logos[i].image }}">#}
                 {% endif %}
+
+                <div>
+                    <ul>
+                        <h3>{{ postes[i] }}</h3>
+                        {% for line in descriptions[i]|split('\n') %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a class="lienEntreprise{{ i+1 }}" href="{{ liens[i] }}">Site de l'entreprise</a>
+                </div>
+
+                {% if i is odd %}
+                    {#<img class="logo logo-right" src="{{ logos[i].image }}">#}
+                {% endif %}
+            </div>
+
+            {% if not loop.last %}
+                <div class="separateur" style="border: 3px solid {{ couleurNavigation }};"></div>
+            {% endif %}
+        {% endfor %}
+    </section>
+
+    <section id="competence">
+        <h1>Compétences :</h1>
+
+        <div class="competence1">
+            {#{% for logo in competenceLogos %}
+                <img alt="logo compétence" class="logo3" src="{{ logo.image }}">
+            {% endfor %}#}
+        </div>
+    </section>
+
+    <section id="projet">
+        <h1>Mes projets :</h1>
+
+        <div class="pdf">
+            {% for doc in Grouppdf %}
+                <div class="espace">
+                    <h3>{{ doc.titre }}</h3>
+                    {#<iframe class="pdf-frame" src="{{ doc.file }}" style="border: none;"></iframe>#}
+                </div>
             {% endfor %}
+        </div>
+    </section>
 
-        </section>
-
-        <section id="competence">
-            <h1>Compétences :</h1>
-            <div class="competence1">
-                {% if GrouplogoC1 %}
-                    {% for logo in GrouplogoC1 %}
-                        <img alt="logo compétence ligne 1" class="logo3" src="{{ logo.image }}">
-                    {% endfor %}
-                {% endif %}
-            </div>
-
-            <div class="competence2">
-                {% if GrouplogoC2 %}
-                    {% for logo in GrouplogoC2 %}
-                        <img alt="logo compétence ligne 2" class="logo3" src="{{ logo.image }}">
-                    {% endfor %}
-                {% endif %}
-            </div>
-
-        </section>
-        <section id="projet">
-            <h1>Mes projets :</h1>
-            <div class="pdf">
-                {% for doc in Grouppdf %}
-                    <div class="espace">
-                        <h3>{{ doc.titre }}</h3>
-                        <iframe class="pdf-frame" src="{{ doc.file }}" style="border: none;"></iframe>
-                    </div>
-                {% endfor %}
-            </div>
-
-        </section>
 {% endblock %}
-

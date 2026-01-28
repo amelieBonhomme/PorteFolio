@@ -14,31 +14,33 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(
         Request $request,
-        EntityManagerInterface $em,
-        \App\Twig\AccesBDDPageTwig $accesBDD
+        EntityManagerInterface $em
     ): Response {
-        // 🔹 1. Valeur par défaut = menu déroulant (001 si rien)
-        $personId = $request->query->get('personId');
-        $numero   = $personId && strlen($personId) >= 3 ? substr($personId, -3) : '001';
+        // 1. Récupérer toutes les personnes
+        $personnes = $em->getRepository(InformationPersonelle::class)
+                        ->findBy([], ['nom' => 'ASC']);
 
-        // 🔹 2. Si un admin est connecté, on force son numéro
-        $user = $this->getUser();
-        if ($user instanceof \App\Entity\PAdmin) {
-            $idAdmin = $user->getIDAdmin();   // ex: "Admin002"
-            $numero  = substr($idAdmin, -3);  // ex: "002"
+        if (!$personnes) {
+            throw $this->createNotFoundException("Aucune personne trouvée.");
         }
 
-        // 🔹 3. Transmettre à l’extension
-        $accesBDD->setNumero($numero);
+        // 2. Récupérer la personne sélectionnée dans l’URL
+        $selectedId = $request->query->get('personId');
 
-        // 🔹 4. Charger les entités
-        $personnes = $em->getRepository(\App\Entity\InformationPersonelle::class)->findAll();
+        // 3. Si aucune sélection → prendre la première
+        if ($selectedId) {
+            $selectedPerson = $em->getRepository(InformationPersonelle::class)->find($selectedId);
+        } else {
+            $selectedPerson = $personnes[0];
+        }
+
+        if (!$selectedPerson) {
+            $selectedPerson = $personnes[0];
+        }
 
         return $this->render('home/accueil.html.twig', [
             'personnes' => $personnes,
-            'numero'    => $numero,
+            'selectedPersonId' => $selectedPerson->getId(),
         ]);
     }
-
-
 }

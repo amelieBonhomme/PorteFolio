@@ -1,49 +1,59 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: "Competence")]
+#[ORM\Table(name: "competence")]
 class Competence
 {
     #[ORM\Id]
-    #[ORM\Column(name: 'IDcompetence', type: 'string', length: 50)]
-    private string $IDcompetence;
+    #[ORM\Column(name: "id_competence", type: "string", length: 50)]
+    private ?string $id = null;
 
-    #[ORM\Column(name: 'logoLigne1', type: 'json', nullable: true)]
-    private ?array $logoLigne1 = [];
+    #[ORM\Column(name: "logo_ligne", type: "string", length: 255)]
+    private string $logoLigne;
 
-    #[ORM\Column(name: 'logoLigne2', type: 'json', nullable: true)]
-    private ?array $logoLigne2 = [];
+    // 🔗 Relation vers PAdmin
+    #[ORM\ManyToOne(targetEntity: PAdmin::class)]
+    #[ORM\JoinColumn(name: "id_admin", referencedColumnName: "id_admin")]
+    private ?PAdmin $admin = null;
 
+    // -------------------------
+    // GETTERS / SETTERS
+    // -------------------------
 
-    public function getIDcompetence(): ?string
+    public function getId(): ?string
     {
-        return $this->IDcompetence;
+        return $this->id;
     }
 
-    public function getLogoLigne1(): ?array
+    public function setId(string $id): self
     {
-        return $this->logoLigne1;
-    }
-
-    public function setLogoLigne1(?array $logoLigne1): static
-    {
-        $this->logoLigne1 = $logoLigne1;
-
+        $this->id = $id;
         return $this;
     }
 
-    public function getLogoLigne2(): ?array
+    public function getLogoLigne(): ?string
     {
-        return $this->logoLigne2;
+        return $this->logoLigne;
     }
 
-    public function setLogoLigne2(?array $logoLigne2): static
+    public function setLogoLigne(string $logoLigne): self
     {
-        $this->logoLigne2 = $logoLigne2;
+        $this->logoLigne = $logoLigne;
+        return $this;
+    }
 
+    public function getAdmin(): ?PAdmin
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?PAdmin $admin): self
+    {
+        $this->admin = $admin;
         return $this;
     }
 }

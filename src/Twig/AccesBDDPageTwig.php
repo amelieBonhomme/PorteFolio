@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Twig;
 
 use App\Entity\Designe;
@@ -6,146 +7,129 @@ use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
 use App\Entity\Competence;
 use App\Entity\Projet;
-use App\Entity\PAdmin;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
 class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 {
     private EntityManagerInterface $em;
-    private string $numero = '001';
+    private RequestStack $requestStack;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, RequestStack $requestStack)
     {
         $this->em = $em;
-    }
-    public function setNumero(string $numero): void
-    {
-        $this->numero = $numero;
+        $this->requestStack = $requestStack;
     }
 
     public function getGlobals(): array
     {
-        $basePath = '/uploads/'.$this->numero.'/';
-        // =========================
-        // Design
-        // =========================
-        $design = $this->em->getRepository(Designe::class)->find('designe' . $this->numero);
+        $request = $this->requestStack->getCurrentRequest();
 
-        // =========================
-        // Informations personnelles
-        // =========================
-        $IP = $this->em->getRepository(InformationPersonelle::class)->find('info'. $this->numero);
+        // 1. Récupérer toutes les personnes
+        $personnes = $this->em->getRepository(InformationPersonelle::class)
+                              ->findBy([], ['nom' => 'ASC']);
+
+        if (!$personnes) {
+            return [];
+        }
+
+        // 2. Récupérer la personne sélectionnée
+        $selectedId = $request->query->get('personId');
+
+        if ($selectedId) {
+            $IP = $this->em->getRepository(InformationPersonelle::class)->find($selectedId);
+        } else {
+            $IP = $personnes[0]; // première personne par défaut
+        }
+
+        if (!$IP) {
+            $IP = $personnes[0];
+        }
+
+        // 3. Récupérer l’admin lié à cette personne
+        $admin = $IP->getAdmin();
+
+        // 4. Récupérer les autres données liées à cet admin
+        $design = $this->em->getRepository(Designe::class)->findOneBy(['admin' => $admin]);
+        $IPro   = $this->em->getRepository(InformationPro::class)->findOneBy(['admin' => $admin]);
+        $Comp   = $this->em->getRepository(Competence::class)->findOneBy(['admin' => $admin]);
+        $P      = $this->em->getRepository(Projet::class)->findOneBy(['admin' => $admin]);
+
+        // 5. Base path pour les fichiers
+        $basePath = '/uploads/'.$admin->getId().'/';
+
+        // 6. Centre d’intérêt
         $centreInterets = [];
         if ($IP) {
-            $images = $IP->getCentreInteretImg();          // tableau JSON
-            $textesString = $IP->getCentreInteretTexte();  // chaîne "Texte1,Texte2,..."
-            $textes = explode(',', $textesString);         // transforme en tableau 
+            $images = explode(',', $IP->getCentreInteretImg());
+            $textes = explode(',', $IP->getCentreInteretTexte());
 
-            foreach ($images as $index => $img) {
+            foreach ($images as $i => $img) {
                 $centreInterets[] = [
                     'image' => $basePath.$img,
-                    'texte' => $textes[$index] ?? ''
+                    'texte' => $textes[$i] ?? ''
                 ];
             }
         }
 
-        // =========================
-        // Informations professionnelles
-        // =========================
-        $IPro = $this->em->getRepository(InformationPro::class)->find('pro'. $this->numero);
-        $Grouplogo = [];
-        if ($IPro) {
-            foreach ($IPro->getlogo() as $img) {
-                $Grouplogo[] = ['image' => $basePath.$img];
-            }
-        }
-
-        // =========================
-        // Compétences
-        // =========================
-        $Comp = $this->em->getRepository(Competence::class)->find('C'. $this->numero);
-        $GrouplogoC1 = [];
-        $GrouplogoC2 = [];
+        // 7. Compétences
+        $competenceLogos = [];
         if ($Comp) {
-            foreach ($Comp->getlogoLigne1() as $img) {
-                $GrouplogoC1[] = ['image' => $basePath.$img];
-            }
-            foreach ($Comp->getlogoLigne2() as $img) {
-                $GrouplogoC2[] = ['image' => $basePath.$img];
+            $logos = explode(',', $Comp->getLogoLigne());
+            foreach ($logos as $logo) {
+                $competenceLogos[] = ['image' => $basePath.$logo];
             }
         }
 
-        // =========================
-        // Projets
-        // =========================
-        $P = $this->em->getRepository(Projet::class)->find('P'. $this->numero);
-        $Grouppdf = [];
+        // 8. Projet
+        $projets = [];
         if ($P) {
-            $pdfs = $P->getPdf();                  // tableau JSON
-            $titresString = $P->gettitreP();       // titres séparés par ";"
-            $titres = explode(';', $titresString);
-
-            foreach ($pdfs as $index => $pdf) {
-                $Grouppdf[] = [
-                    'file'  => $basePath.$pdf,
-                    'titre' => $titres[$index] ?? ''
-                ];
-            }
+            $projets[] = [
+                'file'  => $basePath.$P->getPdf(),
+                'titre' => $P->getTitreProjet()
+            ];
         }
-
-        // =========================
-        // Admin
-        // =========================
-        $PA = $this->em->getRepository(PAdmin::class)->find('Admin'. $this->numero);
-
-        // =========================
-        // Retour des variables globales
-        // =========================
 
         return [
+            'personnes' => $personnes,
+            'selectedPerson' => $IP,
+
             // Design
-            'couleurFond'               => $design ? $design->getCouleurFond() : '#EBBFA9',
-            'couleurTexte'              => $design ? $design->getCouleurTexteGeneral() : '#000000',
-            'imagePrincipale'           => $design ? $design->getImagePrincipale() : '',
-            'couleurMotivationFooter'   => $design ? $design->getcouleurMotivationFooter() : '',
-            'couleurTexteMotivationFooter' => $design ? $design->getcouleurTexteMotivationFooter() : '',
-            'couleurNavigation'         => $design ? $design->getcouleurNavigation() : '',
-            'couleurTexteNavigation'    => $design ? $design->getcouleurTexteNavigation() : '',
+            'couleurFond'               => $design?->getCouleurFond(),
+            'couleurTexte'              => $design?->getCouleurTexteGeneral(),
+            'imagePrincipale'           => $design?->getImagePrincipale(),
+            'couleurMotivationFooter'   => $design?->getCouleurMotivationFooter(),
+            'couleurTexteMotivationFooter' => $design?->getCouleurTexteMotivationFooter(),
+            'couleurNavigation'         => $design?->getCouleurNavigation(),
+            'couleurTexteNavigation'    => $design?->getCouleurTexteNavigation(),
 
             // Informations personnelles
-            'nom'           => $IP ? $IP->getNom() : '',
-            'prenom'        => $IP ? $IP->getPrenom() : '',
-            'metier'        => $IP ? $IP->getMetier() : '',
-            'ordrePerso'    => $IP ? $IP->getordrePerso() : '',
-            'description'   => $IP ? $IP->getDescription() : '',
-            'mail'          => $IP ? $IP->getMail() : '',
-            'linkedin'      => $IP ? $IP->getLinkedin() : '',
-            'tel'           => $IP ? $IP->getTelephone() : '',
-            'localisationMap' => $IP ? $IP->getlocalisationMap() : '',
-            'photo' => $IP && $IP->getPhoto() ? $basePath.$IP->getPhoto()[0] : '',
+            'nom'           => $IP->getNom(),
+            'prenom'        => $IP->getPrenom(),
+            'metier'        => $IP->getMetier(),
+            'ordrePerso'    => $IP->getOrdrePerso(),
+            'description'   => $IP->getDescription(),
+            'mail'          => $IP->getMail(),
+            'linkedin'      => $IP->getLinkedin(),
+            'tel'           => $IP->getTelephone(),
+            'localisationMap' => $IP->getLocalisationMap(),
+            'photo'         => $basePath.$IP->getPhoto(),
             'centreInterets'=> $centreInterets,
 
             // Informations professionnelles
-            'nomEntreprise'         => $IPro ? $IPro->getnomEntreprise() : '',
-            'titrePoste'            => $IPro ? $IPro->gettitrePoste() : '',
-            'descriptionEntreprise1'=> $IPro ? $IPro->getdescriptionEntreprise1() : '',
-            'lienSite'              => $IPro ? $IPro->getlienSite() : '',
-            'ordrepro'              => $IPro ? $IPro->getordrepro() : '',
-            'Grouplogo'             => $Grouplogo,
+            'nomEntreprise'         => $IPro?->getNomEntreprise(),
+            'titrePoste'            => $IPro?->getTitrePoste(),
+            'descriptionEntreprise'=> $IPro?->getDescriptionEntreprise(),
+            'lienSite'              => $IPro?->getLienSite(),
+            'ordrepro'              => $IPro?->getOrdrePro(),
 
             // Compétences
-            'GrouplogoC1' => $GrouplogoC1,
-            'GrouplogoC2' => $GrouplogoC2,
+            'Grouplogo' => $competenceLogos,
 
             // Projets
-            'titreP'    => $P ? $P->gettitreP() : '',
-            'Grouppdf'  => $Grouppdf,
-
-            // Admin
-            'adminLogin' => $PA ? $PA->getLogin() : '',
-            'adminId'    => $PA ? $PA->getIDAdmin() : '',
+            'Grouppdf' => $projets,
         ];
     }
 }

@@ -17,10 +17,10 @@ class AdminFormProjet extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titreP', TextType::class)
-            ->add('pdf', FileType::class, [
-                'label' => 'pdf',
-                'mapped' => false,   // 👈 très important
+            ->add('titreProjet', TextType::class)
+            ->add('pdfFile', FileType::class, [
+                'label' => 'Fichier PDF du projet',
+                'mapped' => false, // upload géré dans le contrôleur
                 'required' => false,
                 'multiple' => true,
                 'constraints' => [

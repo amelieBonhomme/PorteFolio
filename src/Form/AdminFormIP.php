@@ -1,6 +1,5 @@
 <?php
-//Fait séparément pour que la sécurité soit gérer à partir d'ici, évite les requêtes post car gérer directement depuis l'orm permet aussi de valider les données
-// permet aussi de récupérer le formulaire pour l'afficher ailleurs, simplifie la maintenance
+
 namespace App\Form;
 
 use App\Entity\InformationPersonelle;
@@ -12,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Count;
 
-
 class AdminFormIP extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -20,13 +18,17 @@ class AdminFormIP extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
-            ->add('description', TextareaType::class, ['attr' => [ 'rows' => 9],])
+            ->add('description', TextareaType::class, [
+                'attr' => ['rows' => 9],
+            ])
             ->add('mail', TextType::class)
             ->add('telephone', TextType::class)
             ->add('localisationMap', TextareaType::class)
             ->add('linkedin', TextType::class)
+
+            // Images des centres d’intérêt
             ->add('centreInteretImg', FileType::class, [
-                'label' => 'Images centre d’intérêt',
+                'label' => 'Images des centres d’intérêt',
                 'mapped' => false,
                 'required' => false,
                 'multiple' => true,
@@ -37,14 +39,21 @@ class AdminFormIP extends AbstractType
                     ])
                 ],
             ])
+
+            // Textes des centres d’intérêt (séparés par virgules)
             ->add('centreInteretTexte', TextType::class)
+
             ->add('metier', TextType::class)
+
+            // Photo de profil
             ->add('photo', FileType::class, [
-                'label' => 'Images centre d’intérêt',
+                'label' => 'Photo de profil',
                 'mapped' => false,
                 'required' => false,
                 'multiple' => false,
             ])
+
+            // Ordre des centres d’intérêt (ex : "1;2;3")
             ->add('ordrePerso', TextType::class);
     }
 

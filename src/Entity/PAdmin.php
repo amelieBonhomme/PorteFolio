@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -6,35 +7,33 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
+#[ORM\Table(name: "p_admin")]
 class PAdmin implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\Column(name: 'IDAdmin', type: 'string', length: 50)]
-    private string $IDAdmin;
+    #[ORM\Column(name: "id_admin", type: "string", length: 50)]
+    private ?string $id = null;
 
-    #[ORM\Column(name: 'login', length: 50, unique: true)]
+    #[ORM\Column(name: "login", type: "string", length: 50, unique: true)]
     private string $login;
 
     // ⚡ longueur augmentée pour stocker un hash
-    #[ORM\Column(name: 'mdp', length: 255)]
+    #[ORM\Column(name: "mdp", type: "string", length: 255)]
     private string $mdp;
 
-    #[ORM\ManyToOne(targetEntity: Designe::class)]
-    #[ORM\JoinColumn(name: 'IDdesigne', referencedColumnName: 'IDdesigne')]
-    private ?Designe $designe = null;
+    // -------------------------
+    // GETTERS / SETTERS
+    // -------------------------
 
-    #[ORM\ManyToOne(targetEntity: InformationPro::class)]
-    #[ORM\JoinColumn(name: 'ID_pro', referencedColumnName: 'ID_pro')]
-    private ?InformationPro $informationPro = null;
-
-    #[ORM\ManyToOne(targetEntity: InformationPersonelle::class)]
-    #[ORM\JoinColumn(name: 'IDInfoP', referencedColumnName: 'IDInfoP')]
-    private ?InformationPersonelle $informationPersonelle = null;
-
-    // --- Getters / Setters ---
-    public function getIDAdmin(): ?string
+    public function getId(): ?string
     {
-        return $this->IDAdmin;
+        return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
     }
 
     public function getLogin(): ?string
@@ -42,83 +41,50 @@ class PAdmin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->login;
     }
 
-    public function setLogin(string $login): static
+    public function setLogin(string $login): self
     {
         $this->login = $login;
         return $this;
     }
 
-    // --- Compatibilité FormType (champ "mdp") ---
     public function getMdp(): ?string
     {
         return $this->mdp;
     }
 
-    public function setMdp(string $mdp): static
+    public function setMdp(string $mdp): self
     {
         $this->mdp = $mdp;
         return $this;
     }
 
-    // --- Compatibilité Symfony Security ---
+    // -------------------------
+    // SECURITY INTERFACE
+    // -------------------------
+
     public function getPassword(): string
     {
         return $this->mdp;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->mdp = $password;
         return $this;
     }
 
-    // --- Méthodes UserInterface obligatoires ---
     public function getUserIdentifier(): string
     {
-        return $this->login; // identifiant unique
+        return $this->login;
     }
 
     public function getRoles(): array
     {
-        return ['ROLE_ADMIN']; // tu peux adapter si tu veux gérer plusieurs rôles
+        return ['ROLE_ADMIN'];
     }
 
     public function eraseCredentials(): void
     {
-        // Si tu stockes des données sensibles temporaires, nettoie-les ici
-    }
-
-    // --- Relations ---
-    public function getDesigne(): ?Designe
-    {
-        return $this->designe;
-    }
-
-    public function setDesigne(?Designe $designe): static
-    {
-        $this->designe = $designe;
-        return $this;
-    }
-
-    public function getInformationPro(): ?InformationPro
-    {
-        return $this->informationPro;
-    }
-
-    public function setInformationPro(?InformationPro $informationPro): static
-    {
-        $this->informationPro = $informationPro;
-        return $this;
-    }
-
-    public function getInformationPersonelle(): ?InformationPersonelle
-    {
-        return $this->informationPersonelle;
-    }
-
-    public function setInformationPersonelle(?InformationPersonelle $informationPersonelle): static
-    {
-        $this->informationPersonelle = $informationPersonelle;
-        return $this;
+        // rien à nettoyer
     }
 }
