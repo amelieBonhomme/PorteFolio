@@ -18,8 +18,8 @@ class InformationPersonelle
     #[ORM\Column(name: "prenom", type: "string", length: 50)]
     private string $prenom;
 
-    #[ORM\Column(name: "photo", type: "string", length: 50, nullable: true)]
-    private ?string $photo = null;
+    #[ORM\Column(name: "photo", type: "blob", nullable: true)]
+    private $photo;
 
     #[ORM\Column(name: "metier", type: "string", length: 50)]
     private string $metier;
@@ -90,12 +90,12 @@ class InformationPersonelle
         return $this;
     }
 
-    public function getPhoto(): ?string
+    public function getPhoto()
     {
         return $this->photo;
     }
 
-    public function setPhoto(?string $photo): self
+    public function setPhoto($photo): self
     {
         $this->photo = $photo;
         return $this;
