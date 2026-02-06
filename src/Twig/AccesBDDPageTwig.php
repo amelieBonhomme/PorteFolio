@@ -115,7 +115,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'linkedin'      => $IP->getLinkedin(),
             'tel'           => $IP->getTelephone(),
             'localisationMap' => $IP->getLocalisationMap(),
-            'photo'         => $basePath.$IP->getPhoto(),
+            'photo' => $IP->getPhoto(),
             'centreInterets'=> $centreInterets,
 
             // Informations professionnelles

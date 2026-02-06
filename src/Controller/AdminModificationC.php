@@ -72,13 +72,22 @@ class AdminModificationC extends AbstractController
             $photoFile = $IPForm->get('photo')->getData();
 
             if ($photoFile) {
+                // Lire le fichier
                 $binary = file_get_contents($photoFile->getPathname());
-                $IP->setPhoto($binary); 
+
+                // Convertir en base64
+                $base64 = base64_encode($binary);
+
+                // Stocker dans la base
+                $IP->setPhoto($base64);
             }
 
+            // 👉 C’est ça qui manquait !
             $em->flush();
+
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
+
 
 
         if ($IProForm->isSubmitted() && $IProForm->isValid()) {

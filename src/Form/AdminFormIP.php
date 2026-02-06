@@ -47,11 +47,10 @@ class AdminFormIP extends AbstractType
 
             // Photo de profil
             ->add('photo', FileType::class, [
-                'label' => 'Photo de profil',
                 'mapped' => false,
                 'required' => false,
-                'multiple' => false,
             ])
+
 
             // Ordre des centres d’intérêt (ex : "1;2;3")
             ->add('ordrePerso', TextType::class);
