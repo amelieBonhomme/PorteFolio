@@ -7,6 +7,8 @@ use App\Entity\InformationPersonelle;
 use App\Entity\InformationPro;
 use App\Entity\Competence;
 use App\Entity\Projet;
+use App\Entity\Image;
+use App\Entity\Document;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
@@ -57,40 +59,39 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
         $Comp   = $this->em->getRepository(Competence::class)->findOneBy(['admin' => $admin]);
         $P      = $this->em->getRepository(Projet::class)->findOneBy(['admin' => $admin]);
 
-        // 5. Base path pour les fichiers
-        $basePath = '/uploads/'.$admin->getId().'/';
 
         // 6. Centre d’intérêt
         $centreInterets = [];
-        if ($IP) {
-            $images = explode(',', $IP->getCentreInteretImg());
-            $textes = explode(',', $IP->getCentreInteretTexte());
-
-            foreach ($images as $i => $img) {
-                $centreInterets[] = [
-                    'image' => $basePath.$img,
-                    'texte' => $textes[$i] ?? ''
-                ];
-            }
+        foreach ($IP->getImages() as $image) {
+            $centreInterets[] = [
+                'image' => 'data:image/jpeg;base64,' . $image->getImg(),
+                'texte' => $IP->getCentreInteretTexte(), // tu peux améliorer si tu veux un texte par image
+            ];
         }
 
         // 7. Compétences
         $competenceLogos = [];
         if ($Comp) {
-            $logos = explode(',', $Comp->getLogoLigne());
-            foreach ($logos as $logo) {
-                $competenceLogos[] = ['image' => $basePath.$logo];
+            foreach ($Comp->getImages() as $image) {
+                $competenceLogos[] = [
+                    'image' => 'data:image/jpeg;base64,' . $image->getImg()
+                ];
             }
         }
+
 
         // 8. Projet
         $projets = [];
         if ($P) {
-            $projets[] = [
-                'file'  => $basePath.$P->getPdf(),
-                'titre' => $P->getTitreProjet()
-            ];
+            foreach ($P->getDocuments() as $doc) {
+                $projets[] = [
+                    'file'  => 'data:application/pdf;base64,' . $doc->getPdf(),
+                    'titre' => $P->getTitreProjet()
+                ];
+            }
         }
+
+
 
         return [
             'personnes' => $personnes,
@@ -117,6 +118,8 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'localisationMap' => $IP->getLocalisationMap(),
             'photo' => $IP->getPhoto(),
             'centreInterets'=> $centreInterets,
+            'centreInteretTexte' => $IP->getCentreInteretTexte(),
+
 
             // Informations professionnelles
             'nomEntreprise'         => $IPro?->getNomEntreprise(),
@@ -124,6 +127,11 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'descriptionEntreprise'=> $IPro?->getDescriptionEntreprise(),
             'lienSite'              => $IPro?->getLienSite(),
             'ordrepro'              => $IPro?->getOrdrePro(),
+            'imagesPro' => array_map(
+                fn($img) => 'data:image/jpeg;base64,' . $img->getImg(),
+                $IPro?->getImages()->toArray() ?? []
+            ),
+
 
             // Compétences
             'Grouplogo' => $competenceLogos,

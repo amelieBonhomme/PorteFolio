@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: "information_pro")]
@@ -18,9 +20,6 @@ class InformationPro
     #[ORM\Column(name: "titre_poste", type: "string", length: 50)]
     private string $titrePoste;
 
-    #[ORM\Column(name: "logo", type: "string", length: 255)]
-    private string $logo;
-
     #[ORM\Column(name: "description_entreprise", type: "string", length: 255)]
     private string $descriptionEntreprise;
 
@@ -35,9 +34,27 @@ class InformationPro
     #[ORM\JoinColumn(name: "id_admin", referencedColumnName: "id_admin")]
     private ?PAdmin $admin = null;
 
-    // -------------------------
+    // ---------------------------------------------------------
+    // 🔗 OneToMany vers Image (une expérience pro → plusieurs images)
+    // ---------------------------------------------------------
+    #[ORM\OneToMany(
+        mappedBy: "informationPro",
+        targetEntity: Image::class,
+        orphanRemoval: true
+    )]
+    private Collection $images;
+
+    // ---------------------------------------------------------
+    // CONSTRUCTEUR
+    // ---------------------------------------------------------
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
+
+    // ---------------------------------------------------------
     // GETTERS / SETTERS
-    // -------------------------
+    // ---------------------------------------------------------
 
     public function getId(): ?string
     {
@@ -69,17 +86,6 @@ class InformationPro
     public function setTitrePoste(string $titrePoste): self
     {
         $this->titrePoste = $titrePoste;
-        return $this;
-    }
-
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    public function setLogo(string $logo): self
-    {
-        $this->logo = $logo;
         return $this;
     }
 
@@ -124,6 +130,39 @@ class InformationPro
     public function setAdmin(?PAdmin $admin): self
     {
         $this->admin = $admin;
+        return $this;
+    }
+
+    // ---------------------------------------------------------
+    // 🔗 GESTION DES IMAGES
+    // ---------------------------------------------------------
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setInformationPro($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            if ($image->getInformationPro() === $this) {
+                $image->setInformationPro(null);
+            }
+        }
+
         return $this;
     }
 }

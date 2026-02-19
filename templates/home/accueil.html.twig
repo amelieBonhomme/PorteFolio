@@ -13,7 +13,7 @@
             <select name="personId" id="personId" style="color: {{ couleurTexteNavigation }};">
                 {% for personne in personnes %}
                     <option value="{{ personne.id }}"
-                        {% if selectedPersonId == personne.id %}selected{% endif %}>
+                        {% if selectedPerson.id == personne.id %}selected{% endif %}>
                         {{ personne.prenom }} {{ personne.nom }}
                     </option>
                 {% endfor %}
@@ -35,7 +35,7 @@
         <div id="partie1"></div>
 
         <header>
-            {#<img src="{{ photo }}" alt="Photo de profil" class="photoProfil" style="border: 2px solid {{ couleurNavigation }};">#}
+            <img src="{{ photo }}" alt="Photo de profil" class="photoProfil" style="border: 2px solid {{ couleurNavigation }};">
             <div>
                 <h1>Motivation et présentation</h1>
                 <p id="motivation">{{ description|nl2br }}</p>
@@ -46,16 +46,26 @@
 
         <section class="contact">
             {% set ordre = ordrePerso|split(';') %}
+            {% set textes = centreInteretTexte|split(';') %}
+
             {% for pos in ordre %}
                 {% set i = pos|trim - 1 %}
-                <div class="imageTaille">
-                    <div class="cercle" style="border: 2px solid {{ couleurNavigation }};">
-                        {#<img src="{{ centreInterets[i].image }}" alt="Centre d’intérêt">#}
+
+                {% if centreInterets[i] is defined %}
+                    <div class="imageTaille">
+                        <div class="cercle" style="border: 2px solid {{ couleurNavigation }};">
+                            <img src="{{ centreInterets[i].image }}" alt="Centre d’intérêt">
+                        </div>
+
+                        {# Texte individuel #}
+                        {% if textes[i] is defined %}
+                            <h3>{{ textes[i] }}</h3>
+                        {% endif %}
                     </div>
-                    {#<h3>{{ centreInterets[i].texte }}</h3>#}
-                </div>
+                {% endif %}
             {% endfor %}
         </section>
+
     </div>
 
     <section id="entreprise">
@@ -66,29 +76,32 @@
         {% set postes = titrePoste|split(';') %}
         {% set descriptions = descriptionEntreprise|split(';') %}
         {% set liens = lienSite|split(';') %}
-        {% set logos = Grouplogo %}
 
         {% for pos in ordre %}
             {% set i = pos|trim - 1 %}
 
             <div class="entrepriseGénéral">
-                {% if i is even %}
-                    {#<img class="logo logo-left" src="{{ logos[i].image }}">#}
+
+                {# Image gauche si index pair #}
+                {% if i is even and imagesPro[i] is defined %}
+                    <img class="logo logo-left" src="{{ imagesPro[i] }}">
                 {% endif %}
 
                 <div>
-                    <ul>
-                        <h3>{{ postes[i] }}</h3>
-                        {% for line in descriptions[i]|split('\n') %}
-                            <li>{{ line }}</li>
-                        {% endfor %}
-                    </ul>
-                    <a class="lienEntreprise{{ i+1 }}" href="{{ liens[i] }}">Site de l'entreprise</a>
+                    <h3>{{ postes[i] }}</h3>
+
+                    {% for line in descriptions[i]|split('\n') %}
+                        <li>{{ line }}</li>
+                    {% endfor %}
+
+                    <a href="{{ liens[i] }}">Site de l'entreprise</a>
                 </div>
 
-                {% if i is odd %}
-                    {#<img class="logo logo-right" src="{{ logos[i].image }}">#}
+                {# Image droite si index impair #}
+                {% if i is odd and imagesPro[i] is defined %}
+                    <img class="logo logo-right" src="{{ imagesPro[i] }}">
                 {% endif %}
+
             </div>
 
             {% if not loop.last %}
@@ -97,13 +110,14 @@
         {% endfor %}
     </section>
 
+
     <section id="competence">
         <h1>Compétences :</h1>
 
         <div class="competence1">
-            {#{% for logo in competenceLogos %}
+            {% for logo in Grouplogo %}
                 <img alt="logo compétence" class="logo3" src="{{ logo.image }}">
-            {% endfor %}#}
+            {% endfor %}
         </div>
     </section>
 
@@ -114,7 +128,7 @@
             {% for doc in Grouppdf %}
                 <div class="espace">
                     <h3>{{ doc.titre }}</h3>
-                    {#<iframe class="pdf-frame" src="{{ doc.file }}" style="border: none;"></iframe>#}
+                    <iframe class="pdf-frame" src="{{ doc.file }}" style="border: none;"></iframe>
                 </div>
             {% endfor %}
         </div>

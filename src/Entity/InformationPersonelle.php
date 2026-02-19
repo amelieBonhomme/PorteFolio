@@ -3,13 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: "information_personelle")]
 class InformationPersonelle
 {
     #[ORM\Id]
-    #[ORM\Column(name: "id_Info_perso", type: "string", length: 50)]
+    #[ORM\Column(name: "id_info_perso", type: "string", length: 50)]
     private ?string $id = null;
 
     #[ORM\Column(name: "nom", type: "string", length: 50)]
@@ -39,9 +41,6 @@ class InformationPersonelle
     #[ORM\Column(name: "linkedin", type: "string", length: 50)]
     private string $linkedin;
 
-    #[ORM\Column(name: "centre_interet_img", type: "string", length: 255)]
-    private string $centreInteretImg;
-
     #[ORM\Column(name: "centre_interet_texte", type: "string", length: 50)]
     private string $centreInteretTexte;
 
@@ -53,9 +52,27 @@ class InformationPersonelle
     #[ORM\JoinColumn(name: "id_admin", referencedColumnName: "id_admin")]
     private ?PAdmin $admin = null;
 
-    // -------------------------
+    // ---------------------------------------------------------
+    // 🔗 OneToMany vers Image (une personne → plusieurs images)
+    // ---------------------------------------------------------
+    #[ORM\OneToMany(
+        mappedBy: "informationPersonelle",
+        targetEntity: Image::class,
+        orphanRemoval: true
+    )]
+    private Collection $images;
+
+    // ---------------------------------------------------------
+    // CONSTRUCTEUR
+    // ---------------------------------------------------------
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
+
+    // ---------------------------------------------------------
     // GETTERS / SETTERS
-    // -------------------------
+    // ---------------------------------------------------------
 
     public function getId(): ?string
     {
@@ -100,7 +117,6 @@ class InformationPersonelle
         $this->photo = $photo;
         return $this;
     }
-
 
     public function getMetier(): ?string
     {
@@ -168,17 +184,6 @@ class InformationPersonelle
         return $this;
     }
 
-    public function getCentreInteretImg(): ?string
-    {
-        return $this->centreInteretImg;
-    }
-
-    public function setCentreInteretImg(string $img): self
-    {
-        $this->centreInteretImg = $img;
-        return $this;
-    }
-
     public function getCentreInteretTexte(): ?string
     {
         return $this->centreInteretTexte;
@@ -209,6 +214,39 @@ class InformationPersonelle
     public function setAdmin(?PAdmin $admin): self
     {
         $this->admin = $admin;
+        return $this;
+    }
+
+    // ---------------------------------------------------------
+    // 🔗 GESTION DES IMAGES
+    // ---------------------------------------------------------
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setInformationPersonelle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            if ($image->getInformationPersonelle() === $this) {
+                $image->setInformationPersonelle(null);
+            }
+        }
+
         return $this;
     }
 }

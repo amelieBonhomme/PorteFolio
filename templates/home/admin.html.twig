@@ -93,7 +93,7 @@
                         <p>{{ form_label(IPForm.telephone, 'Téléphone :') }}</p>
                         <p class="Petitlongtexte">{{ form_label(IPForm.localisationMap, 'Adresse localisation Google Maps :') }}</p>
                         <p>{{ form_label(IPForm.linkedin, 'Lien LinkedIn :') }}</p>
-                        <p class="centreInteretImg">{{ form_label(IPForm.centreInteretImg, 'Images centre d’intérêt (4 max) :') }}</p>
+                        <p class="centreInteretImg">{{ form_label(IPForm.images, 'Images centre d’intérêt (4 max) :') }}</p>
                         <p>{{ form_label(IPForm.ordrePerso, 'Ordre des images :') }}</p>
                         <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre d’intérêt (séparé par des virgules) :') }}</p>
                         <p>{{ form_label(IPForm.metier, 'Métier :') }}</p>
@@ -109,7 +109,7 @@
                         <p>{{ form_widget(IPForm.localisationMap, {'attr': {'class': 'form-input'}}) }}</p>
                         <p>{{ form_widget(IPForm.linkedin, {'attr': {'class': 'form-input'}}) }}</p>
 
-                        <p>{{ form_widget(IPForm.centreInteretImg, {
+                        <p>{{ form_widget(IPForm.images, {
                             'attr': {'class': 'form-input', 'multiple': 'multiple'}
                         }) }}</p>
 
@@ -173,8 +173,8 @@
                     </div>
 
                     <div class="form-row">
-                        <p>{{ form_label(IPForm.centreInteretImg, 'Images centre d’intérêt (4 max) :') }}</p>
-                        <p>{{ form_widget(IPForm.centreInteretImg, {
+                        <p>{{ form_label(IPForm.images, 'Images centre d’intérêt (4 max) :') }}</p>
+                        <p>{{ form_widget(IPForm.images, {
                             'attr': {'class': 'form-input', 'multiple': 'multiple'}
                         }) }}</p>
                     </div>
@@ -229,7 +229,7 @@
                         <p class="Petitlongtexte">{{ form_label(IProForm.titrePoste, 'Titre du poste :') }}</p>
                         <p class="Longtexte">{{ form_label(IProForm.descriptionEntreprise, 'Description entreprise :') }}</p>
                         <p class="Petitlongtexte">{{ form_label(IProForm.lienSite, 'Lien du site :') }}</p>
-                        <p class="centreInteretImg">{{ form_label(IProForm.logo, 'Logo entreprise :') }}</p>
+                        <p class="centreInteretImg">{{ form_label(IProForm.images, 'Logo entreprise :') }}</p>
                     </div>
 
                     <div class="FormInput">
@@ -238,7 +238,7 @@
                         <p>{{ form_widget(IProForm.descriptionEntreprise, {'attr': {'class': 'form-input'}}) }}</p>
                         <p>{{ form_widget(IProForm.lienSite, {'attr': {'class': 'form-input'}}) }}</p>
 
-                        <p>{{ form_widget(IProForm.logo, {
+                        <p>{{ form_widget(IProForm.images, {
                             'attr': {'class': 'form-input'}
                         }) }}</p>
 
@@ -277,8 +277,8 @@
                     </div>
 
                     <div class="form-row">
-                        <p>{{ form_label(IProForm.logo, 'Logo entreprise :') }}</p>
-                        <p>{{ form_widget(IProForm.logo, {'attr': {'class': 'form-input'}}) }}</p>
+                        <p>{{ form_label(IProForm.images, 'Logo entreprise :') }}</p>
+                        <p>{{ form_widget(IProForm.images, {'attr': {'class': 'form-input'}}) }}</p>
                     </div>
 
                     <div class="images-centre-interet">
@@ -304,12 +304,12 @@
                 <div class="Form">
                     <div class="FormText2">
                         <p class="centreInteretImg">
-                            {{ form_label(CompForm.logos, 'Logos compétences (plusieurs possibles) :') }}
+                            {{ form_label(CompForm.images, 'Logos compétences (plusieurs possibles) :') }}
                         </p>
                     </div>
 
                     <div class="FormInput">
-                        <p>{{ form_widget(CompForm.logos, {
+                        <p>{{ form_widget(CompForm.images, {
                             'attr': {'class': 'form-input', 'multiple': 'multiple'}
                         }) }}</p>
 
@@ -328,8 +328,8 @@
                 <div class="FormMobile">
 
                     <div class="form-row">
-                        <p>{{ form_label(CompForm.logos, 'Logos compétences (plusieurs possibles) :') }}</p>
-                        <p>{{ form_widget(CompForm.logos, {
+                        <p>{{ form_label(CompForm.images, 'Logos compétences (plusieurs possibles) :') }}</p>
+                        <p>{{ form_widget(CompForm.images, {
                             'attr': {'class': 'form-input', 'multiple': 'multiple'}
                         }) }}</p>
                     </div>
@@ -363,7 +363,7 @@
                     <div class="FormInput">
                         <p>{{ form_widget(ProjetForm.titreProjet, {'attr': {'class': 'form-input'}}) }}</p>
 
-                        <p>{{ form_widget(ProjetForm.pdfFile, {
+                        <p>{{ form_widget(ProjetForm.documents, {
                             'attr': {'class': 'form-input', 'multiple': 'multiple'}
                         }) }}</p>
 
@@ -391,8 +391,8 @@
                     </div>
 
                     <div class="form-row">
-                        <p>{{ form_label(ProjetForm.pdfFile, 'Documents PDF du projet (2 max) :') }}</p>
-                        <p>{{ form_widget(ProjetForm.pdfFile, {
+                        <p>{{ form_label(ProjetForm.documents, 'Documents PDF du projet (2 max) :') }}</p>
+                        <p>{{ form_widget(ProjetForm.documents, {
                             'attr': {'class': 'form-input', 'multiple': 'multiple'}
                         }) }}</p>
                     </div>

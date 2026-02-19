@@ -8,6 +8,8 @@ use App\Entity\InformationPro;
 use App\Entity\Competence;
 use App\Entity\Projet;
 use App\Entity\PAdmin;
+use App\Entity\Image;
+use App\Entity\Document;
 use App\Form\AdminFormDesigne;
 use App\Form\AdminFormIP;
 use App\Form\AdminFormPro;
@@ -74,13 +76,23 @@ class AdminModificationC extends AbstractController
             if ($photoFile) {
                 // Lire le fichier
                 $binary = file_get_contents($photoFile->getPathname());
-
                 // Convertir en base64
                 $base64 = base64_encode($binary);
-
                 // Stocker dans la base
                 $IP->setPhoto($base64);
             }
+            // Gestion des images secondaires (OneToMany)
+            $imagesFiles = $IPForm->get('images')->getData();
+
+            foreach ($imagesFiles as $file) {
+                $image = new Image();
+                $image->setIdImg(uniqid());
+                $image->setImg(base64_encode(file_get_contents($file->getPathname())));
+                $image->setInformationPersonelle($IP);
+
+                $em->persist($image);
+            }
+
 
             // 👉 C’est ça qui manquait !
             $em->flush();
@@ -88,19 +100,49 @@ class AdminModificationC extends AbstractController
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
 
-
-
         if ($IProForm->isSubmitted() && $IProForm->isValid()) {
+
+            $imagesFiles = $IProForm->get('images')->getData();
+            foreach ($imagesFiles as $file) {
+                $image = new Image();
+                $image->setIdImg(uniqid());
+                $image->setImg(base64_encode(file_get_contents($file->getPathname())));
+                $image->setInformationPro($IPro);
+
+                $em->persist($image);
+            }
+
             $em->flush();
             $this->addFlash('success', 'Informations pro mises à jour avec succès !');
         }
 
         if ($CompForm->isSubmitted() && $CompForm->isValid()) {
+
+            $imagesFiles = $CompForm->get('images')->getData();
+            foreach ($imagesFiles as $file) {
+                $image = new Image();
+                $image->setIdImg(uniqid());
+                $image->setImg(base64_encode(file_get_contents($file->getPathname())));
+                $image->setCompetence($Comp);
+                $em->persist($image);
+            }
+
             $em->flush();
             $this->addFlash('success', 'Compétences mises à jour avec succès !');
         }
 
         if ($ProjetForm->isSubmitted() && $ProjetForm->isValid()) {
+            
+            $pdfFiles = $ProjetForm->get('documents')->getData();
+            foreach ($pdfFiles as $file) {
+                $doc = new Document();
+                $doc->setIdPdf(uniqid());
+                $doc->setPdf(base64_encode(file_get_contents($file->getPathname())));
+                $doc->setProjet($P);
+
+                $em->persist($doc);
+            }
+
             $em->flush();
             $this->addFlash('success', 'Projets mis à jour avec succès !');
         }

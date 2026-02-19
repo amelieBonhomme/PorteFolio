@@ -25,9 +25,7 @@ class AdminFormIP extends AbstractType
             ->add('telephone', TextType::class)
             ->add('localisationMap', TextareaType::class)
             ->add('linkedin', TextType::class)
-
-            // Images des centres d’intérêt
-            ->add('centreInteretImg', FileType::class, [
+            ->add('images', FileType::class, [
                 'label' => 'Images des centres d’intérêt',
                 'mapped' => false,
                 'required' => false,
@@ -40,19 +38,17 @@ class AdminFormIP extends AbstractType
                 ],
             ])
 
-            // Textes des centres d’intérêt (séparés par virgules)
+            // Texte des centres d’intérêt
             ->add('centreInteretTexte', TextType::class)
 
             ->add('metier', TextType::class)
 
-            // Photo de profil
+            // Photo principale (champ conservé)
             ->add('photo', FileType::class, [
                 'mapped' => false,
                 'required' => false,
             ])
 
-
-            // Ordre des centres d’intérêt (ex : "1;2;3")
             ->add('ordrePerso', TextType::class);
     }
 

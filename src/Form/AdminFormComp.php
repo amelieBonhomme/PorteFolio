@@ -13,12 +13,13 @@ class AdminFormComp extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('logos', FileType::class, [
-                'label' => 'Logos des compétences',
+            ->add('images', FileType::class, [
+                'label' => 'Images des compétences',
                 'mapped' => false,        // on gère l’upload dans le contrôleur
                 'required' => false,
                 'multiple' => true,       // plusieurs fichiers
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

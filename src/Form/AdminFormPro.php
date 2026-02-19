@@ -16,22 +16,18 @@ class AdminFormPro extends AbstractType
     {
         $builder
             ->add('nomEntreprise', TextType::class)
-
             ->add('titrePoste', TextareaType::class, [
                 'attr' => ['rows' => 3],
             ])
-
             ->add('descriptionEntreprise', TextareaType::class, [
                 'attr' => ['rows' => 9],
             ])
-
             ->add('lienSite', TextType::class)
-
-            ->add('logo', FileType::class, [
-                'label' => 'Logo de l’entreprise',
-                'mapped' => false,     // upload géré dans le contrôleur
+            ->add('images', FileType::class, [
+                'label' => 'Images / Logos de l’entreprise',
+                'mapped' => false,
                 'required' => false,
-                'multiple' => false,   // un seul logo maintenant
+                'multiple' => true,
             ]);
     }
 
