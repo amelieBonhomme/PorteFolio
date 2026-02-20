@@ -94,7 +94,6 @@
                         <p class="Petitlongtexte">{{ form_label(IPForm.localisationMap, 'Adresse localisation Google Maps :') }}</p>
                         <p>{{ form_label(IPForm.linkedin, 'Lien LinkedIn :') }}</p>
                         <p class="centreInteretImg">{{ form_label(IPForm.images, 'Images centre d’intérêt (4 max) :') }}</p>
-                        <p>{{ form_label(IPForm.ordrePerso, 'Ordre des images :') }}</p>
                         <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre d’intérêt (séparé par des virgules) :') }}</p>
                         <p>{{ form_label(IPForm.metier, 'Métier :') }}</p>
                         <p class="Petitlongtexte">{{ form_label(IPForm.photo, 'Photo de profil :') }}</p>
@@ -121,7 +120,6 @@
                             {% endif %}
                         </div>
 
-                        <p>{{ form_widget(IPForm.ordrePerso, {'attr': {'class': 'ordrePerso'}}) }}</p>
                         <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                         <p>{{ form_widget(IPForm.metier, {'attr': {'class': 'metier'}}) }}</p>
 
@@ -188,11 +186,6 @@
                     </div>
 
                     <div class="form-row">
-                        <p>{{ form_label(IPForm.ordrePerso, 'Ordre des images :') }}</p>
-                        <p>{{ form_widget(IPForm.ordrePerso, {'attr': {'class': 'form-input'}}) }}</p>
-                    </div>
-
-                    <div class="form-row">
                         <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre d’intérêt (séparé par des virgules) :') }}</p>
                         <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                     </div>
@@ -243,12 +236,14 @@
                         }) }}</p>
 
                         <div class="images-centre-interet">
-                            {% if Grouplogo %}
-                                {% for interet in Grouplogo %}
-                                    <img src="{{ interet.image }}" alt="Logo entreprise" class="img-centre-interet">
+                            {% if imagesPro %}
+                                {% for interet in imagesPro %}
+                                    <img src="{{ interet }}" alt="Logo entreprise" class="img-centre-interet">
                                 {% endfor %}
                             {% endif %}
                         </div>
+
+
                     </div>
                 </div>
 

@@ -44,9 +44,6 @@ class InformationPersonelle
     #[ORM\Column(name: "centre_interet_texte", type: "string", length: 50)]
     private string $centreInteretTexte;
 
-    #[ORM\Column(name: "ordre_perso", type: "string", length: 50, nullable: true)]
-    private ?string $ordrePerso = null;
-
     // 🔗 Relation vers PAdmin
     #[ORM\ManyToOne(targetEntity: PAdmin::class)]
     #[ORM\JoinColumn(name: "id_admin", referencedColumnName: "id_admin")]
@@ -194,17 +191,6 @@ class InformationPersonelle
     public function setCentreInteretTexte(string $texte): self
     {
         $this->centreInteretTexte = $texte;
-        return $this;
-    }
-
-    public function getOrdrePerso(): ?string
-    {
-        return $this->ordrePerso;
-    }
-
-    public function setOrdrePerso(?string $ordre): self
-    {
-        $this->ordrePerso = $ordre;
         return $this;
     }
 

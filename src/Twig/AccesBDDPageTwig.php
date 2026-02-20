@@ -80,16 +80,31 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
         }
 
 
-        // 8. Projet
+        // 8. Projets
         $projets = [];
+        $titresProjet = [];
+        $fichiersProjet = [];
+
         if ($P) {
+            // Séparer les titres par ";"
+            if ($P->getTitreProjet()) {
+                $titresProjet = array_map('trim', explode(';', $P->getTitreProjet()));
+            }
+
+            // Séparer les PDF par ";"
             foreach ($P->getDocuments() as $doc) {
+                $fichiersProjet[] = 'data:application/pdf;base64,' . $doc->getPdf();
+            }
+
+            // Fusionner titres + fichiers par index
+            foreach ($fichiersProjet as $i => $file) {
                 $projets[] = [
-                    'file'  => 'data:application/pdf;base64,' . $doc->getPdf(),
-                    'titre' => $P->getTitreProjet()
+                    'file'  => $file,
+                    'titre' => $titresProjet[$i] ?? 'Projet sans titre'
                 ];
             }
         }
+
 
 
 
@@ -110,7 +125,6 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'nom'           => $IP->getNom(),
             'prenom'        => $IP->getPrenom(),
             'metier'        => $IP->getMetier(),
-            'ordrePerso'    => $IP->getOrdrePerso(),
             'description'   => $IP->getDescription(),
             'mail'          => $IP->getMail(),
             'linkedin'      => $IP->getLinkedin(),
@@ -126,7 +140,6 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'titrePoste'            => $IPro?->getTitrePoste(),
             'descriptionEntreprise'=> $IPro?->getDescriptionEntreprise(),
             'lienSite'              => $IPro?->getLienSite(),
-            'ordrepro'              => $IPro?->getOrdrePro(),
             'imagesPro' => array_map(
                 fn($img) => 'data:image/jpeg;base64,' . $img->getImg(),
                 $IPro?->getImages()->toArray() ?? []
@@ -138,6 +151,8 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 
             // Projets
             'Grouppdf' => $projets,
+            'GroupTitre' => $P?->getTitreProjet() ?? '',
+
         ];
     }
 }

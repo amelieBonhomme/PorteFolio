@@ -26,9 +26,6 @@ class InformationPro
     #[ORM\Column(name: "lien_site", type: "string", length: 255)]
     private string $lienSite;
 
-    #[ORM\Column(name: "ordre_pro", type: "string", length: 50, nullable: true)]
-    private ?string $ordrePro = null;
-
     // 🔗 Relation vers PAdmin
     #[ORM\ManyToOne(targetEntity: PAdmin::class)]
     #[ORM\JoinColumn(name: "id_admin", referencedColumnName: "id_admin")]
@@ -108,17 +105,6 @@ class InformationPro
     public function setLienSite(string $lienSite): self
     {
         $this->lienSite = $lienSite;
-        return $this;
-    }
-
-    public function getOrdrePro(): ?string
-    {
-        return $this->ordrePro;
-    }
-
-    public function setOrdrePro(?string $ordrePro): self
-    {
-        $this->ordrePro = $ordrePro;
         return $this;
     }
 

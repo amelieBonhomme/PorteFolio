@@ -45,43 +45,38 @@
         <h2>Centre d'intérêt personnel :</h2>
 
         <section class="contact">
-            {% set ordre = ordrePerso|split(';') %}
+
             {% set textes = centreInteretTexte|split(';') %}
 
-            {% for pos in ordre %}
-                {% set i = pos|trim - 1 %}
-
-                {% if centreInterets[i] is defined %}
-                    <div class="imageTaille">
-                        <div class="cercle" style="border: 2px solid {{ couleurNavigation }};">
-                            <img src="{{ centreInterets[i].image }}" alt="Centre d’intérêt">
-                        </div>
-
-                        {# Texte individuel #}
-                        {% if textes[i] is defined %}
-                            <h3>{{ textes[i] }}</h3>
-                        {% endif %}
+            {% for i, item in centreInterets %}
+                <div class="imageTaille">
+                    <div class="cercle" style="border: 2px solid {{ couleurNavigation }};">
+                        <img src="{{ item.image }}" alt="Centre d’intérêt">
                     </div>
-                {% endif %}
+
+                    {% if textes[i] is defined %}
+                        <h3>{{ textes[i] }}</h3>
+                    {% endif %}
+                </div>
             {% endfor %}
+
         </section>
+
         
     <section id="entreprise">
         <h1>Expérience :</h1>
 
-        {% set ordre = ordrepro|split(';') %}
+        
         {% set noms = nomEntreprise|split(';') %}
         {% set postes = titrePoste|split(';') %}
         {% set descriptions = descriptionEntreprise|split(';') %}
         {% set liens = lienSite|split(';') %}
 
-        {% for pos in ordre %}
-            {% set i = pos|trim - 1 %}
-
+        {% for i, img in imagesPro %}
             <div class="entrepriseGénéral">
 
                 {# Image gauche si index pair #}
-                {% if i is even and imagesPro[i] is defined %}
+                {% if i is even %}
                     <img class="logo logo-left" src="{{ imagesPro[i] }}">
                 {% endif %}
 
@@ -96,7 +91,7 @@
                 </div>
 
                 {# Image droite si index impair #}
-                {% if i is odd and imagesPro[i] is defined %}
+                {% if i is odd %}
                     <img class="logo logo-right" src="{{ imagesPro[i] }}">
                 {% endif %}
 
@@ -106,6 +101,7 @@
                 <div class="separateur" style="border: 3px solid {{ couleurNavigation }};"></div>
             {% endif %}
         {% endfor %}
+
     </section>
 
 

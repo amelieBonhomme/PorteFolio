@@ -247,27 +247,23 @@ header {
 
 .competence1 {
     display: flex;
-    align-items: center; /* centre verticalement */
-    justify-content: center; /* centre horizontalement si besoin */
-    height: 7%; /* ou une hauteur fixe ou relative */
+    flex-wrap: wrap; /* ⭐ autorise le retour à la ligne */
+    justify-content: center;
+    align-items: center;
+    gap: 2%; /* espace propre entre les logos */
+    margin-top: 2%;
 }
 
-.competence2 {
-    display: flex;
-    align-items: center; /* centre verticalement */
-    justify-content: center; /* centre horizontalement si besoin */
-    height: 7%; /* ou une hauteur fixe ou relative */
-    margin-top: 5%;
-}
 .logo3 {
     width: 13%;
     height: auto;
-    margin-right: 2%;
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
 }
+
 .logo3:hover {
-  transform: scale(1.1); /* agrandit de 10% */
+    transform: scale(1.1);
 }
+
 /*
 ---------------------------------------- Zone projet --------------------------------------------------------------
 */
@@ -281,7 +277,7 @@ header {
 }
 
 .pdf-frame {
-    width: 40rem; 
+    width: 32rem; 
     height: 35rem; 
     border: 1px solid #ccc; 
     box-shadow: 0 0 10px rgba(0,0,0,0.1);

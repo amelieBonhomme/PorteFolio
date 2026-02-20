@@ -58,9 +58,7 @@ class AdminFormIP extends AbstractType
             ->add('photo', FileType::class, [
                 'mapped' => false,
                 'required' => false,
-            ])
-
-            ->add('ordrePerso', TextType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
