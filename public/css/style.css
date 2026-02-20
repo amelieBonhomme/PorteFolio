@@ -277,7 +277,7 @@ header {
 }
 
 .pdf-frame {
-    width: 32rem; 
+    width: 40rem; 
     height: 35rem; 
     border: 1px solid #ccc; 
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
