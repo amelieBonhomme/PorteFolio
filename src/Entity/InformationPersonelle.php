@@ -60,7 +60,9 @@ class InformationPersonelle
         targetEntity: Image::class,
         orphanRemoval: true
     )]
+    #[ORM\OrderBy(["id_img" => "ASC"])]
     private Collection $images;
+
 
     // ---------------------------------------------------------
     // CONSTRUCTEUR

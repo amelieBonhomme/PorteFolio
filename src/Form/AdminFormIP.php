@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File; 
 use Symfony\Component\Validator\Constraints\Count;
 
 class AdminFormIP extends AbstractType
@@ -34,7 +35,17 @@ class AdminFormIP extends AbstractType
                     new Count([
                         'max' => 4,
                         'maxMessage' => 'Vous ne pouvez pas télécharger plus de 4 images.'
-                    ])
+                    ]),
+                    /*new File([ 
+                        'maxSize' => '2M', 
+                        'maxSizeMessage' => 'Chaque image doit faire moins de 1 Mo.', 
+                        'mimeTypes' => [ 
+                            'image/jpeg', 
+                            'image/png', 
+                            'image/webp', 
+                        ], 
+                        'mimeTypesMessage' => 'Seules les images JPEG, PNG ou WEBP sont acceptées.', 
+                    ]),*/
                 ],
             ])
 

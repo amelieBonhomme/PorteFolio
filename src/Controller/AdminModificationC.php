@@ -64,89 +64,131 @@ class AdminModificationC extends AbstractController
         $ProjetForm->handleRequest($request);
         $PAForm->handleRequest($request);
 
-        // Traitement des formulaires
+        // ------------------------------
+        // DESIGN
+        // ------------------------------
         if ($designForm->isSubmitted() && $designForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Design mis à jour avec succès !');
         }
 
+        // ------------------------------
+        // INFORMATION PERSONNELLE
+        // ------------------------------
         if ($IPForm->isSubmitted() && $IPForm->isValid()) {
-            $photoFile = $IPForm->get('photo')->getData();
 
+            // PHOTO PRINCIPALE
+            $photoFile = $IPForm->get('photo')->getData();
             if ($photoFile) {
-                // Lire le fichier
                 $binary = file_get_contents($photoFile->getPathname());
-                // Convertir en base64
-                $base64 = base64_encode($binary);
-                // Stocker dans la base
-                $IP->setPhoto($base64);
+                $IP->setPhoto(base64_encode($binary));
             }
-            // Gestion des images secondaires (OneToMany)
+
+            // IMAGES SECONDAIRES
             $imagesFiles = $IPForm->get('images')->getData();
 
-            foreach ($imagesFiles as $file) {
-                $image = new Image();
-                $image->setIdImg(uniqid());
-                $image->setImg(base64_encode(file_get_contents($file->getPathname())));
-                $image->setInformationPersonelle($IP);
+            if ($imagesFiles) {
+                // Supprimer anciennes images
+                foreach ($IP->getImages() as $oldImage) {
+                    $IP->removeImage($oldImage);
+                    $em->remove($oldImage);
+                }
 
-                $em->persist($image);
+                // Ajouter nouvelles images
+                foreach ($imagesFiles as $file) {
+                    $image = new Image();
+                    $image->setIdImg(uniqid());
+                    $image->setImg(base64_encode(file_get_contents($file->getPathname())));
+                    $image->setInformationPersonelle($IP);
+                    $em->persist($image);
+                }
             }
 
-
-            // 👉 C’est ça qui manquait !
             $em->flush();
-
             $this->addFlash('success', 'Informations personnelles mises à jour avec succès !');
         }
 
+        // ------------------------------
+        // INFORMATION PRO
+        // ------------------------------
         if ($IProForm->isSubmitted() && $IProForm->isValid()) {
 
             $imagesFiles = $IProForm->get('images')->getData();
-            foreach ($imagesFiles as $file) {
-                $image = new Image();
-                $image->setIdImg(uniqid());
-                $image->setImg(base64_encode(file_get_contents($file->getPathname())));
-                $image->setInformationPro($IPro);
 
-                $em->persist($image);
+            if ($imagesFiles) {
+                foreach ($IPro->getImages() as $oldImage) {
+                    $IPro->removeImage($oldImage);
+                    $em->remove($oldImage);
+                }
+
+                foreach ($imagesFiles as $file) {
+                    $image = new Image();
+                    $image->setIdImg(uniqid());
+                    $image->setImg(base64_encode(file_get_contents($file->getPathname())));
+                    $image->setInformationPro($IPro);
+                    $em->persist($image);
+                }
             }
 
             $em->flush();
             $this->addFlash('success', 'Informations pro mises à jour avec succès !');
         }
 
+        // ------------------------------
+        // COMPÉTENCES
+        // ------------------------------
         if ($CompForm->isSubmitted() && $CompForm->isValid()) {
 
             $imagesFiles = $CompForm->get('images')->getData();
-            foreach ($imagesFiles as $file) {
-                $image = new Image();
-                $image->setIdImg(uniqid());
-                $image->setImg(base64_encode(file_get_contents($file->getPathname())));
-                $image->setCompetence($Comp);
-                $em->persist($image);
+
+            if ($imagesFiles) {
+                foreach ($Comp->getImages() as $oldImage) {
+                    $Comp->removeImage($oldImage);
+                    $em->remove($oldImage);
+                }
+
+                foreach ($imagesFiles as $file) {
+                    $image = new Image();
+                    $image->setIdImg(uniqid());
+                    $image->setImg(base64_encode(file_get_contents($file->getPathname())));
+                    $image->setCompetence($Comp);
+                    $em->persist($image);
+                }
             }
 
             $em->flush();
             $this->addFlash('success', 'Compétences mises à jour avec succès !');
         }
 
+        // ------------------------------
+        // PROJETS (PDF)
+        // ------------------------------
         if ($ProjetForm->isSubmitted() && $ProjetForm->isValid()) {
-            
-            $pdfFiles = $ProjetForm->get('documents')->getData();
-            foreach ($pdfFiles as $file) {
-                $doc = new Document();
-                $doc->setIdPdf(uniqid());
-                $doc->setPdf(base64_encode(file_get_contents($file->getPathname())));
-                $doc->setProjet($P);
 
-                $em->persist($doc);
+            $pdfFiles = $ProjetForm->get('documents')->getData();
+
+            if ($pdfFiles) {
+                foreach ($P->getDocuments() as $oldDoc) {
+                    $P->removeDocument($oldDoc);
+                    $em->remove($oldDoc);
+                }
+
+                foreach ($pdfFiles as $file) {
+                    $doc = new Document();
+                    $doc->setIdPdf(uniqid());
+                    $doc->setPdf(base64_encode(file_get_contents($file->getPathname())));
+                    $doc->setProjet($P);
+                    $em->persist($doc);
+                }
             }
 
             $em->flush();
             $this->addFlash('success', 'Projets mis à jour avec succès !');
         }
 
+        // ------------------------------
+        // MOT DE PASSE ADMIN
+        // ------------------------------
         if ($PAForm->isSubmitted() && $PAForm->isValid()) {
             $plainPassword = $admin->getMdp();
             $hashedPassword = $passwordHasher->hashPassword($admin, $plainPassword);
