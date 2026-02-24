@@ -31,33 +31,53 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 
         // 1. Récupérer toutes les personnes
         $personnes = $this->em->getRepository(InformationPersonelle::class)
-                              ->findBy([], ['nom' => 'ASC']);
+                            ->findBy([], ['nom' => 'ASC']);
 
         if (!$personnes) {
             return [];
         }
 
-        // 2. Récupérer la personne sélectionnée
-        $selectedId = $request->query->get('personId');
+        // 🔥 2. Vérifier si un admin est connecté
+        $adminConnecte = $request->getSession()->get('_security.last_username');
 
-        if ($selectedId) {
-            $IP = $this->em->getRepository(InformationPersonelle::class)->find($selectedId);
-        } else {
-            $IP = $personnes[0]; // première personne par défaut
+        if ($adminConnecte) {
+            // On récupère l'admin connecté
+            $admin = $this->em->getRepository(\App\Entity\PAdmin::class)
+                            ->findOneBy(['login' => $adminConnecte]);
+
+            if ($admin) {
+                // On récupère SA fiche InformationPersonelle
+                $IP = $this->em->getRepository(InformationPersonelle::class)
+                            ->findOneBy(['admin' => $admin]);
+            }
         }
 
-        if (!$IP) {
-            $IP = $personnes[0];
+        // 🔥 3. Si pas d’admin connecté → comportement normal
+        if (!isset($IP)) {
+            $selectedId = $request->query->get('personId');
+
+            if ($selectedId) {
+                $IP = $this->em->getRepository(InformationPersonelle::class)->find($selectedId);
+            } else {
+                $IP = $personnes[0]; // première personne par défaut
+            }
+
+            if (!$IP) {
+                $IP = $personnes[0];
+            }
         }
 
-        // 3. Récupérer l’admin lié à cette personne
+        // 4. Récupérer l’admin lié à cette personne
         $admin = $IP->getAdmin();
 
-        // 4. Récupérer les autres données liées à cet admin
+        // 5. Récupérer les autres données liées à cet admin
         $design = $this->em->getRepository(Designe::class)->findOneBy(['admin' => $admin]);
         $IPro   = $this->em->getRepository(InformationPro::class)->findOneBy(['admin' => $admin]);
         $Comp   = $this->em->getRepository(Competence::class)->findOneBy(['admin' => $admin]);
         $P      = $this->em->getRepository(Projet::class)->findOneBy(['admin' => $admin]);
+
+        // … le reste de ton code ne change pas …
+
 
 
         // 6. Centre d’intérêt
@@ -131,6 +151,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             'tel'           => $IP->getTelephone(),
             'localisationMap' => $IP->getLocalisationMap(),
             'photo' => $IP->getPhoto() ? 'data:image/jpeg;base64,' . $IP->getPhoto() : null,
+
             'centreInterets'=> $centreInterets,
             'centreInteretTexte' => $IP->getCentreInteretTexte(),
 

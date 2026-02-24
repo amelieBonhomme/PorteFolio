@@ -128,6 +128,23 @@ html {
     50% { top: 50%; opacity: 1; }
     100% { top: 100%; opacity: 0; }
 }
+.petit_bouton{
+    padding: 5px;
+    border: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+/*quand on le survole*/
+.petit_bouton:hover {
+    transform: scale(1.05);
+}
+/*au clic sur le bouton*/
+.petit_bouton:active {
+    transform: scale(0.98);
+}
 /*
 ---------------------------------------- Zone Motivation --------------------------------------------------------------
 */
