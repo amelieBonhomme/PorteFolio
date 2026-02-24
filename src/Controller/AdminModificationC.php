@@ -190,13 +190,20 @@ class AdminModificationC extends AbstractController
         // MOT DE PASSE ADMIN
         // ------------------------------
         if ($PAForm->isSubmitted() && $PAForm->isValid()) {
-            $plainPassword = $admin->getMdp();
-            $hashedPassword = $passwordHasher->hashPassword($admin, $plainPassword);
-            $admin->setMdp($hashedPassword);
+
+            // Récupérer le mot de passe en clair depuis le formulaire
+            $plainPassword = $PAForm->get('plainPassword')->getData();
+
+            // Si l’utilisateur a rempli le champ
+            if ($plainPassword) {
+                $hashedPassword = $passwordHasher->hashPassword($admin, $plainPassword);
+                $admin->setMdp($hashedPassword);
+            }
 
             $em->flush();
             $this->addFlash('success', 'Mot de passe mis à jour avec succès !');
         }
+
 
         // Détection mobile
         $userAgent = $request->headers->get('User-Agent', '');
