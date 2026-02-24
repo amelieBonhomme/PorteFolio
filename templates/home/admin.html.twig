@@ -126,7 +126,7 @@
                         <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
 
                         {% if photo %}
-                            <img class="img-centre-interet" src="data:image/jpeg;base64,{{ photo }}" alt="Photo de profil">
+                            <img class="img-centre-interet" src="{{ photo }}" alt="Photo de profil">
                         {% endif %} 
                     </div>
                 </div>
@@ -366,9 +366,10 @@
                             {% if Grouppdf %}
                                 {% for doc in Grouppdf %}
                                     <div class="pdf-preview">
-                                        <a href="{{ doc.file }}" target="_blank" class="pdf-link">
-                                            📄 {{ doc.file|split('/')|last }}
+                                        <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="pdf-link">
+                                            📄 {{ doc.titre }}
                                         </a>
+
                                     </div>
                                 {% endfor %}
                             {% endif %}
