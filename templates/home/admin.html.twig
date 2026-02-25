@@ -126,7 +126,7 @@
                         <p>{{ form_widget(IPForm.photo, {'attr': {'class': 'form-input'}}) }}</p>
 
                         {% if photo %}
-                            <img class="img-centre-interet" src="{{ photo }}" alt="Photo de profil">
+                            <img class="img-centre-interet" src="{{ photo }}" alt="Portrait">
                         {% endif %} 
                     </div>
                 </div>
@@ -201,7 +201,7 @@
                     </div>
 
                     {% if photo %}
-                        <img class="img-centre-interet" src="data:image/jpeg;base64,{{ photo }}" alt="Photo de profil">
+                        <img class="img-centre-interet" src="data:image/jpeg;base64,{{ photo }}" alt="portrait">
                     {% endif %}
                 </div>
 

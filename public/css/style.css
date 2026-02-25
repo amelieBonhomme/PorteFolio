@@ -1,9 +1,7 @@
 body {
     font-family: 'Segoe UI', sans-serif;
-    /*background-color: #EBBFA9;*/
     margin: 0%;
     padding: 0%;
-    /*color :#000000;*/
 }
 
 #background-video {
@@ -19,7 +17,6 @@ html {
     scroll-behavior: smooth;
 }
 .separateur{
-    /*border: 3px solid #c8ad7f;*/
     width: 150vh;
     height: 0.01vh;
     margin-left: 10%;
@@ -29,22 +26,18 @@ html {
 /*
 ---------------------------------------- Zone Accueil --------------------------------------------------------------
 */
-/*section {
-    margin-top: 30px;
-}*/
+
 .navbar {
     position: fixed;
     max-width: 60%;
     top: 0;
     left: 0;
     width: 100%;
-    /*background-color: #c8ad7fbe;*/
     padding: 1% 0;
     text-align: center;
     border-radius: 30px;
     margin-left: 20%;
     margin-top: 1%;
-    /*z-index: 1000;*/
 }
 
 .navbar ul {
@@ -57,7 +50,6 @@ html {
 }
 
 .navbar li a {
-    /*color: #ffffff;*/
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
@@ -89,7 +81,6 @@ html {
     animation: opaciterNom 5s ;
     min-width: 12ch;
     border-color: transparent;
-    background: transparent;
 }
 /* Option interne : fond transparent aussi */
 #personId option {
@@ -103,7 +94,6 @@ html {
     width: 4.5%;
     height: 18vh; /*en vh pour se référer à la taille de l'écran*/
     background-color: transparent;
-    /*border: 3px solid #c8ad7f;*/
     border-radius: 30px;
     cursor: pointer;
     overflow: hidden;
@@ -155,7 +145,6 @@ html {
     background: rgba(255, 255, 255, 0.651);
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     border-radius: 30px;
-    /*color :#000000;*/
 }
 #motivation{
     margin-left: 5%;
@@ -166,7 +155,6 @@ html {
     width: 20%;
     border-radius: 70%;
     height: 20%;
-    /*border: 2px solid #c8ad7f;*/
 }
 header {
     display: flex;
@@ -311,16 +299,13 @@ header {
 .contactener {
     margin-top: 10%;
     padding: 1%;
-    /*background: rgba(255, 255, 255, 0.651);*/
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 .mapgg {
   width: 150%;
   height: 25vh;
-  border: none;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border:0;
   margin-left: 10%;
 }
 .info {
@@ -401,7 +386,6 @@ body.zoomEffect {
 /* Bouton */
 .form-button {
     background-color: #c8ad7f;
-    /*color: white;*/
     padding: 12px 24px;
     border: none;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -421,9 +405,6 @@ body.zoomEffect {
     background-color: #685a42;
     transform: scale(0.98);
 }
-.boutonform {
-    margin-left: 43%;
-}
 .logout-container {
     margin-top: 5%;
 }
@@ -438,7 +419,6 @@ body.zoomEffect {
 }
 
 .adminteneur {
-    /*background-color: #f9f9f996;*/
     padding: 2% 5%;
     border-radius: 15px;
 }
@@ -517,8 +497,8 @@ body.zoomEffect {
     font-size: 16px;
     border: none;
     border-radius: 6px;
-    /*color: white;*/
     cursor: pointer;
+    margin-left: 43%;
 }
 
 

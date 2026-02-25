@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <video autoplay muted loop id="background-video">
+    <video autoplay muted loop id="background-video" >
         <source src="{{ imagePrincipale }}" type="video/mp4">
     </video>
 
@@ -35,7 +35,7 @@
         <div id="partie1"></div>
 
         <header>
-            <img src="{{ photo }}" alt="Photo de profil" class="photoProfil" style="border: 2px solid {{ couleurNavigation }};">
+            <img src="{{ photo }}" alt="portrait" class="photoProfil" style="border: 2px solid {{ couleurNavigation }};">
             <div>
                 <h1>Motivation et présentation</h1>
                 <p id="motivation">{{ description|nl2br }}</p>
@@ -77,7 +77,7 @@
 
                 {# Image gauche si index pair #}
                 {% if i is even %}
-                    <img class="logo logo-left" src="{{ imagesPro[i] }}">
+                    <img class="logo logo-left" src="{{ imagesPro[i] }}" alt="logo entreprise">
                 {% endif %}
 
                 <div>
@@ -92,7 +92,7 @@
 
                 {# Image droite si index impair #}
                 {% if i is odd %}
-                    <img class="logo logo-right" src="{{ imagesPro[i] }}">
+                    <img class="logo logo-right" src="{{ imagesPro[i] }}" alt="logo entreprise">
                 {% endif %}
 
             </div>
@@ -122,7 +122,7 @@
             {% for doc in Grouppdf %}
                 <div class="espace">
                     <h3>{{ doc.titre }}</h3>
-                    <iframe class="pdf-frame" src="{{ doc.file }}" style="border: none;"></iframe>
+                    <iframe class="pdf-frame" src="{{ doc.file }}" style="border: none;" title="carte google map"></iframe>
                 </div>
             {% endfor %}
         </div>
