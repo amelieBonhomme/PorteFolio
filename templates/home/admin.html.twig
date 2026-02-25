@@ -94,7 +94,7 @@
                         <p class="Petitlongtexte">{{ form_label(IPForm.localisationMap, 'Adresse localisation Google Maps :') }}</p>
                         <p>{{ form_label(IPForm.linkedin, 'Lien LinkedIn :') }}</p>
                         <p class="centreInteretImg">{{ form_label(IPForm.images, 'Images centre d’intérêt (4 max) :') }}</p>
-                        <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre d’intérêt (séparé par des virgules) :') }}</p>
+                        <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre d’intérêt (séparé par des point virgules) :') }}</p>
                         <p>{{ form_label(IPForm.metier, 'Métier :') }}</p>
                         <p class="Petitlongtexte">{{ form_label(IPForm.photo, 'Photo de profil :') }}</p>
                     </div>
@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="form-row">
-                        <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre d’intérêt (séparé par des virgules) :') }}</p>
+                        <p>{{ form_label(IPForm.centreInteretTexte, 'Texte centre d’intérêt (séparé par des point virgules) :') }}</p>
                         <p>{{ form_widget(IPForm.centreInteretTexte, {'attr': {'class': 'form-input'}}) }}</p>
                     </div>
 
