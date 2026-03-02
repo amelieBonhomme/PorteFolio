@@ -501,6 +501,83 @@ body.zoomEffect {
     margin-left: 43%;
 }
 
+/*------------------------bulle info--------------------------*/
+.form-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Le rond avec le "?" */
+.help-icon {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+    background-color: #fff;
+    cursor: help;
+}
+
+/* La bulle */
+.help-tooltip {
+    position: absolute;
+    left: 50%;
+    top: 130%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    max-width: 260px;
+    padding: 8px 10px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-size: 12px;
+    line-height: 1.4;
+    z-index: 10;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+
+/* Petite flèche */
+.help-tooltip::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 6px 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent #ddd transparent;
+}
+
+.help-tooltip::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 5px 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+/* Affichage au survol */
+.help-icon:hover .help-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 /*
 ---------------------------------------- Page veille --------------------------------------------------------------

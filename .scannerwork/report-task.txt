@@ -2,5 +2,5 @@ projectKey=Portfolio
 serverUrl=http://localhost:9000
 serverVersion=26.2.0.119303
 dashboardUrl=http://localhost:9000/dashboard?id=Portfolio
-ceTaskId=c5dbc529-55bc-4269-a1ec-d0f34a6741e4
-ceTaskUrl=http://localhost:9000/api/ce/task?id=c5dbc529-55bc-4269-a1ec-d0f34a6741e4
+ceTaskId=dccefd4f-c086-42be-af17-476dfce12027
+ceTaskUrl=http://localhost:9000/api/ce/task?id=dccefd4f-c086-42be-af17-476dfce12027
