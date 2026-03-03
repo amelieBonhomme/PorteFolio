@@ -329,8 +329,8 @@
                     </div>
 
                     {% if photo %}
-                        <img class="img-centre-interet" src="data:image/jpeg;base64,{{ photo }}" alt="portrait">
-                    {% endif %}
+                        <img class="img-centre-interet" src="{{ photo }}" alt="Portrait">
+                    {% endif %} 
                 </div>
 
             {% endif %}
@@ -463,9 +463,9 @@
                     </div>
 
                     <div class="images-centre-interet">
-                        {% if Grouplogo %}
-                            {% for interet in Grouplogo %}
-                                <img src="{{ interet.image }}" alt="Logo entreprise" class="img-centre-interet">
+                        {% if imagesPro %}
+                            {% for interet in imagesPro %}
+                                <img src="{{ interet }}" alt="Logo entreprise" class="img-centre-interet">
                             {% endfor %}
                         {% endif %}
                     </div>

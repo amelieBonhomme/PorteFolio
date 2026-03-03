@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
 
     <video autoplay muted loop id="background-video" >
@@ -82,11 +81,11 @@
 
                 <div>
                     <h3>{{ postes[i] }}</h3>
-
-                    {% for line in descriptions[i]|split('\n') %}
-                        <li>{{ line }}</li>
-                    {% endfor %}
-
+                    <ul>
+                        {% for line in descriptions[i]|split('\n') %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
                     <a href="{{ liens[i] }}">Site de l'entreprise</a>
                 </div>
 
