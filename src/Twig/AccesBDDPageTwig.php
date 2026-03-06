@@ -169,6 +169,7 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 
             // Compétences
             'Grouplogo' => $competenceLogos,
+            'grille' => $Comp->getGrille(),
 
             // Projets
             'Grouppdf' => $projets,

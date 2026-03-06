@@ -18,6 +18,11 @@ class AdminFormComp extends AbstractType
                 'mapped' => false,        // on gère l’upload dans le contrôleur
                 'required' => false,
                 'multiple' => true,       // plusieurs fichiers
+            ])
+            ->add('grille', FileType::class, [
+                'label' => 'Grille compétance',
+                'mapped' => false,
+                'required' => false,
             ]);
 
     }

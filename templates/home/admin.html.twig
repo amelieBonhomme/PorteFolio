@@ -485,11 +485,31 @@
                 <div class="Form">
                     <div class="FormText2">
                         <p class="centreInteretImg">
+                            {{ form_label(CompForm.grille, "Grille pour l'épreuve E5 :") }}
+                        </p>
+                        <p class="centreInteretImg">
                             {{ form_label(CompForm.images, 'Logos compétences (plusieurs possibles) :') }}
                         </p>
                     </div>
 
                     <div class="FormInput">
+                        <p>
+                            {{ form_widget(CompForm.grille, {'attr': {'class': 'form-input'}}) }}
+                            <span class="help-icon" aria-label="Informations sur ce champ"> 
+                                ? 
+                                <span class="help-tooltip">Renseinger le document grille E5.</span> 
+                            </span>
+                        </p>
+                        <div class="pdf-list">
+                            {% if grille %}
+                                <a href="data:application/pdf;base64,{{ grille }}" 
+                                target="_blank" 
+                                download="grille_E5.pdf"
+                                class="pdf-link">
+                                    📄 Télécharger la grille E5
+                                </a>
+                            {% endif %}
+                        </div>
                         <p>
                             {{ form_widget(CompForm.images, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}
                             <span class="help-icon" aria-label="Informations sur ce champ"> 

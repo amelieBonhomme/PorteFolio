@@ -137,28 +137,33 @@ class AdminModificationC extends AbstractController
         // ------------------------------
         // COMPÉTENCES
         // ------------------------------
-        if ($CompForm->isSubmitted() && $CompForm->isValid()) {
+            if ($CompForm->isSubmitted() && $CompForm->isValid()) {
 
-            $imagesFiles = $CompForm->get('images')->getData();
+                $imagesFiles = $CompForm->get('images')->getData();
 
-            if ($imagesFiles) {
-                foreach ($Comp->getImages() as $oldImage) {
-                    $Comp->removeImage($oldImage);
-                    $em->remove($oldImage);
+                if ($imagesFiles) {
+                    foreach ($Comp->getImages() as $oldImage) {
+                        $Comp->removeImage($oldImage);
+                        $em->remove($oldImage);
+                    }
+
+                    foreach ($imagesFiles as $file) {
+                        $image = new Image();
+                        $image->setIdImg(uniqid());
+                        $image->setImg(base64_encode(file_get_contents($file->getPathname())));
+                        $image->setCompetence($Comp);
+                        $em->persist($image);
+                    }
                 }
+                $grilleFile = $CompForm->get('grille')->getData();
+                    if ($grilleFile) {
+                        $binary = file_get_contents($grilleFile->getPathname());
+                        $Comp->setGrille(base64_encode($binary));
+                    }
 
-                foreach ($imagesFiles as $file) {
-                    $image = new Image();
-                    $image->setIdImg(uniqid());
-                    $image->setImg(base64_encode(file_get_contents($file->getPathname())));
-                    $image->setCompetence($Comp);
-                    $em->persist($image);
-                }
+                $em->flush();
+                $this->addFlash('success', 'Compétences mises à jour avec succès !');
             }
-
-            $em->flush();
-            $this->addFlash('success', 'Compétences mises à jour avec succès !');
-        }
 
         // ------------------------------
         // PROJETS (PDF)

@@ -107,12 +107,29 @@
     <section id="competence">
         <h1>Compétences :</h1>
 
+        <div class="grille">
+            <div class="espace">
+                <h3>Grille E5</h3>
+
+                {% if grille %}
+                    <iframe class="pdf-frame"
+                            src="data:application/pdf;base64,{{ grille }}"
+                            style="border: none;"
+                            title="grille E5">
+                    </iframe>
+                {% else %}
+                    <p>Aucun document disponible.</p>
+                {% endif %}
+            </div>
+        </div>
+
         <div class="competence1">
             {% for logo in Grouplogo %}
                 <img alt="logo compétence" class="logo3" src="{{ logo.image }}">
             {% endfor %}
         </div>
     </section>
+
 
     <section id="projet">
         <h1>Mes projets :</h1>

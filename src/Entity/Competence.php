@@ -18,6 +18,9 @@ class Competence
     #[ORM\JoinColumn(name: "id_admin", referencedColumnName: "id_admin")]
     private ?PAdmin $admin = null;
 
+    #[ORM\Column(name: "grille_e5", type: "text", nullable: true)]
+    private ?string $grille;
+
     // ---------------------------------------------------------
     // 🔗 OneToMany vers Image (une compétence → plusieurs images)
     // ---------------------------------------------------------
@@ -59,6 +62,16 @@ class Competence
     public function setAdmin(?PAdmin $admin): self
     {
         $this->admin = $admin;
+        return $this;
+    }
+    public function getGrille(): ?string
+    {
+        return $this->grille;
+    }
+
+    public function setGrille(?string $grille): self
+    {
+        $this->grille = $grille;
         return $this;
     }
 
