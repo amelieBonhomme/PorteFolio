@@ -412,7 +412,9 @@ body.zoomEffect {
     background-color: #685a42;
     transform: scale(0.98);
 }
-
+#designe {
+    padding-left: 20%;
+}
 /*
 ---------------------------------------- Page Gestion Admin --------------------------------------------------------------
 */
@@ -426,55 +428,6 @@ body.zoomEffect {
 .adminteneur {
     padding: 2% 5%;
     border-radius: 15px;
-}
-
-.Form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: space-between;
-}
-
-.FormText1,
-.FormText2 {
-    flex: 1;
-    min-width: 200px;
-}
-
-.FormText1 p,
-.FormText2 p {
-    margin-bottom: 2.8rem;
-    font-size: 18px;
-    text-align: right;
-}
-
-.FormInput {
-    flex: 2;
-    min-width: 300px;
-}
-
-.FormInput textarea,
-.FormInput input,
-.FormInput select {
-    width: 100%;
-    max-width: 500px;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.casecoche {
-    transform: scale(1.5);
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.Longtexte {
-    padding-bottom: 8rem;
-}
-.Petitlongtexte {
-    padding-bottom: 1.3rem;
 }
 .centreInteretImg {
     padding-bottom: 5.3rem;
