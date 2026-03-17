@@ -17,10 +17,6 @@ class Projet
     #[ORM\Column(name: "titre_projet", type: "string", length: 50)]
     private string $titreProjet;
 
-    // ❌ Ancien champ PDF supprimé
-    // #[ORM\Column(name: "pdf", type: "string", length: 50)]
-    // private string $pdf;
-
     // 🔗 Relation vers PAdmin
     #[ORM\ManyToOne(targetEntity: PAdmin::class)]
     #[ORM\JoinColumn(name: "id_admin", referencedColumnName: "id_admin")]

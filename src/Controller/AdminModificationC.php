@@ -160,6 +160,22 @@ class AdminModificationC extends AbstractController
                         $binary = file_get_contents($grilleFile->getPathname());
                         $Comp->setGrille(base64_encode($binary));
                     }
+                $DocFiles = $CompForm->get('documents')->getData();
+
+                if ($DocFiles) {
+                    foreach ($Comp->getDocuments() as $oldDoc) {
+                        $Comp->removeDocument($oldDoc);
+                        $em->remove($oldDoc);
+                    }
+
+                    foreach ($DocFiles as $file) {
+                        $doc = new Document();
+                        $doc->setIdPdf(uniqid());
+                        $doc->setPdf(base64_encode(file_get_contents($file->getPathname())));
+                        $doc->setCompetence($Comp);
+                        $em->persist($doc);
+                    }
+                }
 
                 $em->flush();
                 $this->addFlash('success', 'Compétences mises à jour avec succès !');

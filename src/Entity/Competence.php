@@ -30,6 +30,16 @@ class Competence
         orphanRemoval: true
     )]
     private Collection $images;
+    // ---------------------------------------------------------
+    // 🔗 OneToMany vers document (une compétence → plusieurs doc)
+    // ---------------------------------------------------------
+
+    #[ORM\OneToMany(
+        mappedBy: "competence",
+        targetEntity: Document::class,
+        orphanRemoval: true
+    )]
+    private Collection $documents;
 
     // ---------------------------------------------------------
     // CONSTRUCTEUR
@@ -37,6 +47,7 @@ class Competence
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     // ---------------------------------------------------------
@@ -102,6 +113,37 @@ class Competence
         if ($this->images->removeElement($image)) {
             if ($image->getCompetence() === $this) {
                 $image->setCompetence(null);
+            }
+        }
+
+        return $this;
+    }
+    // ---------------------------------------------------------
+    // 🔗 GESTION DES DOCUMENTS
+    // ---------------------------------------------------------
+    /**
+     * @return Collection<int, Document>
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents->add($document);
+            $document->setCompetence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        if ($this->documents->removeElement($document)) {
+            if ($document->getCompetence() === $this) {
+                $document->setCompetence(null);
             }
         }
 

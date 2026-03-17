@@ -291,9 +291,13 @@ header {
 .espace {
     margin-right: 5%;
     margin-top: 5%;
+    display: flex;
 }
 .grille {
-    margin-left: 25%;
+    margin-left: 10%;
+}
+.pdf-list-Comp {
+    margin-left: 5%;
 }
 /*
 ---------------------------------------- foooter --------------------------------------------------------------

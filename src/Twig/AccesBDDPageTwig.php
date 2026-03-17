@@ -91,12 +91,20 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
 
         // 7. Compétences
         $competenceLogos = [];
+        $fichiersCompetence = [];
+
         if ($Comp) {
             foreach ($Comp->getImages() as $image) {
                 $competenceLogos[] = [
                     'image' => 'data:image/jpeg;base64,' . $image->getImg()
                 ];
             }
+            foreach ($Comp->getDocuments() as $doc) {
+                $fichiersCompetence[] = [
+                    'file' => 'data:application/pdf;base64,' . $doc->getPdf()
+                ];
+            }
+            
         }
 
 
@@ -170,6 +178,8 @@ class AccesBDDPageTwig extends AbstractExtension implements GlobalsInterface
             // Compétences
             'Grouplogo' => $competenceLogos,
             'grille' => $Comp->getGrille(),
+            'GrouppdfComp' => $fichiersCompetence,
+
 
             // Projets
             'Grouppdf' => $projets,

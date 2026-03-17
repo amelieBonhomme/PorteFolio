@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 class AdminFormComp extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -23,6 +24,12 @@ class AdminFormComp extends AbstractType
                 'label' => 'Grille compétance',
                 'mapped' => false,
                 'required' => false,
+            ])
+            ->add('documents', FileType::class, [
+                'label' => 'Fichiers PDF de competence',
+                'mapped' => false, // upload géré dans le contrôleur
+                'required' => false,
+                'multiple' => true,
             ]);
 
     }

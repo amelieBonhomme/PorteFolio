@@ -109,17 +109,31 @@
 
         <div class="grille">
             <div class="espace">
-                <h3>Grille E5</h3>
+                <div>
+                    <h3>Grille E5</h3>
 
-                {% if grille %}
-                    <iframe class="pdf-frame"
-                            src="data:application/pdf;base64,{{ grille }}"
-                            style="border: none;"
-                            title="grille E5">
-                    </iframe>
-                {% else %}
-                    <p>Aucun document disponible.</p>
-                {% endif %}
+                    {% if grille %}
+                        <iframe class="pdf-frame"
+                                src="data:application/pdf;base64,{{ grille }}"
+                                style="border: none;"
+                                title="grille E5">
+                        </iframe>
+                    {% else %}
+                        <p>Aucun document disponible.</p>
+                    {% endif %}
+                </div>
+                <div class="pdf-list-Comp">
+                <h3>Document des projets E5</h3>
+                    {% if GrouppdfComp %}
+                        {% for doc in GrouppdfComp %}
+                            <div class="pdf-preview">
+                                <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="pdf-link">
+                                    📄 document {{ loop.index }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
 

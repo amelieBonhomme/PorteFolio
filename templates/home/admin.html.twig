@@ -511,6 +511,24 @@
                             {% endif %}
                         </div>
                         <p>
+                            {{ form_widget(CompForm.documents, {'attr': {'class': 'form-input'}}) }}
+                            <span class="help-icon" aria-label="Informations sur ce champ"> 
+                                ? 
+                                <span class="help-tooltip">Renseinger les documents en rapport avec la grille E5</span> 
+                            </span>
+                        </p>
+                        <div class="pdf-list">
+                            {% if GrouppdfComp %}
+                                {% for doc in GrouppdfComp %}
+                                    <div class="pdf-preview">
+                                        <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="pdf-link">
+                                            📄 document {{ loop.index }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <p>
                             {{ form_widget(CompForm.images, {'attr': {'class': 'form-input', 'multiple': 'multiple'}}) }}
                             <span class="help-icon" aria-label="Informations sur ce champ"> 
                                 ? 
