@@ -195,18 +195,6 @@ header {
     margin-top: 0%;
 }
 
-/* Liens */
-.lienEntreprise {
-    margin-top: 5%;
-    display: block;
-    text-align: center;
-}
-
-.lienEntreprise2 {
-    margin-top: 5%;
-    display: block;
-    text-align: center;
-}
 
 /* Logos */
 .logo-left {
@@ -289,6 +277,10 @@ header {
 }
 
 .espace {
+    margin-right: 5%;
+    margin-top: 5%;
+}
+.espace2 {
     margin-right: 5%;
     margin-top: 5%;
     display: flex;
@@ -456,7 +448,7 @@ body.zoomEffect {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    margin-left: 43%;
+    margin-left: 30%;
 }
 
 /*------------------------bulle info--------------------------*/
@@ -535,7 +527,9 @@ body.zoomEffect {
     opacity: 1;
     pointer-events: auto;
 }
-
+.logout-container {
+    margin-top: 5%;
+}
 
 /*
 ---------------------------------------- Page veille --------------------------------------------------------------
