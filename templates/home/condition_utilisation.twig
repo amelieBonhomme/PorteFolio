@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conditions Générales d’Utilisation{% endblock %}
+
+{% block body %}
+<section class="container" style="background-color: {{ couleurMotivationFooter }}; color: {{ couleurTexteMotivationFooter }};">
+    <h1>Conditions Générales d’Utilisation (CGU)</h1>
+
+    <p>Dernière mise à jour : {{ "now"|date("d/m/Y") }}</p>
+
+    <h2>1. Objet</h2>
+    <p>
+        Les présentes Conditions Générales d’Utilisation (ci-après « CGU ») ont pour objet d’encadrer l’accès
+        et l’utilisation du site permettant aux utilisateurs de créer et gérer leur propre portfolio en ligne.
+        En utilisant ce service, l’utilisateur accepte sans réserve les présentes CGU.
+    </p>
+
+    <h2>2. Accès au service</h2>
+    <p>
+        Le service est accessible gratuitement à tout utilisateur disposant d’un accès Internet.
+        L’éditeur se réserve le droit de suspendre ou limiter l’accès au service pour maintenance,
+        mise à jour ou raisons techniques.
+    </p>
+
+    <h2>3. Création et gestion d’un portfolio</h2>
+    <p>
+        L’utilisateur peut créer un portfolio via l’interface proposée. Il s’engage à fournir des informations exactes
+        et à ne pas usurper l’identité d’un tiers. L’utilisateur est responsable de la gestion et de la mise à jour
+        de son contenu.
+    </p>
+
+    <h2>4. Contenus publiés par les utilisateurs</h2>
+    <p>
+        L’utilisateur est seul responsable des contenus qu’il publie dans son portfolio. Il s’engage à ne pas publier
+        de contenus :
+    </p>
+    <ul>
+        <li>illégaux, diffamatoires, discriminatoires ou violents ;</li>
+        <li>portant atteinte aux droits d’auteur ou à la propriété intellectuelle ;</li>
+        <li>contraires à l’ordre public ou aux bonnes mœurs ;</li>
+        <li>contenant des données personnelles d’un tiers sans autorisation.</li>
+    </ul>
+    <p>
+        L’éditeur se réserve le droit de supprimer tout contenu manifestement illicite ou contraire aux présentes CGU.
+    </p>
+
+    <h2>5. Propriété intellectuelle</h2>
+    <p>
+        Le site, son design, son code et ses fonctionnalités sont la propriété exclusive de l’éditeur.
+        Les portfolios créés par les utilisateurs restent leur propriété, sous réserve du respect des lois en vigueur.
+    </p>
+
+    <h2>6. Responsabilité</h2>
+    <p>
+        L’éditeur ne peut être tenu responsable :
+    </p>
+    <ul>
+        <li>des interruptions du service ;</li>
+        <li>de la perte de données ;</li>
+        <li>des contenus publiés par les utilisateurs ;</li>
+        <li>d’un usage non conforme du service ;</li>
+        <li>de tout dommage résultant de l’utilisation du site.</li>
+    </ul>
+
+    <h2>7. Données personnelles</h2>
+    <p>
+        Les données collectées dans le cadre de l’utilisation du service sont traitées conformément à la
+         <a href="{{ path('politique_confidentialite') }}">Politique de confidentialité</a>.
+    </p>
+
+    <h2>8. Modification des CGU</h2>
+    <p>
+        L’éditeur peut modifier les présentes CGU à tout moment. Les utilisateurs seront informés en cas de
+        changement majeur. L’utilisation du site après modification vaut acceptation des nouvelles CGU.
+    </p>
+
+    <h2>9. Loi applicable</h2>
+    <p>
+        Les présentes CGU sont soumises au droit français. En cas de litige, et à défaut de résolution amiable,
+        les tribunaux français seront seuls compétents.
+    </p>
+</section>
+{% endblock %}

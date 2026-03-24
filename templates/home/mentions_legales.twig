@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales{% endblock %}
+
+{% block body %}
+<section class="container" style="background-color: {{ couleurMotivationFooter }}; color: {{ couleurTexteMotivationFooter }};">
+    <h1>Mentions légales</h1>
+
+    <h2>Éditeur du site</h2>
+    <p>
+        Nom : Amélie Bonhomme<br>
+        Statut : Portfolio personnel (site non professionnel)<br>
+        Adresse : Toulouse, France<br>
+        Email : contact@ton-domaine.fr
+    </p>
+
+    <h2>Hébergement</h2>
+    <p>
+        Hébergeur : IONOS SARL<br>
+        Adresse : 7 place de la Gare, 57200 Sarreguemines, France<br>
+        Site web : https://www.ionos.fr
+    </p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+        L’ensemble des contenus présents sur ce site (textes, images, code, design)
+        sont la propriété exclusive de Amélie Bonhomme, sauf mention contraire.
+        Toute reproduction, distribution ou modification est interdite sans autorisation préalable.
+    </p>
+
+    <h2>Données personnelles</h2>
+    <p>
+        Ce site ne collecte aucune donnée personnelle autre que celles transmises volontairement via le formulaire de contact.
+        Aucune donnée n’est stockée à des fins commerciales.
+    </p>
+
+    <h2>Responsabilité</h2>
+    <p>
+        L’éditeur du site ne peut être tenu responsable des erreurs ou omissions dans les contenus,
+        ni de l’utilisation qui pourrait en être faite.
+    </p>
+</section>
+{% endblock %}

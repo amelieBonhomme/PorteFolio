@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de confidentialité{% endblock %}
+
+{% block body %}
+<section class="container" style="background-color: {{ couleurMotivationFooter }}; color: {{ couleurTexteMotivationFooter }};">
+    <h1>Politique de confidentialité</h1>
+
+    <p>Dernière mise à jour : {{ "now"|date("d/m/Y") }}</p>
+
+    <h2>1. Responsable du traitement</h2>
+    <p>
+        Le traitement des données personnelles collectées sur ce site est effectué par :
+        <br><strong>Amélie Bonhomme</strong><br>
+        Toulouse, France<br>
+        Email : ameliebonhomme7@gmail.com
+    </p>
+
+    <h2>2. Données collectées</h2>
+    <p>Le site peut collecter les données suivantes :</p>
+    <ul>
+        <li>Contenus publiés dans le portfolio ;</li>
+        <li>Données techniques : adresse IP, type de navigateur, logs serveur.</li>
+    </ul>
+
+    <h2>3. Finalités du traitement</h2>
+    <p>Les données sont collectées pour :</p>
+    <ul>
+        <li>permettre la création et la gestion d’un portfolio ;</li>
+        <li>assurer le bon fonctionnement technique du site ;</li>
+        <li>améliorer l’expérience utilisateur.</li>
+    </ul>
+
+    <h2>4. Base légale</h2>
+    <p>Le traitement repose sur :</p>
+    <ul>
+        <li>le consentement de l’utilisateur ;</li>
+        <li>l’exécution du service demandé ;</li>
+        <li>l’intérêt légitime de l’éditeur pour la sécurité du site.</li>
+    </ul>
+
+    <h2>5. Durée de conservation</h2>
+    <p>
+        Les données sont conservées pour les durées suivantes :
+    </p>
+    <ul>
+        <li>Données du compte : tant que l’utilisateur utilise le service ;</li>
+        <li>Logs techniques : 12 mois maximum.</li>
+    </ul>
+
+    <h2>6. Partage des données</h2>
+    <p>
+        Les données ne sont jamais vendues. Elles peuvent être transmises uniquement :
+    </p>
+    <ul>
+        <li>aux prestataires techniques (hébergement, sécurité) ;</li>
+        <li>aux autorités en cas d’obligation légale.</li>
+    </ul>
+
+    <h2>7. Droits des utilisateurs</h2>
+    <p>
+        Conformément au RGPD, l’utilisateur dispose des droits suivants :
+    </p>
+    <ul>
+        <li>droit d’accès ;</li>
+        <li>droit de rectification ;</li>
+        <li>droit de suppression ;</li>
+        <li>droit d’opposition ;</li>
+        <li>droit à la limitation ;</li>
+        <li>droit à la portabilité.</li>
+    </ul>
+    <p>
+        Pour exercer ces droits : <strong>ameliebonhomme7@gmail.com</strong>
+    </p>
+
+    <h2>8. Cookies</h2>
+    <p>
+        Le site utilise uniquement des cookies techniques nécessaires à son fonctionnement.
+        Aucun cookie publicitaire ou de suivi n’est utilisé.
+    </p>
+
+    <h2>9. Sécurité</h2>
+    <p>
+        L’éditeur met en œuvre des mesures techniques pour protéger les données :
+        chiffrement HTTPS, contrôle d’accès, sauvegardes régulières.
+    </p>
+</section>
+{% endblock %}
