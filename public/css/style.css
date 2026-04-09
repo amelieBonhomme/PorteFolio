@@ -284,9 +284,7 @@ header {
     margin-right: 5%;
     margin-top: 5%;
     display: flex;
-}
-.grille {
-    margin-left: 10%;
+    flex-wrap: wrap;
 }
 .pdf-list-Comp {
     margin-left: 5%;
@@ -406,6 +404,11 @@ body.zoomEffect {
 }
 #designe {
     padding-left: 20%;
+}
+@media (max-width: 768px) {
+    #designe {
+        padding-left: 0%;
+    }
 }
 /*
 ---------------------------------------- Page Gestion Admin --------------------------------------------------------------

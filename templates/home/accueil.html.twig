@@ -107,7 +107,7 @@
     <section id="competence">
         <h1>Compétences :</h1>
 
-        <div class="grille">
+        <div>
             <div class="espace2">
                 <div>
                     <h3>Grille E5</h3>
@@ -128,7 +128,7 @@
                         {% for doc in GrouppdfComp %}
                             <div class="pdf-preview">
                                 <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="pdf-link">
-                                    📄 document {{ loop.index }}
+                                    📄 document ligne {{ loop.index }}
                                 </a>
                             </div>
                         {% endfor %}
