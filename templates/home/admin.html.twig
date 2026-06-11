@@ -295,7 +295,7 @@
                                 <a href="data:application/pdf;base64,{{ grille }}" 
                                 target="_blank" 
                                 download="grille_E5.pdf"
-                                class="pdf-link">
+                                class="link espace_link_admin" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">
                                     📄 Télécharger la grille E5
                                 </a>
                             {% endif %}
@@ -316,7 +316,7 @@
                             {% if GrouppdfComp %}
                                 {% for doc in GrouppdfComp %}
                                     <div class="pdf-preview">
-                                        <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="pdf-link">
+                                        <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="link espace_link_admin" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">
                                             📄 document {{ loop.index }}
                                         </a>
                                     </div>
@@ -380,7 +380,7 @@
                         {% if Grouppdf %}
                             {% for doc in Grouppdf %}
                                 <div class="pdf-preview">
-                                    <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="pdf-link">
+                                    <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="link espace_link_admin" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">
                                         📄 {{ doc.titre }}
                                     </a>
                                 </div>

@@ -126,7 +126,7 @@
                     {% if GrouppdfComp %}
                         {% for doc in GrouppdfComp %}
                             <div class="pdf-preview">
-                                <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="link" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">
+                                <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="link espace_link" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">
                                     📄 document ligne {{ loop.index }}
                                 </a>
                             </div>

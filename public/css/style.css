@@ -31,7 +31,6 @@ a.link {
     font-weight: 600;
     transition: 0.25s ease;
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-    margin-bottom: 4%;
 }
 
 a.link:hover {
@@ -278,7 +277,9 @@ header {
 .logo3:hover {
     transform: scale(1.1);
 }
-
+.espace_link {
+    margin-bottom: 4%;
+}
 /*
 ---------------------------------------- Zone projet --------------------------------------------------------------
 */
@@ -573,7 +574,10 @@ body.zoomEffect {
 .logout-container {
     margin-top: 5%;
 }
-
+.espace_link_admin {
+    margin-bottom: 4%;
+    margin-bottom: 1%;
+}
 /*
 ---------------------------------------- Page veille --------------------------------------------------------------
 */

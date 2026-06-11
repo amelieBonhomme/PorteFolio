@@ -32,7 +32,7 @@
         <h3>{{ article.title }}</h3>
         <small>Publiée le {{ article.pubDate|date('d/m/Y H:i') }}</small>
         <p>{{ article.description|raw }}</p>
-        <a href="{{ article.link }}" target="_blank">Lire la suite</a>
+        <a href="{{ article.link }}" target="_blank" class="link" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">Lire la suite</a>
       </div>
     {% else %}
       <p>Aucun article trouvé.</p>
