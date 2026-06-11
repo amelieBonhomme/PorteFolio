@@ -23,6 +23,26 @@ html {
     margin-top: 5%;
     border-radius: 10px;
 }
+a.link {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.25s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    margin-bottom: 4%;
+}
+
+a.link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.20);
+}
+
+a.link:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
 /*
 ---------------------------------------- Zone Accueil --------------------------------------------------------------
 */
@@ -229,7 +249,9 @@ header {
     align-items: flex-start;
     margin-top: 5%;
 }
-
+.link_entreprise {
+    margin-left: 40%;
+}
 /*
 ---------------------------------------- Zone Competances --------------------------------------------------------------
 */
@@ -310,13 +332,31 @@ header {
 }
 .info2 {
     margin-left: 10%;
-    margin-top: 2%;
 
 }
 .titrefooter {
     margin-left: 2%;
     margin-top: 0%;
     margin-bottom: 2%;
+}
+a.link_footer{
+    display: inline-block;
+    padding: 7px 9px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.25s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    margin-bottom: 4%;
+}
+a.link_footer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.20);
+}
+
+a.link_footer:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 /*
 ---------------------------------------- Page Admin --------------------------------------------------------------

@@ -42,13 +42,12 @@
                         <iframe class="mapgg" src="{{localisationMap}}" title="localisation"></iframe>
                     </div>
                     <div class="info">
-                        <h3>Linkedin :<a href="{{linkedin}}">Mon profil</a></h3>
-                        <h3>Email : <a href="mailto:{{mail}}">{{mail}}</a></h3>
-                        <h3>Tel : {{tel}}</h3>
+                        <h3>Linkedin : <a href="{{linkedin}}" class="link_footer" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">Mon profil</a></h3>
+                        <h3>Email : <a href="mailto:{{mail}}" class="link_footer" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">Me contacter</a></h3>
                     </div>
                     <div class="info2">
-                        <h3>Mention légale :<a href="{{ path('mentions_legales') }}">Consulter</a></h3>
-                        <h3>Condition d'utilisation :<a href="{{ path('condition_utilisation') }}">Consulter</a></h3>
+                        <h3>Mention légale : <a href="{{ path('mentions_legales') }}" class="link_footer" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">Consulter</a></h3>
+                        <h3>Condition d'utilisation : <a href="{{ path('condition_utilisation') }}" class="link_footer" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">Consulter</a></h3>
                     </div>
                 </div>
             </div>

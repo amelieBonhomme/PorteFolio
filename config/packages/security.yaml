@@ -3,7 +3,7 @@ security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
-    # Déclaration du provider basé sur ton entité PAdmin
+    # Déclaration du provider basé sur entité PAdmin
     providers:
         app_user_provider:
             entity:

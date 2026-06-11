@@ -86,15 +86,14 @@
                             <li>{{ line }}</li>
                         {% endfor %}
                     </ul>
-                    <a href="{{ liens[i] }}">Site de l'entreprise</a>
                 </div>
 
                 {# Image droite si index impair #}
                 {% if i is odd %}
                     <img class="logo logo-right" src="{{ imagesPro[i] }}" alt="logo entreprise">
                 {% endif %}
-
             </div>
+            <a href="{{ liens[i] }}" class="link_entreprise link" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">Site de l'entreprise</a>
 
             {% if not loop.last %}
                 <div class="separateur" style="border: 3px solid {{ couleurNavigation }};"></div>
@@ -127,7 +126,7 @@
                     {% if GrouppdfComp %}
                         {% for doc in GrouppdfComp %}
                             <div class="pdf-preview">
-                                <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="pdf-link">
+                                <a href="{{ doc.file }}" target="_blank" download="document.pdf" class="link" style="background: {{ couleurNavigation }}; color: {{couleurTexteNavigation}}">
                                     📄 document ligne {{ loop.index }}
                                 </a>
                             </div>

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
   const span = document.getElementById("nom");
 
   // Récupère la valeur injectée par Twig
@@ -15,4 +15,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   typeEffect();
-});
+});*/
